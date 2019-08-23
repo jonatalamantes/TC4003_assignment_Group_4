@@ -1,9 +1,21 @@
 package cos418_hw1_1
 
 import (
-	"fmt"
-	"sort"
+    "fmt"
+    "sort"
+    "strings"
+    "regexp"
+    "io/ioutil"
 )
+
+//Return the min of two integers
+func min(x, y int) int {
+    if x < y {
+        return x
+    } else {
+        return y
+    }
+}
 
 // Find the top K most common words in a text document.
 // 	path: location of the document
@@ -15,10 +27,32 @@ import (
 // are removed, e.g. "don't" becomes "dont".
 // You should use `checkError` to handle potential errors.
 func topWords(path string, numWords int, charThreshold int) []WordCount {
-	// TODO: implement me
-	// HINT: You may find the `strings.Fields` and `strings.ToLower` functions helpful
-	// HINT: To keep only alphanumeric characters, use the regex "[^0-9a-zA-Z]+"
-	return nil
+
+    //Read the file
+    file, err := ioutil.ReadFile(path)
+    checkError(err)
+    fileContent := strings.ToLower(string(file))
+
+    //File cleanup
+    re := regexp.MustCompile(`[^0-9a-z\s]`)
+    fileContent = re.ReplaceAllString(fileContent, "")
+
+    //Create Hashmap of words (Map)
+    wordMap := make(map[string] int)
+    for _, word := range strings.Fields(fileContent) {
+        wordMap[word] += 1
+    }
+
+    //Create Word Count Structure (Reduce)
+    var wCount []WordCount
+    for word, count := range wordMap {
+        if len(word) >= charThreshold {
+            wCount = append(wCount, WordCount{word, count})
+        }
+    }
+    sortWordCounts(wCount)
+    minSlice := min(numWords, len(wCount))
+    return wCount[:minSlice]
 }
 
 // A struct that represents how many times a word is observed in a document
