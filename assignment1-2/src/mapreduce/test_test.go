@@ -81,7 +81,7 @@ func check(t *testing.T, files []string) {
 		i++
 	}
 	if i != nNumber {
-        t.Fatalf("Expected %d lines in output, got: %d\n", nNumber, i)
+		t.Fatalf("Expected %d lines in output\n", nNumber)
 	}
 }
 
