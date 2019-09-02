@@ -33,24 +33,24 @@ func doReduce(
         jsonMap[filename] = kv
     }
 
+    //Create the encode data
+    reduceMap := make(map[string] []string)
+    for _, kvs := range jsonMap {
+        for _, kv := range kvs {
+            reduceMap[kv.Key] = append(reduceMap[kv.Key], kv.Value)
+        }
+    }
+
     //Create the output file
     outputFile := mergeName(jobName, reduceTaskNumber)
     file, err := os.OpenFile(outputFile, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0755)
     checkError(err)
     encoder := json.NewEncoder(file)
 
-    //Create the encode data
-    counter := 0
-    for _, kvs := range jsonMap {
-
-        for _, kv := range kvs {
-            //Call the reducer with the actual data
-            var reduceList []string
-            reduceList = append(reduceList, kv.Value)
-            encoder.Encode(KeyValue{kv.Key, reduceF(kv.Key, reduceList)})
-        }
-
-        counter = counter+1
+    //Call the reducer with the actual data
+    for key, values := range reduceMap {
+        res := reduceF(key, values)
+        encoder.Encode(KeyValue{key, res})
     }
 
     file.Close()

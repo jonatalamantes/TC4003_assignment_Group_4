@@ -1,10 +1,11 @@
 package mapreduce
 
 import (
-	"hash/fnv"
+    "encoding/json"
+    "hash/fnv"
     "io/ioutil"
     "os"
-    "encoding/json"
+    //"regexp"
 )
 
 // doMap does the job of a map worker: it reads one of the input files
@@ -28,24 +29,16 @@ func doMap(
     mapValues = mapF(inFile, fileContent)
 
     //Create the structures of the json format
-    jsonMap := make(map[string] []KeyValue)
-    for i, v := range mapValues {
+    jsonMap := make(map[string][]KeyValue)
+    for _, v := range mapValues {
 
         //Get the index of the reduce worker and file name
-        reduceIndex := i % nReduce
+        reduceIndex := int(ihash(v.Key)) % nReduce
         reduceFilename := reduceName(jobName, mapTaskNumber, reduceIndex)
-        encoder, inMap := jsonMap[reduceFilename]
+        jsonObj := jsonMap[reduceFilename]
 
-        //In case of not exist the key on the map of jsonEncoder
-        if inMap == false {
-
-            //Create the KeyValue of that node
-            var kv []KeyValue
-            jsonMap[reduceFilename] = kv
-        }
-
-        //Write the data in the encoder
-        jsonMap[reduceFilename] = append(encoder, v)
+        //Write the data in the json Obj
+        jsonMap[reduceFilename] = append(jsonObj, v)
     }
 
     //Create the files with the json
