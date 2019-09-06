@@ -8,6 +8,6 @@ if [ "$1" == "-c" ]; then
 else
     ( cd "$GOPATH/src"; go test -v -run TestBasic mapreduce/... )
     ( cd "$GOPATH/src"; go test -v -run Failure mapreduce/... )
-    #( cd "$GOPATH/src/main"; sh ./test-ii.sh )
+    ( cd "$GOPATH/src/main"; sh ./test-ii.sh )
 fi
 
