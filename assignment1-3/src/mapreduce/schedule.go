@@ -14,49 +14,49 @@ func (mr *Master) schedule(phase jobPhase) {
 	}
 
 	debug("Schedule: %v %v tasks (%d I/Os)\n", ntasks, phase, nios)
-    channel := make(chan bool)
+	channel := make(chan bool)
 
-    for i := 0; i < ntasks; i++ {
+	for i := 0; i < ntasks; i++ {
 
-        anonymous := func(i int, done chan bool) {
+		anonymous := func(i int, done chan bool) {
 
-            ok := false
-            workerId := ""
-            for ok == false {
+			ok := false
+			workerId := ""
+			for ok == false {
 
-                workerId = <- mr.registerChannel
+				workerId = <-mr.registerChannel
 
-                var args DoTaskArgs
-                args.JobName = mr.jobName
-                args.Phase = phase
-                args.TaskNumber = i
-                args.NumOtherPhase = nios
-                if phase == mapPhase {
-                    args.File = mr.files[i]
-                }
+				var args DoTaskArgs
+				args.JobName = mr.jobName
+				args.Phase = phase
+				args.TaskNumber = i
+				args.NumOtherPhase = nios
+				if phase == mapPhase {
+					args.File = mr.files[i]
+				}
 
-                ok = call(workerId, "Worker.DoTask", &args, new(struct{}))
-                if ok == false {
-                    debug("Scheduler, Worker.DoTask fails, Retry connection %d \n", i)
-                }
-            }
+				ok = call(workerId, "Worker.DoTask", &args, new(struct{}))
+				if ok == false {
+					debug("Scheduler, Worker.DoTask fails, Retry connection %d \n", i)
+				}
+			}
 
-            var rargs RegisterArgs
-            rargs.Worker = workerId
-            ok = call(mr.address, "Master.Register", rargs, new(struct{}))
-            if ok == false {
-                debug("Scheduler, Master.Registr fails\n")
-            }
+			var rargs RegisterArgs
+			rargs.Worker = workerId
+			ok = call(mr.address, "Master.Register", rargs, new(struct{}))
+			if ok == false {
+				debug("Scheduler, Master.Registr fails\n")
+			}
 
-            done <- true
-        }
+			done <- true
+		}
 
-        go anonymous(i, channel)
-    }
+		go anonymous(i, channel)
+	}
 
-    for i := 0; i < ntasks; i++ {
-        <-channel
-    }
+	for i := 0; i < ntasks; i++ {
+		<-channel
+	}
 
 	debug("Schedule: %v phase done\n", phase)
 }

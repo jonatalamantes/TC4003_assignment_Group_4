@@ -24,7 +24,7 @@ type Worker struct {
 // DoTask is called by the master when a new task is being scheduled on this
 // worker.
 func (wk *Worker) DoTask(arg *DoTaskArgs, _ *struct{}) error {
-     	 debug("%s: given %v task #%d on file %s (nios: %d)\n",
+	debug("%s: given %v task #%d on file %s (nios: %d)\n",
 		wk.name, arg.Phase, arg.TaskNumber, arg.File, arg.NumOtherPhase)
 
 	switch arg.Phase {

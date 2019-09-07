@@ -1,20 +1,20 @@
 package cos418_hw1_1
 
 import (
-    "fmt"
-    "sort"
-    "strings"
-    "regexp"
-    "io/ioutil"
+	"fmt"
+	"io/ioutil"
+	"regexp"
+	"sort"
+	"strings"
 )
 
 //Return the min of two integers
 func min(x, y int) int {
-    if x < y {
-        return x
-    } else {
-        return y
-    }
+	if x < y {
+		return x
+	} else {
+		return y
+	}
 }
 
 // Find the top K most common words in a text document.
@@ -28,31 +28,31 @@ func min(x, y int) int {
 // You should use `checkError` to handle potential errors.
 func topWords(path string, numWords int, charThreshold int) []WordCount {
 
-    //Read the file
-    file, err := ioutil.ReadFile(path)
-    checkError(err)
-    fileContent := strings.ToLower(string(file))
+	//Read the file
+	file, err := ioutil.ReadFile(path)
+	checkError(err)
+	fileContent := strings.ToLower(string(file))
 
-    //File cleanup
-    re := regexp.MustCompile(`[^0-9a-z\s]`)
-    fileContent = re.ReplaceAllString(fileContent, "")
+	//File cleanup
+	re := regexp.MustCompile(`[^0-9a-z\s]`)
+	fileContent = re.ReplaceAllString(fileContent, "")
 
-    //Create Hashmap of words (Map)
-    wordMap := make(map[string] int)
-    for _, word := range strings.Fields(fileContent) {
-        wordMap[word] += 1
-    }
+	//Create Hashmap of words (Map)
+	wordMap := make(map[string]int)
+	for _, word := range strings.Fields(fileContent) {
+		wordMap[word] += 1
+	}
 
-    //Create Word Count Structure (Reduce)
-    var wCount []WordCount
-    for word, count := range wordMap {
-        if len(word) >= charThreshold {
-            wCount = append(wCount, WordCount{word, count})
-        }
-    }
-    sortWordCounts(wCount)
-    minSlice := min(numWords, len(wCount))
-    return wCount[:minSlice]
+	//Create Word Count Structure (Reduce)
+	var wCount []WordCount
+	for word, count := range wordMap {
+		if len(word) >= charThreshold {
+			wCount = append(wCount, WordCount{word, count})
+		}
+	}
+	sortWordCounts(wCount)
+	minSlice := min(numWords, len(wCount))
+	return wCount[:minSlice]
 }
 
 // A struct that represents how many times a word is observed in a document

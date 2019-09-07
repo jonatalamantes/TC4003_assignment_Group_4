@@ -1,11 +1,11 @@
 package mapreduce
 
 import (
-    "encoding/json"
-    "hash/fnv"
-    "io/ioutil"
-    "os"
-    //"regexp"
+	"encoding/json"
+	"hash/fnv"
+	"io/ioutil"
+	"os"
+	//"regexp"
 )
 
 // doMap does the job of a map worker: it reads one of the input files
@@ -19,39 +19,39 @@ func doMap(
 	mapF func(file string, contents string) []KeyValue,
 ) {
 
-    //Read the inFile
-    file, err := ioutil.ReadFile(inFile)
-    checkError(err)
-    fileContent := string(file)
+	//Read the inFile
+	file, err := ioutil.ReadFile(inFile)
+	checkError(err)
+	fileContent := string(file)
 
-    //Create mapF keyValues output
-    var mapValues []KeyValue
-    mapValues = mapF(inFile, fileContent)
+	//Create mapF keyValues output
+	var mapValues []KeyValue
+	mapValues = mapF(inFile, fileContent)
 
-    //Create the structures of the json format
-    jsonMap := make(map[string][]KeyValue)
-    for _, v := range mapValues {
+	//Create the structures of the json format
+	jsonMap := make(map[string][]KeyValue)
+	for _, v := range mapValues {
 
-        //Get the index of the reduce worker and file name
-        reduceIndex := int(ihash(v.Key)) % nReduce
-        reduceFilename := reduceName(jobName, mapTaskNumber, reduceIndex)
-        jsonObj := jsonMap[reduceFilename]
+		//Get the index of the reduce worker and file name
+		reduceIndex := int(ihash(v.Key)) % nReduce
+		reduceFilename := reduceName(jobName, mapTaskNumber, reduceIndex)
+		jsonObj := jsonMap[reduceFilename]
 
-        //Write the data in the json Obj
-        jsonMap[reduceFilename] = append(jsonObj, v)
-    }
+		//Write the data in the json Obj
+		jsonMap[reduceFilename] = append(jsonObj, v)
+	}
 
-    //Create the files with the json
-    for filename, kv := range jsonMap {
+	//Create the files with the json
+	for filename, kv := range jsonMap {
 
-        file, err := os.OpenFile(filename, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0755)
-        checkError(err)
+		file, err := os.OpenFile(filename, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0755)
+		checkError(err)
 
-        encoder := json.NewEncoder(file)
-        encoder.Encode(&kv)
+		encoder := json.NewEncoder(file)
+		encoder.Encode(&kv)
 
-        file.Close()
-    }
+		file.Close()
+	}
 }
 
 func ihash(s string) uint32 {

@@ -1,8 +1,8 @@
 package mapreduce
 
 import (
-    "encoding/json"
-    "os"
+	"encoding/json"
+	"os"
 )
 
 // doReduce does the job of a reduce worker: it reads the intermediate
@@ -16,42 +16,42 @@ func doReduce(
 	reduceF func(key string, values []string) string,
 ) {
 
-    //Read the keyValues of reducer on data structure
-    jsonMap := make(map[string] []KeyValue)
-    for m := 0; m < nMap; m++ {
+	//Read the keyValues of reducer on data structure
+	jsonMap := make(map[string][]KeyValue)
+	for m := 0; m < nMap; m++ {
 
-        filename := reduceName(jobName, m, reduceTaskNumber)
+		filename := reduceName(jobName, m, reduceTaskNumber)
 
-        file, err := os.Open(filename)
-        checkError(err)
+		file, err := os.Open(filename)
+		checkError(err)
 
-        var kv []KeyValue
-        encoder := json.NewDecoder(file)
-        err = encoder.Decode(&kv)
-        checkError(err)
+		var kv []KeyValue
+		encoder := json.NewDecoder(file)
+		err = encoder.Decode(&kv)
+		checkError(err)
 
-        jsonMap[filename] = kv
-    }
+		jsonMap[filename] = kv
+	}
 
-    //Create the encode data
-    reduceMap := make(map[string] []string)
-    for _, kvs := range jsonMap {
-        for _, kv := range kvs {
-            reduceMap[kv.Key] = append(reduceMap[kv.Key], kv.Value)
-        }
-    }
+	//Create the encode data
+	reduceMap := make(map[string][]string)
+	for _, kvs := range jsonMap {
+		for _, kv := range kvs {
+			reduceMap[kv.Key] = append(reduceMap[kv.Key], kv.Value)
+		}
+	}
 
-    //Create the output file
-    outputFile := mergeName(jobName, reduceTaskNumber)
-    file, err := os.OpenFile(outputFile, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0755)
-    checkError(err)
-    encoder := json.NewEncoder(file)
+	//Create the output file
+	outputFile := mergeName(jobName, reduceTaskNumber)
+	file, err := os.OpenFile(outputFile, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0755)
+	checkError(err)
+	encoder := json.NewEncoder(file)
 
-    //Call the reducer with the actual data
-    for key, values := range reduceMap {
-        res := reduceF(key, values)
-        encoder.Encode(KeyValue{key, res})
-    }
+	//Call the reducer with the actual data
+	for key, values := range reduceMap {
+		res := reduceF(key, values)
+		encoder.Encode(KeyValue{key, res})
+	}
 
-    file.Close()
+	file.Close()
 }
