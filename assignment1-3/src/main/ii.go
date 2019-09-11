@@ -1,12 +1,12 @@
 package main
 
-import (
-	"fmt"
-	"mapreduce"
-	"os"
-	"strconv"
-	"unicode"
-)
+import "os"
+import "fmt"
+import "mapreduce"
+import "unicode"
+import "strings"
+import "strconv"
+import "sort"
 
 // The mapping function is called once for each piece of the input.
 // In this framework, the key is the name of the file that is being processed,
@@ -14,20 +14,22 @@ import (
 // key/value pairs, each represented by a mapreduce.KeyValue.
 func mapF(document string, value string) (res []mapreduce.KeyValue) {
 
+	//Separete by word
 	word := ""
 	for _, char := range value {
 		if unicode.IsLetter(char) {
 			word += string(char)
 		} else {
 			if word != "" {
-				res = append(res, mapreduce.KeyValue{word, "1"})
+				//Emit Word, Document
+				res = append(res, mapreduce.KeyValue{word, document})
 			}
 			word = ""
 		}
 	}
 
 	if word != "" {
-		res = append(res, mapreduce.KeyValue{word, "1"})
+		res = append(res, mapreduce.KeyValue{word, document})
 	}
 
 	return res
@@ -38,12 +40,27 @@ func mapF(document string, value string) (res []mapreduce.KeyValue) {
 // should be a single output value for that key.
 func reduceF(key string, values []string) string {
 
-	sum := 0
-	for _, v := range values {
-		x, _ := strconv.Atoi(v)
-		sum += x
+	var uniq []string
+
+	//Get the uniq list of files by word
+	for _, value := range values {
+		found := false
+		for _, u := range uniq {
+			if u == value {
+				found = true
+				break
+			}
+		}
+
+		if found == false {
+			uniq = append(uniq, value)
+		}
 	}
-	return strconv.Itoa(sum)
+
+	//Get the last key
+	sort.Strings(uniq)
+	s := strconv.Itoa(len(uniq))
+	return s + " " + strings.Join(uniq, ",")
 }
 
 // Can be run in 3 ways:
@@ -56,9 +73,9 @@ func main() {
 	} else if os.Args[1] == "master" {
 		var mr *mapreduce.Master
 		if os.Args[2] == "sequential" {
-			mr = mapreduce.Sequential("wcseq", os.Args[3:], 3, mapF, reduceF)
+			mr = mapreduce.Sequential("iiseq", os.Args[3:], 3, mapF, reduceF)
 		} else {
-			mr = mapreduce.Distributed("wcseq", os.Args[3:], 3, os.Args[2])
+			mr = mapreduce.Distributed("iiseq", os.Args[3:], 3, os.Args[2])
 		}
 		mr.Wait()
 	} else {
