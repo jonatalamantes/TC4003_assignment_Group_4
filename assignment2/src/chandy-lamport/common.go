@@ -86,7 +86,7 @@ func (m SentMessageEvent) String() string {
 // A message that signifies the beginning of the snapshot process on a particular server.
 // This is used only for debugging that is not sent between servers.
 type StartSnapshot struct {
-	serverId string
+	serverId   string
 	snapshotId int
 }
 
@@ -97,7 +97,7 @@ func (m StartSnapshot) String() string {
 // A message that signifies the end of the snapshot process on a particular server.
 // This is used only for debugging that is not sent between servers.
 type EndSnapshot struct {
-	serverId string
+	serverId   string
 	snapshotId int
 }
 
@@ -130,11 +130,66 @@ type SnapshotMessage struct {
 	message interface{}
 }
 
+// Compare one Snapshot message with oneself
+// One invert menssage is a TokenMenssage
+// This token menssage has the same value of token multplied by -1
+func (sm *SnapshotMessage) IsInvert(com *SnapshotMessage) bool {
+	switch smm := sm.message.(type) {
+	case TokenMessage:
+		switch comm := com.message.(type) {
+		case TokenMessage:
+			if smm.numTokens == (comm.numTokens*-1) &&
+				sm.src == com.src &&
+				sm.dest == com.dest {
+				return true
+			}
+		}
+	}
+
+	return false
+}
+
 // State recorded during the snapshot process
 type SnapshotState struct {
 	id       int
 	tokens   map[string]int // key = server ID, value = num tokens
 	messages []*SnapshotMessage
+}
+
+//Finds on SnapshosState the SnapshotMessage of TokenMessage with negative values
+func (snap *SnapshotState) FindNegative() *SnapshotMessage {
+	for _, negativeMsg := range snap.messages {
+		switch msg := negativeMsg.message.(type) {
+		case TokenMessage:
+			if msg.numTokens < 0 {
+				return negativeMsg
+			}
+		}
+	}
+	return nil
+}
+
+// Find the Inverse menssage of one given menssage and return it
+func (snap *SnapshotState) FindInverse(msg *SnapshotMessage) *SnapshotMessage {
+	for _, maybeInvertMsg := range snap.messages {
+		if maybeInvertMsg.IsInvert(msg) {
+			return maybeInvertMsg
+		}
+	}
+	return nil
+}
+
+//Remove one message from the menssage list
+func (snap *SnapshotState) RemoveMessage(msg *SnapshotMessage) {
+	if msg != nil {
+		newMessageList := make([]*SnapshotMessage, 0)
+		for _, msgKeep := range snap.messages {
+			if msgKeep != msg {
+				newMessageList = append(newMessageList, msgKeep)
+			}
+		}
+		snap.messages = newMessageList
+	}
 }
 
 // =====================
@@ -161,4 +216,21 @@ func getSortedKeys(m interface{}) []string {
 	}
 	sort.Strings(keys)
 	return keys
+}
+
+//Data structure used on the server to track the state of its own snapshots
+type SnapshotInServer struct {
+	Tokens      int
+	Menssages   []*SnapshotMessage
+	Done        bool
+	DoneChannel chan bool
+}
+
+func NewSnapshotInServer() *SnapshotInServer {
+	return &SnapshotInServer{
+		-1,
+		make([]*SnapshotMessage, 0),
+		false,
+		make(chan bool),
+	}
 }

@@ -23,7 +23,6 @@ type Simulator struct {
 	nextSnapshotId int
 	servers        map[string]*Server // key = server ID
 	logger         *Logger
-	// TODO: ADD MORE FIELDS HERE
 }
 
 func NewSimulator() *Simulator {
@@ -107,20 +106,59 @@ func (sim *Simulator) StartSnapshot(serverId string) {
 	snapshotId := sim.nextSnapshotId
 	sim.nextSnapshotId++
 	sim.logger.RecordEvent(sim.servers[serverId], StartSnapshot{serverId, snapshotId})
-	// TODO: IMPLEMENT ME
+
+	//Initializate variables into the server to do the snapshot
+	for _, server := range sim.servers {
+		server.InitSnap(snapshotId)
+	}
+	//Bootstrap of the first snapshot
+	sim.servers[serverId].StartSnapshot(snapshotId)
+
 }
 
 // Callback for servers to notify the simulator that the snapshot process has
 // completed on a particular server
 func (sim *Simulator) NotifySnapshotComplete(serverId string, snapshotId int) {
 	sim.logger.RecordEvent(sim.servers[serverId], EndSnapshot{serverId, snapshotId})
-	// TODO: IMPLEMENT ME
 }
 
 // Collect and merge snapshot state from all the servers.
 // This function blocks until the snapshot process has completed on all servers.
 func (sim *Simulator) CollectSnapshot(snapshotId int) *SnapshotState {
-	// TODO: IMPLEMENT ME
+
 	snap := SnapshotState{snapshotId, make(map[string]int), make([]*SnapshotMessage, 0)}
+
+	//Wait all the server to receive the markers and do his own snapshots
+	for serverId, server := range sim.servers {
+		<-server.Snapshots[snapshotId].DoneChannel
+		snap.tokens[serverId] = server.Snapshots[snapshotId].Tokens
+	}
+
+	//Collect the remains message passing between the servers
+	for _, server := range sim.servers {
+		snapServer := server.Snapshots[snapshotId]
+		for _, m := range snapServer.Menssages {
+			snap.messages = append(snap.messages, m)
+		}
+	}
+
+	//Correctness on the server
+	//When a new message is send, but there is already one snapshot done
+	//There is a new message passed with the same value but multiplied by -1 (Negative)
+	//This new message prevent of having incosistences on the remains messages
+	//Is necessary to remove the Negative Mensage, find is own pair and remove it as well
+	ok := false
+	for !ok {
+
+		negativeMsg := snap.FindNegative()
+		if negativeMsg == nil {
+			ok = true
+		} else {
+			inverseMsg := snap.FindInverse(negativeMsg)
+			snap.RemoveMessage(negativeMsg)
+			snap.RemoveMessage(inverseMsg)
+		}
+	}
+
 	return &snap
 }

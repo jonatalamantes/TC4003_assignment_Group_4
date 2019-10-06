@@ -13,7 +13,9 @@ type Server struct {
 	sim           *Simulator
 	outboundLinks map[string]*Link // key = link.dest
 	inboundLinks  map[string]*Link // key = link.src
-	// TODO: ADD MORE FIELDS HERE
+
+	//This variable is going to store tne requested snapshots
+	Snapshots map[int]*SnapshotInServer // key = snapshotId
 }
 
 // A unidirectional communication channel between two servers
@@ -31,6 +33,7 @@ func NewServer(id string, tokens int, sim *Simulator) *Server {
 		sim,
 		make(map[string]*Link),
 		make(map[string]*Link),
+		make(map[int]*SnapshotInServer),
 	}
 }
 
@@ -67,6 +70,17 @@ func (server *Server) SendTokens(numTokens int, dest string) {
 	}
 	message := TokenMessage{numTokens}
 	server.sim.logger.RecordEvent(server, SentMessageEvent{server.Id, dest, message})
+	//Correctness of the messages on the snapshots
+	//If there is already one snapshot done by this server
+	//Store one "Invert" message with the same value
+	//Since is not allowed new message after the snapshot
+	for _, snap := range server.Snapshots {
+		if snap.Done {
+			newMessage := TokenMessage{-1 * numTokens}
+			newMsg := SnapshotMessage{server.Id, dest, newMessage}
+			snap.Menssages = append(snap.Menssages, &newMsg)
+		}
+	}
 	// Update local state before sending the tokens
 	server.Tokens -= numTokens
 	link, ok := server.outboundLinks[dest]
@@ -84,11 +98,58 @@ func (server *Server) SendTokens(numTokens int, dest string) {
 // When the snapshot algorithm completes on this server, this function
 // should notify the simulator by calling `sim.NotifySnapshotComplete`.
 func (server *Server) HandlePacket(src string, message interface{}) {
-	// TODO: IMPLEMENT ME
+
+	switch msg := message.(type) {
+
+	case TokenMessage:
+
+		//In case the snapshot is already done
+		//Store this mensage to track the received menssages
+		for _, snap := range server.Snapshots {
+			if snap.Done {
+				newMsg := SnapshotMessage{src, server.Id, message}
+				snap.Menssages = append(snap.Menssages, &newMsg)
+			}
+		}
+
+		//Update of tokens
+		server.Tokens += msg.numTokens
+
+	case MarkerMessage:
+
+		//Start snapshot in case there is not one
+		server.StartSnapshot(msg.snapshotId)
+
+	}
+}
+
+//Bootstrap method that create the Snapshots in server
+//When a snapshot message is received by the simulator
+func (server *Server) InitSnap(snapshotId int) {
+	server.Snapshots[snapshotId] = NewSnapshotInServer()
 }
 
 // Start the chandy-lamport snapshot algorithm on this server.
 // This should be called only once per server.
 func (server *Server) StartSnapshot(snapshotId int) {
-	// TODO: IMPLEMENT ME
+
+	//Get the snapshot
+	snap := server.Snapshots[snapshotId]
+
+	if !snap.Done {
+
+		//Do the snapshot
+		snap.Tokens = server.Tokens
+		snap.Done = true
+		server.sim.NotifySnapshotComplete(server.Id, snapshotId)
+
+		//Update the channel since CollectSnapshots is waiting
+		go func() {
+			snap.DoneChannel <- true
+		}()
+
+		//Send the marker to other servers
+		snapMessage := MarkerMessage{snapshotId}
+		server.SendToNeighbors(snapMessage)
+	}
 }
