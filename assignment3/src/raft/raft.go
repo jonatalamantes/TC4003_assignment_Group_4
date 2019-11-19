@@ -48,10 +48,6 @@ type Entry struct {
     Index int
 }
 
-type ScheduleEntry struct {
-    Retries int
-}
-
 //
 // A Go object implementing a single Raft peer.
 //
