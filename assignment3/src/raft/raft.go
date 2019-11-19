@@ -8,11 +8,11 @@ package raft
 // rf = Make(...)
 //   create a new Raft server.
 // rf.Start(command interface{}) (index, term, isleader)
-//   start agreement on a new log entry
+//   start agreement on a new.history entry
 // rf.GetState() (term, isLeader)
 //   ask a Raft for its current term, and whether it thinks it is leader
 // ApplyMsg
-//   each time a new entry is committed to the log, each Raft peer
+//   each time a new entry is committed to the.history, each Raft peer
 //   should send an ApplyMsg to the service (or tester)
 //   in the same server.
 //
@@ -23,6 +23,7 @@ import "labrpc"
 import "bytes"
 import "encoding/gob"
 import "time"
+import "strconv"
 //import "math/rand"
 
 //import "runtime/debug" 
@@ -30,7 +31,7 @@ import "time"
 import "fmt"
 
 //
-// as each Raft peer becomes aware that successive log entries are
+// as each Raft peer becomes aware that successive.history entries are
 // committed, the peer should send an ApplyMsg to the service (or
 // tester) on the same server, via the applyCh passed to Make().
 //
@@ -41,6 +42,16 @@ type ApplyMsg struct {
 	Snapshot    []byte // ignore for lab2; only used in lab3
 }
 
+type Entry struct {
+    Term int
+    Command int
+    Index int
+}
+
+type ScheduleEntry struct {
+    Retries int
+}
+
 //
 // A Go object implementing a single Raft peer.
 //
@@ -49,6 +60,7 @@ type Raft struct {
 	peers     []*labrpc.ClientEnd
 	persister *Persister
 	me        int // index into peers[]
+    applyCh chan ApplyMsg
 
 	// Your data here.
 	// Look at the paper's Figure 2 for a description of what
@@ -57,7 +69,8 @@ type Raft struct {
     // Persistent state on all servers
     currentTerm int
     votedFor map[int]int //key = term, value = serverId
-    log []int
+    history []Entry
+    leaderId int
 
     // Volatile state on all servers
    commitIndex int
@@ -65,56 +78,25 @@ type Raft struct {
 
    // Volatile state on leaders
    nodeType string
-   nextIndex []int
-   matchIndex []int
+   nextIndex map[int]int //key = serverId, value = retries
+   matchIndex map[int]int //key = serverId
 
    //New variables to control the laders
    timeoutLeader time.Time
+   avgPackage time.Duration
    disconnected bool
+
+   kill bool
+   aliveServices int
+   pingSend int
 }
 
-func (rf *Raft) Print(Msg string, Msg2 int) {
-    fmt.Println(Msg, Msg2, "[Me:", rf.me, "Type:", rf.nodeType, "Term:", rf.currentTerm, "]")
-}
-
-func (rf *Raft) CheckTimeoutLeader() {
-
-    for true {
-
-        if rf.disconnected {
-            time.Sleep(500 * time.Millisecond)
-        }
-
-        switch rf.nodeType {
-        case "Follower":
-            now := time.Now()
-            if now.After(rf.timeoutLeader) {
-                rf.currentTerm += 1
-                rf.nodeType = "Candidate"
-                rf.ResetTime(0)
-            }
-        case "Candidate":
-            votes := rf.startVotation()
-            rf.Print("Votes", votes)
-            if float32(votes) >= float32(len(rf.peers))/2.0 {
-                if rf.nodeType == "Candidate" {
-                    rf.Print("Became Leader", -1)
-                    rf.nodeType = "Leader"
-                }
-            } else {
-                rf.nodeType = "Follower"
-                rf.Print("Get Disconnected (Cand)", -1)
-                rf.disconnected = true
-            }
-        case "Leader": 
-            alive := rf.Heartbeat()
-            if alive == 0 {
-                rf.Print("Anybody response", -1)
-                rf.nodeType = "Follower"
-                rf.disconnected = true
-            }
-        }
-    }
+func (rf *Raft) Print(Msg string, Msg2 interface{}) {
+    fmt.Println(Msg, Msg2, "[Me:", rf.me,
+                            "Type:", rf.nodeType,
+                            "CommitIndex:", rf.commitIndex,
+                            "Term:", rf.currentTerm,
+                            "Logs", rf.history, "]")
 }
 
 // return currentTerm and whether this server
@@ -140,7 +122,7 @@ func (rf *Raft) persist() {
     e := gob.NewEncoder(w)
     e.Encode(rf.currentTerm)
     e.Encode(rf.votedFor)
-    e.Encode(rf.log)
+    e.Encode(rf.history)
     data := w.Bytes()
     rf.persister.SaveRaftState(data)
 }
@@ -153,7 +135,57 @@ func (rf *Raft) readPersist(data []byte) {
     d := gob.NewDecoder(r)
     d.Decode(&rf.currentTerm)
     d.Decode(&rf.votedFor)
-    d.Decode(&rf.log)
+    d.Decode(&rf.history)
+}
+
+/*
+  Dynamic history interaction functions
+*/
+func (rf *Raft) FindCommand(cmd int) *Entry {
+    for i := len(rf.history)-1; i >= 0; i-- {
+        entry := rf.history[i]
+        if cmd == entry.Command {
+            return &entry
+        }
+    }
+    return nil
+}
+
+func (rf *Raft) AppendCommand(cmd int) *Entry{
+    add := true
+    if len(rf.history) > 0 {
+        if rf.history[len(rf.history)-1].Command == cmd {
+            add = false
+        }
+    }
+    if add {
+        entry := Entry{rf.currentTerm, cmd, len(rf.history)}
+        rf.history = append(rf.history, entry)
+        return &entry
+    } else {
+        return &rf.history[len(rf.history)-1]
+    }
+}
+
+func (rf *Raft) PopCommand() *Entry{
+    if len(rf.history) > 0 {
+        entry := rf.history[len(rf.history)-1]
+        rf.history = rf.history[:len(rf.history)-1]
+        return &entry
+    }
+    return nil
+}
+
+func (rf *Raft) MapCommands(from int) []int {
+    cmds := make([]int, 0)
+    for i := from; i < len(rf.history); i++ {
+        cmds = append(cmds, rf.history[i].Command)
+    }
+    return cmds
+}
+
+func (rf *Raft) Clear() {
+    rf.history = make([]Entry, 0)
 }
 
 //
@@ -163,8 +195,7 @@ func (rf *Raft) readPersist(data []byte) {
 type AppendEntriesArgs struct {
     Term int
     LeaderId int
-    PrevLogIndex int
-    PrevLogTerm int
+    PrevEntry Entry
     Entries []int
     LeaderCommit int
 }
@@ -185,46 +216,188 @@ func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply)
     reply.Term = rf.currentTerm
 
     if args.Term < rf.currentTerm {
-        rf.Print("No success", -1)
+        rf.Print("AppendEntries, Incorrect Term", args)
         reply.Success = false
 
     } else {
 
-        rf.nodeType = "Follower"
-        rf.ResetTime(0)
-        rf.currentTerm = args.Term
+        if rf.me != args.LeaderId {
+            rf.nodeType = "Follower"
+            rf.ResetTime()
+            rf.currentTerm = args.Term
+        }
 
-        //TODO thingswith the logs
+        rf.leaderId = args.LeaderId
 
+        // Heartbeat package
+        if len(args.Entries) == 0 {
+            //Propagete Commit Index
+            if args.LeaderCommit != -1 {
+                if args.LeaderCommit > rf.commitIndex {
+                    if len(rf.history)-1 > args.LeaderCommit {
+                        rf.commitIndex = args.LeaderCommit
+                    } else {
+                        rf.commitIndex = len(rf.history)-1
+                    }
+                }
+            }
+            reply.Success = true
+            return
+        }
+
+        rf.Print("Call AppendEntries", args)
+
+        if args.PrevEntry.Index == -1 {
+            rf.Clear()
+            //rf.AppendCommand(args.PrevEntry.Command)
+            for _, cmd := range args.Entries {
+                rf.AppendCommand(cmd)
+            }
+            if args.LeaderCommit > rf.commitIndex {
+                rf.commitIndex = args.LeaderCommit
+            }
+            rf.Print("Call AppendEntries Complete 1", args)
+            reply.Success = true
+            return
+        }
+
+        if args.PrevEntry.Index > len(rf.history)-1 {
+            reply.Success = false
+            rf.Print("AppendEntries PrevEntry not exists", args)
+            return
+        }
+
+        prevEntry := rf.history[args.PrevEntry.Index]
+
+        if prevEntry.Command != args.PrevEntry.Command {
+            rf.Print("AppendEntries PrevEntry Term conflict", args)
+            reply.Success = false
+            return
+        }
+
+        //Override logs after prevEntry
+        removed := rf.PopCommand()
+        for removed.Index != args.PrevEntry.Index {
+           removed = rf.PopCommand()
+        }
+        rf.AppendCommand(args.PrevEntry.Command)
+
+        //Apply new commands
+        for _, cmd := range args.Entries {
+            rf.AppendCommand(cmd)
+        }
+        if args.LeaderCommit > rf.commitIndex {
+            if len(rf.history)-1 > args.LeaderCommit {
+                rf.commitIndex = args.LeaderCommit
+            } else {
+                rf.commitIndex = len(rf.history)-1
+            }
+        }
+
+        rf.Print("Call AppendEntries Complete 2", args)
         reply.Success = true
     }
-
 }
 
-func (rf *Raft) sendAppendEntries(server int, args AppendEntriesArgs, reply *AppendEntriesReply) bool {
-    return rf.MakeCall(server, "Raft.AppendEntries", args, reply)
-}
-
-func (rf *Raft) Heartbeat() int {
-
+func (rf *Raft) Heartbeat(propagateCommit bool) int {
     count := 0
-
-    //Vote for self or requests votes
     for peerIdx, _ := range rf.peers {
         if peerIdx != rf.me {
-
-            args := AppendEntriesArgs{rf.currentTerm, rf.me, 0, 0, nil, 0}
+            entry := Entry{}
+            args := AppendEntriesArgs{rf.currentTerm, rf.me, entry, nil, -1}
+            if propagateCommit {
+                args.LeaderCommit = rf.commitIndex
+            }
             reply := AppendEntriesReply{}
-            ok := rf.sendAppendEntries(peerIdx, args, &reply)
-            if ok {
+            reason := rf.SendAppendEntries(peerIdx, args, &reply)
+            if reason == 0 {
                 count += 1
             }
         }
     }
-
     return count
 }
 
+//
+// Return reason of failure (0 = success, 1 = failure, 2 = network issue)
+//
+func (rf *Raft) SendAppendEntries(server int, args AppendEntriesArgs, reply *AppendEntriesReply) int {
+    if server == rf.me {
+        rf.AppendEntries(args, reply)
+        if reply.Success {
+            return 0
+        } else {
+            return 1
+        }
+    } else {
+        response := rf.MakeCall(server, "Raft.AppendEntries", args, reply, false)
+        if ! response {
+            return 2
+        } else {
+            if reply.Success {
+                return 0
+            } else {
+                return 1
+            }
+        }
+    }
+}
+//
+// Ping structures
+//
+type PingArgs struct {
+    Sleep int
+}
+
+type PingReply struct {
+    Ok bool
+}
+
+func (rf *Raft) PingRPC (args PingArgs, reply *PingReply) {
+    if args.Sleep != 0 {
+        time.Sleep(time.Duration(args.Sleep) * time.Millisecond)
+    }
+    reply.Ok = true
+}
+
+func (rf *Raft) TestPing(serverId int, sleep int) {
+    args := PingArgs{sleep}
+    reply := PingReply{false}
+    rf.MakeCall(serverId, "Raft.PingRPC", args, &reply, true)
+    rf.pingSend += 1
+}
+
+func (rf *Raft) PeersAlives(retries int) int {
+    count := 0
+    for peerIdx, _ := range rf.peers {
+        if peerIdx != rf.me {
+            if rf.DoPing(peerIdx, retries) {
+                count += 1
+            }
+        }
+    }
+    return count
+}
+
+func (rf *Raft) GetPingCount() int {
+    return rf.pingSend
+}
+
+func (rf *Raft) DoPing(serverId int, retries int) bool {
+    if rf.leaderId == -1 && serverId == rf.leaderId{
+        return false
+    }
+    for i := 0; i < retries; i++ {
+        args := PingArgs{0}
+        reply := PingReply{false}
+        ok := rf.MakeCall(serverId, "Raft.PingRPC", args, &reply, false)
+        rf.pingSend += 1
+        if ok && reply.Ok {
+            return true
+        }
+    }
+    return false
+}
 
 //
 // RequestVote RPC arguments structure.
@@ -232,8 +405,7 @@ func (rf *Raft) Heartbeat() int {
 type RequestVoteArgs struct {
     Term int
     CandidateId int
-    LastLogIndex int
-    LastLogTerm int
+    LastEntry Entry
 }
 
 //
@@ -249,26 +421,61 @@ type RequestVoteReply struct {
 //
 func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 
+    rf.Print("RequestVote", args)
+
     reply.Term = rf.currentTerm
 
     if args.Term < rf.currentTerm {
-        reply.VoteGranted = false
-    } else {
-
-        if rf.nodeType == "Candidate" && rf.currentTerm == args.Term {
-            rf.votedFor[args.Term] = args.CandidateId
-            reply.VoteGranted = false
-        } else {
-
-            _, exist := rf.votedFor[args.Term]
-            if ! exist && args.CandidateId != -1 {
-                rf.votedFor[args.Term] = args.CandidateId
-                reply.VoteGranted = true
-            } else {
-                reply.VoteGranted = false
-            }
-        }
+        rf.Print("RequestVote Incorrect Terms", reply)
+        return
     }
+
+    votedFor, exist := rf.votedFor[args.Term]
+    if ! exist && args.CandidateId != -1 {
+
+        if args.LastEntry.Index >= len(rf.history) {
+            rf.votedFor[args.Term] = args.CandidateId
+            reply.VoteGranted = true
+            rf.Print("RequestVote New Vote received and Upper Logs", reply)
+            return
+        }
+
+        entry := rf.history[args.LastEntry.Index]
+
+        if entry.Index < rf.commitIndex {
+            rf.votedFor[args.Term] = args.CandidateId
+            reply.VoteGranted = true
+            rf.Print("RequestVote No Vote for commit leaser", entry)
+            return
+        }
+
+        if entry.Command == args.LastEntry.Command && entry.Term == args.LastEntry.Term {
+            rf.votedFor[args.Term] = args.CandidateId
+            reply.VoteGranted = true
+            rf.Print("RequestVote New Vote received and Entry OK", entry)
+            return
+        }
+
+        if args.LastEntry.Term > entry.Term {
+            rf.votedFor[args.Term] = args.CandidateId
+            reply.VoteGranted = true
+            rf.Print("RequestVote New Vote with most updated entry", entry)
+            return
+        }
+
+        rf.Print("RequestVote Denial, Incosistence Log", entry)
+        reply.VoteGranted = false
+        return
+    }
+
+    if votedFor == args.CandidateId {
+        reply.VoteGranted = true
+        rf.Print("RequestVote Already voted by args node", reply)
+        return
+    }
+
+    rf.Print("RequestVote Denial, Voted for", votedFor)
+    reply.VoteGranted = false
 }
 
 
@@ -291,66 +498,26 @@ func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 // the struct itself.
 //
 func (rf *Raft) sendRequestVote(server int, args RequestVoteArgs, reply *RequestVoteReply) bool {
-    return rf.MakeCall(server, "Raft.RequestVote", args, reply)
+    return rf.MakeCall(server, "Raft.RequestVote", args, reply, false)
 }
 
-func (rf *Raft) CallWrapper(server int, endpoint string, args interface{}, reply interface{}, suc chan bool) {
-    ok := rf.peers[server].Call(endpoint, args, reply)
-    suc <- ok
-}
 
-func (rf *Raft) MakeCall(server int, endpoint string, args interface{}, reply interface{}) bool {
-
-    channel := make(chan bool)
-    go rf.CallWrapper(server, endpoint, args, reply, channel)
-
-    timeout := time.Now().Add(time.Duration(300) * time.Millisecond)
-
-    counter := 0
-    for true {
-        now := time.Now()
-        counter += 1
-        /*if endpoint != "Raft.AppendEntries" {
-            fmt.Println("CurrentTime", now, timeout)
-            counter = 0
-        }*/
-        if now.After(timeout) {
-            rf.Print("Network Issue (" + endpoint + ") send it to", server)
-            return false
-        } else {
-            select {
-            case v := <-channel:
-                return v
-            default:
-                //pass
-            }
-        }
-    }
-    return false
-}
-
-func (rf *Raft) startVotation() int {
+func (rf *Raft) Votation() int {
 
     votes := 0
 
     //Vote for self or requests votes
-    for peerIdx, _ := range rf.peers {
-        if peerIdx == rf.me {
-            votes += 1
-        } else {
+    for peerIdx := len(rf.peers)-1; peerIdx >= 0; peerIdx-- {
 
-            args := RequestVoteArgs{rf.currentTerm, rf.me, 0, 0}
+            lastEntry := rf.history[len(rf.history)-1]
+            args := RequestVoteArgs{rf.currentTerm, rf.me, lastEntry}
             reply := RequestVoteReply{}
-            rf.Print("Send RPCVote", peerIdx)
             ok := rf.sendRequestVote(peerIdx, args, &reply)
             if ok {
                 if reply.VoteGranted {
                     votes += 1
                }
-           } else {
-                rf.Print("RPC Fail", peerIdx)
            }
-       }
    }
 
    return votes
@@ -359,10 +526,10 @@ func (rf *Raft) startVotation() int {
 
 //
 // the service using Raft (e.g. a k/v server) wants to start
-// agreement on the next command to be appended to Raft's log. if this
+// agreement on the next command to be appended to Raft's.history. if this
 // server isn't the leader, returns false. otherwise start the
 // agreement and return immediately. there is no guarantee that this
-// command will ever be committed to the Raft log, since the leader
+// command will ever be committed to the Raft.history, since the leader
 // may fail or lose an election.
 //
 // the first return value is the index that the command will appear at
@@ -370,10 +537,24 @@ func (rf *Raft) startVotation() int {
 // term. the third return value is true if this server believes it is
 // the leader.
 //
-func (rf *Raft) Start(command interface{}) (int, int, bool) {
+func (rf *Raft) Start(command int) (int, int, bool) {
 
     if rf.nodeType == "Leader" {
-        return -1, rf.currentTerm, true
+        entry := rf.AppendCommand(command)
+
+        for peerIdx, _ := range rf.peers {
+
+            rf.mu.Lock()
+            retries, ok := rf.nextIndex[peerIdx]
+            if ! ok {
+                retries = 3
+            }
+            rf.nextIndex[peerIdx] = retries
+            rf.mu.Unlock()
+        }
+        rf.Print("Schedule", rf.nextIndex)
+
+        return entry.Index, rf.currentTerm, true
     } else {
         return -1, rf.currentTerm, false
     }
@@ -386,18 +567,25 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 // turn off debug output from this instance.
 //
 func (rf *Raft) Kill() {
-	// Your code here, if desired.
+
+    rf.mu.Lock()
+
+    rf.kill = true
+    for rf.aliveServices > 0 {}
+    rf.Print("Kill", nil)
+
+    rf.mu.Unlock()
 }
 
-func (rf *Raft) ResetTime(extraTime int) {
+func (rf *Raft) ResetTime() {
 
     if rf.disconnected {
-        rf.timeoutLeader = time.Now()
         rf.disconnected = false
     }
 
-   startTimeout := time.Duration(400 + extraTime) * time.Millisecond
-   rf.timeoutLeader = rf.timeoutLeader.Add(startTimeout)
+    rf.timeoutLeader = time.Now()
+    ratio := time.Duration((rf.me+1)*100) * time.Duration(len(rf.peers)) * rf.avgPackage
+    rf.timeoutLeader = rf.timeoutLeader.Add(ratio)
 }
 
 //
@@ -417,38 +605,308 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.peers = peers
 	rf.persister = persister
 	rf.me = me
-
-    //Creation of the pair
-    //fmt.Println("*** START")
-    //debug.PrintStack()
+    rf.applyCh = applyCh
 
     // Persistent state on all servers
-    rf.currentTerm = 0
     rf.votedFor = make(map[int]int)
-    rf.log = make([]int, 0)
+    rf.history = make([]Entry, 0)
 
     // Volatile state on all servers
-   rf.commitIndex = 0
-   rf.lastApplied = 0
+   rf.commitIndex = -1
+   rf.lastApplied = -1
+   rf.currentTerm = 0
 
    // Volatile state on leaders
    if rf.me == 0 {
-       rf.nodeType = "Leader"
+       rf.nodeType = "Candidate"
        rf.currentTerm = 1
    } else {
        rf.nodeType = "Follower"
    }
-   rf.nextIndex = make([]int, 0)
-   rf.matchIndex = make([]int, 0)
+   rf.AppendCommand(-7)
+   rf.leaderId = -1
+   rf.nextIndex = make(map[int]int)
+
+   rf.matchIndex = make(map[int]int)
+   for peerIdx, _ := range(rf.peers) {
+        rf.matchIndex[peerIdx] = -1
+   }
 
    rf.disconnected = true
-   rf.ResetTime(rf.me * 500)
+   rf.ResetTime()
+
+   rf.kill = false
+   rf.aliveServices = 0
+   rf.pingSend = 0
 
 	// initialize from state persisted before a crash
 	rf.readPersist(persister.ReadRaftState())
 
-    go rf.CheckTimeoutLeader()
-
-
 	return rf
+}
+
+func (rf *Raft) VolatilRefresh() {
+   rf.nextIndex = make(map[int]int)
+
+   rf.matchIndex = make(map[int]int)
+   for peerIdx, _ := range(rf.peers) {
+        rf.matchIndex[peerIdx] = -1
+   }
+}
+
+func (rf *Raft) Bootstrap() {
+
+    rf.CalculateBestTimeout(10)
+
+    go rf.CheckTimeoutLeader()
+    go rf.UpdateStateMachine()
+    go rf.HandleNextAppendEntries()
+}
+
+/*
+ Async functions
+*/
+
+func (rf *Raft) CheckTimeoutLeader() {
+
+    rf.aliveServices += 1
+
+    for ! rf.kill {
+
+        time.Sleep(100 * time.Millisecond)
+
+        if rf.disconnected {
+            alives := rf.PeersAlives(3)
+            if alives > 0 {
+                rf.Print("ReConnected", nil)
+                rf.nodeType = "Follower"
+                rf.ResetTime()
+            } else {
+                continue
+            }
+        }
+
+        switch rf.nodeType {
+        case "Follower":
+            now := time.Now()
+            if now.After(rf.timeoutLeader) {
+                alives := rf.PeersAlives(3)
+                if alives > 0 {
+                    leaderAlive := rf.DoPing(rf.leaderId, 3)
+                    if ! leaderAlive {
+                        rf.currentTerm += 1
+                        rf.nodeType = "Candidate"
+                    }
+                } else {
+                    rf.Print("Disconnected (Follower)", nil)
+                    rf.disconnected = true
+                    rf.leaderId = -1
+                }
+            }
+        case "Candidate":
+            votes := rf.Votation()
+            rf.Print("Votes", votes)
+            if float32(votes) >= float32(len(rf.peers))/2.0 {
+                if rf.nodeType == "Candidate" {
+                    rf.Print("Became Leader", nil)
+                    rf.VolatilRefresh()
+                    rf.nodeType = "Leader"
+                } else {
+                    rf.nodeType = "Follower"
+                    rf.ResetTime()
+                }
+            } else {
+                alives := rf.PeersAlives(3)
+                if alives <= 0 {
+                    rf.Print("Disconnected (Candidate)", nil)
+                    rf.nodeType = "Follower"
+                    rf.leaderId = -1
+                    rf.disconnected = true
+                }
+            }
+        case "Leader":
+            alive := rf.Heartbeat(false)
+            if alive == 0 {
+                alives := rf.PeersAlives(3)
+                if alives <= 0 {
+                    rf.Print("Disconnected (Leader)", nil)
+                    rf.nodeType = "Follower"
+                    rf.leaderId = -1
+                    rf.disconnected = true
+                }
+            }
+        }
+    }
+
+    rf.aliveServices -= 1
+}
+
+func (rf *Raft) UpdateStateMachine() {
+
+    rf.aliveServices += 1
+
+    for ! rf.kill {
+
+        time.Sleep(100 * time.Millisecond)
+
+        // Apply command
+        for rf.commitIndex > rf.lastApplied {
+            rf.lastApplied += 1
+            entry := rf.history[rf.lastApplied]
+            apply := ApplyMsg{rf.lastApplied, entry.Command, false, nil}
+            rf.applyCh <- apply
+            rf.Print("ApplyCh", apply)
+        }
+
+        // Update Commit Index
+        if rf.nodeType == "Leader" {
+            for n := len(rf.history)-1; n > rf.commitIndex && n >= 0; n-- {
+                matched := 0
+                for _, matchIdx := range rf.matchIndex {
+                    if matchIdx >= n && rf.history[n].Term == rf.currentTerm {
+                        matched += 1
+                    }
+                }
+                if float64(matched) > float64(len(rf.peers))/float64(2) {
+                    rf.commitIndex = n
+                    rf.Print("Set Commit Index", rf.commitIndex)
+                    rf.Heartbeat(true)
+                    break
+                }
+            }
+        }
+    }
+
+    rf.aliveServices -= 1
+}
+
+func (rf *Raft) HandleNextAppendEntries() {
+
+    rf.aliveServices += 1
+    nextServer := 0
+
+    for ! rf.kill {
+
+        time.Sleep(100 * time.Millisecond)
+
+        // Only leader must use this function
+        if rf.nodeType != "Leader" {
+            rf.nextIndex = make(map[int]int)
+        }
+
+        // No Entries for the moment
+        if len(rf.nextIndex) == 0 {
+            continue
+        }
+
+        // Fetch next pendint request
+        retries, exists := rf.nextIndex[nextServer]
+        lastMatched := rf.matchIndex[nextServer]
+
+        // No Entry for this server yet
+        if ! exists {
+            continue
+        }
+
+        if retries == 0 {
+            rf.Print("Too Many Network Issues", nil)
+            delete(rf.nextIndex, nextServer)
+            continue
+        }
+
+        // Apply the AppendEntries of the schedule
+        entries := rf.MapCommands(1)
+        currEntry := rf.history[0]
+
+        if lastMatched != -1 {
+            entries = rf.MapCommands(lastMatched)
+            currEntry = rf.history[lastMatched-1]
+        }
+
+        args := AppendEntriesArgs{rf.currentTerm, rf.me, currEntry, entries, rf.commitIndex}
+        reply := AppendEntriesReply{}
+        reason := rf.SendAppendEntries(nextServer, args, &reply)
+
+        // Log inconsistency
+        if reason == 1 {
+            rf.matchIndex[nextServer] = rf.matchIndex[nextServer]-1
+        }
+        // Network Issue
+        if reason == 2 {
+            rf.nextIndex[nextServer] = retries-1
+        }
+        // Success
+        if reason == 0 {
+            delete(rf.nextIndex, nextServer)
+            if len(rf.history) > 0 {
+                lastEntry := rf.history[len(rf.history)-1]
+
+                match, ok := rf.matchIndex[nextServer]
+                if !ok || match < lastEntry.Index {
+                    rf.matchIndex[nextServer] = lastEntry.Index
+                    rf.Print("Set Match Index", lastEntry.Index)
+                }
+            }
+        }
+
+        nextServer = (nextServer+1) % len(rf.peers)
+    }
+
+    rf.aliveServices -= 1
+}
+
+
+/*
+ Network Functions
+*/
+func (rf *Raft) CallWrapper(server int, endpoint string, args interface{}, reply interface{}, suc chan bool) {
+    ok := rf.peers[server].Call(endpoint, args, reply)
+    suc <- ok
+}
+
+func (rf *Raft) MakeCall(server int, endpoint string, args interface{}, reply interface{}, unlimited bool) bool {
+
+    if rf.kill {
+        return false
+    }
+
+    channel := make(chan bool)
+    go rf.CallWrapper(server, endpoint, args, reply, channel)
+
+    tolerance := time.Duration(100*len(rf.peers)) * rf.avgPackage
+    timeout := time.Now().Add(tolerance)
+
+    counter := 0
+    for true {
+        now := time.Now()
+        counter += 1
+        if now.After(timeout) && ! unlimited {
+            if endpoint != "Raft.PingRPC" {
+                rf.Print("Network Issue (" + endpoint + ") send it to (" + strconv.Itoa(server) + ")", args)
+            }
+            return false
+        } else {
+            select {
+            case v := <-channel:
+                return v
+            default:
+                //pass
+            }
+        }
+    }
+    return false
+}
+
+func (rf *Raft) CalculateBestTimeout(retries int) {
+    avg := time.Duration(0)
+    for i := 0; i < retries; i++ {
+        for peerIdx, _ := range rf.peers {
+            starttime := time.Now()
+            rf.TestPing(peerIdx, 0)
+            endtime := time.Now()
+            avg += endtime.Sub(starttime)
+        }
+    }
+    rf.avgPackage = (avg/time.Duration(len(rf.peers)))/time.Duration(retries)
+    rf.Print("AVG Time", rf.avgPackage)
 }

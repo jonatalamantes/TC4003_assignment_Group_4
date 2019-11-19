@@ -19,7 +19,7 @@ import "sync"
 // (much more than the paper's range of timeouts).
 const RaftElectionTimeout = 1000 * time.Millisecond
 
-func TestInitialElection(t *testing.T) {
+func Test111InitialElection(t *testing.T) {
 	servers := 3
 	cfg := make_config(t, servers, false)
 	defer cfg.cleanup()
@@ -40,7 +40,7 @@ func TestInitialElection(t *testing.T) {
 	fmt.Println("... Passed")
 }
 
-func TestReElection(t *testing.T) {
+func Test112ReElection(t *testing.T) {
 	servers := 3
 	cfg := make_config(t, servers, false)
 	defer cfg.cleanup()
@@ -100,7 +100,7 @@ func TestReElection(t *testing.T) {
 	fmt.Println("... Passed")
 }
 
-func TestBasicAgree(t *testing.T) {
+func Test211BasicAgree(t *testing.T) {
 	servers := 5
 	cfg := make_config(t, servers, false)
 	defer cfg.cleanup()
@@ -123,14 +123,22 @@ func TestBasicAgree(t *testing.T) {
 	fmt.Println("... Passed")
 }
 
-func TestFailAgree(t *testing.T) {
+func Test212FailAgree(t *testing.T) {
 	servers := 3
 	cfg := make_config(t, servers, false)
 	defer cfg.cleanup()
 
 	fmt.Println("Test: agreement despite follower failure...")
 
+	fmt.Println(" *****************")
+	fmt.Println(" ****** T1 *******")
+	fmt.Println(" *****************")
+
 	cfg.one(101, servers)
+
+	fmt.Println(" *****************")
+	fmt.Println(" ****** T2 *******")
+	fmt.Println(" *****************")
 
 	// follower network failure
 	leader := cfg.checkOneLeader()
@@ -143,8 +151,16 @@ func TestFailAgree(t *testing.T) {
 	cfg.one(104, servers-1)
 	cfg.one(105, servers-1)
 
+	fmt.Println(" *****************")
+	fmt.Println(" ****** T3 *******")
+	fmt.Println(" *****************")
+
 	// failed server re-connected
 	cfg.connect((leader + 1) % servers)
+
+	fmt.Println(" *****************")
+	fmt.Println(" ****** T4 *******")
+	fmt.Println(" *****************")
 
 	// agree with full set of servers?
 	cfg.one(106, servers)
@@ -154,7 +170,7 @@ func TestFailAgree(t *testing.T) {
 	fmt.Println("... Passed")
 }
 
-func TestFailNoAgree(t *testing.T) {
+func Test213FailNoAgree(t *testing.T) {
 	servers := 5
 	cfg := make_config(t, servers, false)
 	defer cfg.cleanup()
@@ -206,7 +222,7 @@ func TestFailNoAgree(t *testing.T) {
 	fmt.Println("... Passed")
 }
 
-func TestConcurrentStarts(t *testing.T) {
+func Test214ConcurrentStarts(t *testing.T) {
 	servers := 3
 	cfg := make_config(t, servers, false)
 	defer cfg.cleanup()
@@ -307,7 +323,7 @@ loop:
 	fmt.Println("... Passed")
 }
 
-func TestRejoin(t *testing.T) {
+func Test215Rejoin(t *testing.T) {
 	servers := 3
 	cfg := make_config(t, servers, false)
 	defer cfg.cleanup()
@@ -345,12 +361,17 @@ func TestRejoin(t *testing.T) {
 	fmt.Println("... Passed")
 }
 
-func TestBackup(t *testing.T) {
+func Test216Backup(t *testing.T) {
 	servers := 5
+    entries := 10
 	cfg := make_config(t, servers, false)
 	defer cfg.cleanup()
 
-	fmt.Print("Test: leader backs up quickly over incorrect follower logs...")
+	fmt.Println("Test: leader backs up quickly over incorrect follower logs...")
+
+	fmt.Println(" *****************")
+	fmt.Println(" ****** T1 *******")
+	fmt.Println(" *****************")
 
 	cfg.one(rand.Int(), servers)
 
@@ -361,9 +382,13 @@ func TestBackup(t *testing.T) {
 	cfg.disconnect((leader1 + 4) % servers)
 
 	// submit lots of commands that won't commit
-	for i := 0; i < 50; i++ {
+	for i := 0; i < entries; i++ {
 		cfg.rafts[leader1].Start(rand.Int())
 	}
+
+	fmt.Println(" *****************")
+	fmt.Println(" ****** T2 *******")
+	fmt.Println(" *****************")
 
 	time.Sleep(RaftElectionTimeout / 2)
 
@@ -375,10 +400,18 @@ func TestBackup(t *testing.T) {
 	cfg.connect((leader1 + 3) % servers)
 	cfg.connect((leader1 + 4) % servers)
 
+	fmt.Println(" *****************")
+	fmt.Println(" ****** T3 *******")
+	fmt.Println(" *****************")
+
 	// lots of successful commands to new group.
-	for i := 0; i < 50; i++ {
+	for i := 0; i < entries; i++ {
 		cfg.one(rand.Int(), 3)
 	}
+
+	fmt.Println(" *****************")
+	fmt.Println(" ****** T4 *******")
+	fmt.Println(" *****************")
 
 	// now another partitioned leader and one follower
 	leader2 := cfg.checkOneLeader()
@@ -388,12 +421,20 @@ func TestBackup(t *testing.T) {
 	}
 	cfg.disconnect(other)
 
+	fmt.Println(" *****************")
+	fmt.Println(" ****** T5 *******")
+	fmt.Println(" *****************")
+
 	// lots more commands that won't commit
-	for i := 0; i < 50; i++ {
+	for i := 0; i < entries; i++ {
 		cfg.rafts[leader2].Start(rand.Int())
 	}
 
 	time.Sleep(RaftElectionTimeout / 2)
+
+	fmt.Println(" *****************")
+	fmt.Println(" ****** T6 *******")
+	fmt.Println(" *****************")
 
 	// bring original leader back to life,
 	for i := 0; i < servers; i++ {
@@ -403,8 +444,12 @@ func TestBackup(t *testing.T) {
 	cfg.connect((leader1 + 1) % servers)
 	cfg.connect(other)
 
+	fmt.Println(" *****************")
+	fmt.Println(" ****** T7 *******")
+	fmt.Println(" *****************")
+
 	// lots of successful commands to new group.
-	for i := 0; i < 50; i++ {
+	for i := 0; i < entries; i++ {
 		cfg.one(rand.Int(), 3)
 	}
 
@@ -412,12 +457,17 @@ func TestBackup(t *testing.T) {
 	for i := 0; i < servers; i++ {
 		cfg.connect(i)
 	}
+
+	fmt.Println(" *****************")
+	fmt.Println(" ****** T8 *******")
+	fmt.Println(" *****************")
+
 	cfg.one(rand.Int(), servers)
 
 	fmt.Println("... Passed")
 }
 
-func TestCount(t *testing.T) {
+func Test217Count(t *testing.T) {
 	servers := 3
 	cfg := make_config(t, servers, false)
 	defer cfg.cleanup()
@@ -527,7 +577,7 @@ loop:
 	fmt.Println("... Passed")
 }
 
-func TestPersist1(t *testing.T) {
+func Test221Persist1(t *testing.T) {
 	servers := 3
 	cfg := make_config(t, servers, false)
 	defer cfg.cleanup()
@@ -573,7 +623,7 @@ func TestPersist1(t *testing.T) {
 	fmt.Println("... Passed")
 }
 
-func TestPersist2(t *testing.T) {
+func Test222Persist2(t *testing.T) {
 	servers := 5
 	cfg := make_config(t, servers, false)
 	defer cfg.cleanup()
@@ -619,7 +669,7 @@ func TestPersist2(t *testing.T) {
 	fmt.Println("... Passed")
 }
 
-func TestPersist3(t *testing.T) {
+func Test223Persist3(t *testing.T) {
 	servers := 3
 	cfg := make_config(t, servers, false)
 	defer cfg.cleanup()
