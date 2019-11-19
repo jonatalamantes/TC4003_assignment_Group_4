@@ -85,10 +85,12 @@ type Raft struct {
    kill bool
    aliveServices int
    pingSend int
+   heartbeatsCount int
 }
 
 func (rf *Raft) Print(Msg string, Msg2 interface{}) {
     fmt.Println(Msg, Msg2, "[Me:", rf.me,
+                            "LeaderTimeout:", rf.timeoutLeader.Sub(time.Now()),
                             "Type:", rf.nodeType,
                             "CommitIndex:", rf.commitIndex,
                             "Term:", rf.currentTerm,
@@ -99,7 +101,7 @@ func (rf *Raft) Print(Msg string, Msg2 interface{}) {
 // believes it is the leader.
 func (rf *Raft) GetState() (int, bool) {
 
-    fmt.Println("GetState", rf.me, rf.nodeType, rf.currentTerm, rf.timeoutLeader.Sub(time.Now()))
+    rf.Print("GetState, LeaderId:", rf.leaderId)
 
     if rf.nodeType == "Leader" {
         return rf.currentTerm, true
@@ -114,24 +116,51 @@ func (rf *Raft) GetState() (int, bool) {
 // see paper's Figure 2 for a description of what should be persistent.
 //
 func (rf *Raft) persist() {
+
     w := new(bytes.Buffer)
     e := gob.NewEncoder(w)
     e.Encode(rf.currentTerm)
     e.Encode(rf.votedFor)
     e.Encode(rf.history)
+    e.Encode(rf.commitIndex)
+    e.Encode(rf.lastApplied)
+    e.Encode(rf.nodeType)
+    e.Encode(rf.nextIndex)
+    e.Encode(rf.matchIndex)
+    e.Encode(rf.avgPackage)
     data := w.Bytes()
+
     rf.persister.SaveRaftState(data)
+
 }
 
 //
 // restore previously persisted state.
 //
 func (rf *Raft) readPersist(data []byte) {
+
     r := bytes.NewBuffer(data)
     d := gob.NewDecoder(r)
     d.Decode(&rf.currentTerm)
     d.Decode(&rf.votedFor)
     d.Decode(&rf.history)
+    d.Decode(&rf.commitIndex)
+    d.Decode(&rf.lastApplied)
+    d.Decode(&rf.nodeType)
+    d.Decode(&rf.nextIndex)
+    d.Decode(&rf.matchIndex)
+    d.Decode(&rf.avgPackage)
+
+    if rf.nodeType == "Leader" {
+        rf.nodeType = "Candidate"
+    }
+
+    rf.ResetTime()
+    go rf.CheckTimeoutLeader()
+    go rf.UpdateStateMachine()
+    go rf.HandleNextAppendEntries()
+
+    rf.Print("ReadPersister", nil)
 }
 
 /*
@@ -174,8 +203,10 @@ func (rf *Raft) PopCommand() *Entry{
 
 func (rf *Raft) MapCommands(from int) []int {
     cmds := make([]int, 0)
-    for i := from; i < len(rf.history); i++ {
-        cmds = append(cmds, rf.history[i].Command)
+    if from > 0 {
+        for i := from; i < len(rf.history); i++ {
+            cmds = append(cmds, rf.history[i].Command)
+        }
     }
     return cmds
 }
@@ -221,22 +252,12 @@ func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply)
             rf.nodeType = "Follower"
             rf.ResetTime()
             rf.currentTerm = args.Term
-        }
+        } 
 
         rf.leaderId = args.LeaderId
 
         // Heartbeat package
         if len(args.Entries) == 0 {
-            //Propagete Commit Index
-            if args.LeaderCommit != -1 {
-                if args.LeaderCommit > rf.commitIndex {
-                    if len(rf.history)-1 > args.LeaderCommit {
-                        rf.commitIndex = args.LeaderCommit
-                    } else {
-                        rf.commitIndex = len(rf.history)-1
-                    }
-                }
-            }
             reply.Success = true
             return
         }
@@ -295,21 +316,28 @@ func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply)
     }
 }
 
-func (rf *Raft) Heartbeat(propagateCommit bool) int {
+func (rf *Raft) Heartbeat() int {
     count := 0
     for peerIdx, _ := range rf.peers {
         if peerIdx != rf.me {
             entry := Entry{}
             args := AppendEntriesArgs{rf.currentTerm, rf.me, entry, nil, -1}
-            if propagateCommit {
-                args.LeaderCommit = rf.commitIndex
-            }
             reply := AppendEntriesReply{}
             reason := rf.SendAppendEntries(peerIdx, args, &reply)
             if reason == 0 {
                 count += 1
             }
         }
+
+        rf.heartbeatsCount += 1
+
+        if rf.heartbeatsCount > 50 {
+            if len(rf.history) > 1 {
+                rf.Schedule(3)
+            }
+            rf.heartbeatsCount = 0
+        }
+
     }
     return count
 }
@@ -422,7 +450,7 @@ func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
     reply.Term = rf.currentTerm
 
     if args.Term < rf.currentTerm {
-        rf.Print("RequestVote Incorrect Terms", reply)
+        rf.Print("RequestVote Incorrect Terms", args)
         return
     }
 
@@ -439,13 +467,13 @@ func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
         entry := rf.history[args.LastEntry.Index]
 
         if entry.Index < rf.commitIndex {
-            rf.votedFor[args.Term] = args.CandidateId
-            reply.VoteGranted = true
+            reply.VoteGranted = false
             rf.Print("RequestVote No Vote for commit leaser", entry)
             return
         }
 
         if entry.Command == args.LastEntry.Command && entry.Term == args.LastEntry.Term {
+
             rf.votedFor[args.Term] = args.CandidateId
             reply.VoteGranted = true
             rf.Print("RequestVote New Vote received and Entry OK", entry)
@@ -470,8 +498,15 @@ func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
         return
     }
 
-    rf.Print("RequestVote Denial, Voted for", votedFor)
-    reply.VoteGranted = false
+    if rf.leaderId != -1 {
+        rf.Print("RequestVote Denial, Voted for", votedFor)
+        reply.VoteGranted = false
+        return
+    }
+
+    rf.votedFor[args.Term] = args.CandidateId
+    reply.VoteGranted = true
+    rf.Print("RequestVote Revoted since there is not leader", -1)
 }
 
 
@@ -498,7 +533,7 @@ func (rf *Raft) sendRequestVote(server int, args RequestVoteArgs, reply *Request
 }
 
 
-func (rf *Raft) Votation() int {
+func (rf *Raft) Votation(retries int) int {
 
     votes := 0
 
@@ -508,10 +543,13 @@ func (rf *Raft) Votation() int {
             lastEntry := rf.history[len(rf.history)-1]
             args := RequestVoteArgs{rf.currentTerm, rf.me, lastEntry}
             reply := RequestVoteReply{}
-            ok := rf.sendRequestVote(peerIdx, args, &reply)
-            if ok {
-                if reply.VoteGranted {
-                    votes += 1
+            ok := false
+            for i := 0; i < retries && ! ok; i++ {
+                ok = rf.sendRequestVote(peerIdx, args, &reply)
+                if ok {
+                    if reply.VoteGranted {
+                        votes += 1
+                   }
                }
            }
    }
@@ -537,23 +575,25 @@ func (rf *Raft) Start(command int) (int, int, bool) {
 
     if rf.nodeType == "Leader" {
         entry := rf.AppendCommand(command)
-
-        for peerIdx, _ := range rf.peers {
-
-            rf.mu.Lock()
-            retries, ok := rf.nextIndex[peerIdx]
-            if ! ok {
-                retries = 3
-            }
-            rf.nextIndex[peerIdx] = retries
-            rf.mu.Unlock()
-        }
-        rf.Print("Schedule", rf.nextIndex)
-
+        rf.Schedule(3)
         return entry.Index, rf.currentTerm, true
     } else {
         return -1, rf.currentTerm, false
     }
+}
+
+func (rf *Raft) Schedule(retries int) {
+    for peerIdx, _ := range rf.peers {
+
+        rf.mu.Lock()
+        retries, ok := rf.nextIndex[peerIdx]
+        if ! ok {
+            retries = 3
+        }
+        rf.nextIndex[peerIdx] = retries
+        rf.mu.Unlock()
+    }
+    rf.Print("Schedule", rf.nextIndex)
 }
 
 //
@@ -564,13 +604,11 @@ func (rf *Raft) Start(command int) (int, int, bool) {
 //
 func (rf *Raft) Kill() {
 
-    rf.mu.Lock()
-
     rf.kill = true
-    for rf.aliveServices > 0 {}
+    for rf.aliveServices > 0 {
+        time.Sleep(50 * time.Millisecond)
+    }
     rf.Print("Kill", nil)
-
-    rf.mu.Unlock()
 }
 
 func (rf *Raft) ResetTime() {
@@ -580,7 +618,7 @@ func (rf *Raft) ResetTime() {
     }
 
     rf.timeoutLeader = time.Now()
-    ratio := time.Duration((rf.me+1)*100) * time.Duration(len(rf.peers)) * rf.avgPackage
+    ratio := time.Duration((rf.me+1)*150) * time.Duration(len(rf.peers)) * rf.avgPackage
     rf.timeoutLeader = rf.timeoutLeader.Add(ratio)
 }
 
@@ -634,9 +672,10 @@ func Make(peers []*labrpc.ClientEnd, me int,
    rf.kill = false
    rf.aliveServices = 0
    rf.pingSend = 0
+   rf.avgPackage = time.Duration(500)  * time.Millisecond
 
 	// initialize from state persisted before a crash
-	rf.readPersist(persister.ReadRaftState())
+	rf.readPersist(rf.persister.ReadRaftState())
 
 	return rf
 }
@@ -651,12 +690,7 @@ func (rf *Raft) VolatilRefresh() {
 }
 
 func (rf *Raft) Bootstrap() {
-
     rf.CalculateBestTimeout(10)
-
-    go rf.CheckTimeoutLeader()
-    go rf.UpdateStateMachine()
-    go rf.HandleNextAppendEntries()
 }
 
 /*
@@ -678,6 +712,7 @@ func (rf *Raft) CheckTimeoutLeader() {
                 rf.nodeType = "Follower"
                 rf.ResetTime()
             } else {
+                rf.Print("I am disconnected", nil)
                 continue
             }
         }
@@ -700,7 +735,7 @@ func (rf *Raft) CheckTimeoutLeader() {
                 }
             }
         case "Candidate":
-            votes := rf.Votation()
+            votes := rf.Votation(3)
             rf.Print("Votes", votes)
             if float32(votes) >= float32(len(rf.peers))/2.0 {
                 if rf.nodeType == "Candidate" {
@@ -721,7 +756,7 @@ func (rf *Raft) CheckTimeoutLeader() {
                 }
             }
         case "Leader":
-            alive := rf.Heartbeat(false)
+            alive := rf.Heartbeat()
             if alive == 0 {
                 alives := rf.PeersAlives(3)
                 if alives <= 0 {
@@ -745,6 +780,9 @@ func (rf *Raft) UpdateStateMachine() {
 
         time.Sleep(100 * time.Millisecond)
 
+        //Save Persister
+        rf.persist()
+
         // Apply command
         for rf.commitIndex > rf.lastApplied {
             rf.lastApplied += 1
@@ -766,7 +804,8 @@ func (rf *Raft) UpdateStateMachine() {
                 if float64(matched) > float64(len(rf.peers))/float64(2) {
                     rf.commitIndex = n
                     rf.Print("Set Commit Index", rf.commitIndex)
-                    rf.Heartbeat(true)
+                    //Propagate commit
+                    rf.Schedule(3)
                     break
                 }
             }
@@ -814,7 +853,7 @@ func (rf *Raft) HandleNextAppendEntries() {
         entries := rf.MapCommands(1)
         currEntry := rf.history[0]
 
-        if lastMatched != -1 {
+        if lastMatched >= 0 {
             entries = rf.MapCommands(lastMatched)
             currEntry = rf.history[lastMatched-1]
         }
@@ -825,7 +864,7 @@ func (rf *Raft) HandleNextAppendEntries() {
 
         // Log inconsistency
         if reason == 1 {
-            rf.matchIndex[nextServer] = rf.matchIndex[nextServer]-1
+            rf.matchIndex[nextServer] -= 1
         }
         // Network Issue
         if reason == 2 {
@@ -856,8 +895,11 @@ func (rf *Raft) HandleNextAppendEntries() {
  Network Functions
 */
 func (rf *Raft) CallWrapper(server int, endpoint string, args interface{}, reply interface{}, suc chan bool) {
-    ok := rf.peers[server].Call(endpoint, args, reply)
-    suc <- ok
+    if ! rf.kill {
+        ok := rf.peers[server].Call(endpoint, args, reply)
+        suc <- ok
+    }
+    suc <- false
 }
 
 func (rf *Raft) MakeCall(server int, endpoint string, args interface{}, reply interface{}, unlimited bool) bool {
@@ -869,7 +911,7 @@ func (rf *Raft) MakeCall(server int, endpoint string, args interface{}, reply in
     channel := make(chan bool)
     go rf.CallWrapper(server, endpoint, args, reply, channel)
 
-    tolerance := time.Duration(100*len(rf.peers)) * rf.avgPackage
+    tolerance := time.Duration(150*len(rf.peers)) * rf.avgPackage
     timeout := time.Now().Add(tolerance)
 
     counter := 0

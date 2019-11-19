@@ -363,7 +363,7 @@ func Test215Rejoin(t *testing.T) {
 
 func Test216Backup(t *testing.T) {
 	servers := 5
-    entries := 10
+    entries := 5
 	cfg := make_config(t, servers, false)
 	defer cfg.cleanup()
 
@@ -630,7 +630,7 @@ func Test222Persist2(t *testing.T) {
 
 	fmt.Println("Test: more persistence...")
 
-	index := 1
+	index := 0
 	for iters := 0; iters < 5; iters++ {
 		cfg.one(10+index, servers)
 		index++

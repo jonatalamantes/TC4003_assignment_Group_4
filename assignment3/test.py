@@ -30,7 +30,7 @@ def main():
             command = "go test -run {0} 2>&1 | tee {1}/execution.log ".format(args.test_type, current)
 
         if not args.debug:
-            command += " | grep 'FAIL\|Pass\|PASS\|ok   raft    \|Test: \|    .*.go:.*: '"
+            command += " | grep 'FAIL\|Pass\|PASS\|ok.*raft\|Test: \|    .*.go:.*: '"
 
         rc = os.system(command)
         if rc == 0:

@@ -344,6 +344,9 @@ func (cfg *config) nCommitted(index int) (int, interface{}) {
 			cmd = cmd1
 		}
 	}
+	for i := 0; i < cfg.n; i++ {
+		//cfg.rafts[i].GetState()
+    }
     fmt.Println("nCommitted ( Index:", index, "Count:", count, "Cmd", cmd, ")")
 	return count, cmd
 }
