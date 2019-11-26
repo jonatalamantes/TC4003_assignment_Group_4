@@ -1,0 +1,56 @@
+(1)[bash-4.2]jesandov@den02tai ~/Code/Go/TC4003_assignment_Group_4/assignment3 $ time ./test.py --test_type "Test1" 2>&1
+ *** Start Test Suite Iteration 1 ***
+Test: initial election...
+... Passed
+Test: election after network failure...
+... Passed
+PASS
+ok      raft    10.156s
+
+Test Results: 1/1 = 1.0
+
+real    0m10.821s
+user    0m14.070s
+sys 0m0.223s
+
+(1)[bash-4.2]jesandov@den02tai ~/Code/Go/TC4003_assignment_Group_4/assignment3 $ time ./test.py --test_type "Test21" 2>&1
+ *** Start Test Suite Iteration 1 ***
+Test: basic agreement...
+... Passed
+Test: agreement despite follower failure...
+... Passed
+Test: no agreement if too many followers fail...
+... Passed
+Test: concurrent Start()s...
+... Passed
+Test: rejoin of partitioned leader...
+... Passed
+Test: leader backs up quickly over incorrect follower logs...
+... Passed
+Test: RPC counts aren't too high...
+... Passed
+PASS
+ok      raft    73.270s
+
+Test Results: 1/1 = 1.0
+
+real    1m13.947s
+user    2m39.946s
+sys 0m0.718s
+
+(1)[bash-4.2]jesandov@den02tai ~/Code/Go/TC4003_assignment_Group_4/assignment3 $ time ./test.py --test_type "Test22" 2>&1
+ *** Start Test Suite Iteration 1 ***
+Test: basic persistence...
+... Passed
+Test: more persistence...
+... Passed
+Test: partitioned leader and one follower crash, leader restarts...
+... Passed
+PASS
+ok      raft    57.686s
+
+Test Results: 1/1 = 1.0
+
+real    0m58.156s
+user    2m13.422s
+sys 0m0.564s

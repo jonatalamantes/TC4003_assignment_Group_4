@@ -1,0 +1,129 @@
+disconnect(0)
+ReadPersister <nil> [Me:0#LeaderTimeout:3m44.999990311s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+disconnect(1)
+ReadPersister <nil> [Me:1#LeaderTimeout:7m29.999976916s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+disconnect(2)
+ReadPersister <nil> [Me:2#LeaderTimeout:11m14.999993748s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+connect(0)
+connect(1)
+connect(2)
+AVG Time 292.713µs [Me:0#LeaderTimeout:3m44.990862814s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+AVG Time 273.914µs [Me:1#LeaderTimeout:7m29.982767011s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+AVG Time 271.719µs [Me:2#LeaderTimeout:11m14.974565754s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+Test: election after network failure...
+ *****************
+ ****** T1 *******
+ *****************
+RequestVote {1 0 {1 -7 0}} [Me:2#LeaderTimeout:11m14.899347631s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote New Vote with most updated entry {0 -7 0} [Me:2#LeaderTimeout:11m14.899188216s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote {1 0 {1 -7 0}} [Me:1#LeaderTimeout:7m29.898383644s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote New Vote with most updated entry {0 -7 0} [Me:1#LeaderTimeout:7m29.898236014s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote {1 0 {1 -7 0}} [Me:0#LeaderTimeout:3m44.897374543s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+RequestVote New Vote received and Entry OK {1 -7 0} [Me:0#LeaderTimeout:3m44.897229707s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Votes 3 [Me:0#LeaderTimeout:3m44.896973542s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Became Leader <nil> [Me:0#LeaderTimeout:3m44.896947768s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+GetState, LeaderId: -1 [Me:0#LeaderTimeout:3m44.474008055s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+GetState, LeaderId: 0 [Me:1#LeaderTimeout:230.271239ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+GetState, LeaderId: 0 [Me:2#LeaderTimeout:350.839422ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+ *****************
+ ****** T2 *******
+ *****************
+disconnect(0)
+Network Issue (Raft.AppendEntries) send it to (1) {1 0 {0 <nil> 0} [] -1} [Me:0#LeaderTimeout:3m44.257906396s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Network Issue (Raft.AppendEntries) send it to (2) {1 0 {0 <nil> 0} [] -1} [Me:0#LeaderTimeout:3m44.126081852s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+GetState, LeaderId: 0 [Me:1#LeaderTimeout:-269.859626ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+GetState, LeaderId: 0 [Me:2#LeaderTimeout:-149.299101ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+GetState, LeaderId: 0 [Me:1#LeaderTimeout:-769.971482ms#Type:Candidate#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+GetState, LeaderId: 0 [Me:2#LeaderTimeout:-649.408733ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+RequestVote {2 1 {0 -7 0}} [Me:2#LeaderTimeout:-733.996783ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+RequestVote New Vote received and Entry OK {0 -7 0} [Me:2#LeaderTimeout:-734.017038ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+RequestVote {2 1 {0 -7 0}} [Me:1#LeaderTimeout:-855.069061ms#Type:Candidate#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+RequestVote New Vote received and Entry OK {0 -7 0} [Me:1#LeaderTimeout:-855.085548ms#Type:Candidate#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+Disconnected (Leader) <nil> [Me:0#LeaderTimeout:3m43.335588257s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Network Issue (Raft.RequestVote) send it to (0) {2 1 {0 -7 0}} [Me:1#LeaderTimeout:-978.496561ms#Type:Candidate#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+RequestVote {2 2 {0 -7 0}} [Me:2#LeaderTimeout:-871.25751ms#Type:Candidate#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+RequestVote Denial, Voted for 1 [Me:2#LeaderTimeout:-871.270345ms#Type:Candidate#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+RequestVote {2 2 {0 -7 0}} [Me:1#LeaderTimeout:-992.172191ms#Type:Candidate#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+RequestVote Denial, Voted for 1 [Me:1#LeaderTimeout:-992.182809ms#Type:Candidate#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+Network Issue (Raft.RequestVote) send it to (0) {2 1 {0 -7 0}} [Me:1#LeaderTimeout:-1.101824168s#Type:Candidate#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+Network Issue (Raft.RequestVote) send it to (0) {2 2 {0 -7 0}} [Me:2#LeaderTimeout:-994.020025ms#Type:Candidate#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+Network Issue (Raft.RequestVote) send it to (0) {2 1 {0 -7 0}} [Me:1#LeaderTimeout:-1.225147896s#Type:Candidate#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+Votes 2 [Me:1#LeaderTimeout:-1.225163265s#Type:Candidate#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+Became Leader <nil> [Me:1#LeaderTimeout:-1.225173468s#Type:Candidate#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+Network Issue (Raft.RequestVote) send it to (0) {2 2 {0 -7 0}} [Me:2#LeaderTimeout:-1.116355594s#Type:Candidate#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+GetState, LeaderId: 0 [Me:1#LeaderTimeout:-1.270176572s#Type:Leader#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+GetState, LeaderId: 0 [Me:2#LeaderTimeout:-1.149617224s#Type:Candidate#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+ *****************
+ ****** T3 *******
+ *****************
+connect(0)
+ReConnected <nil> [Me:0#LeaderTimeout:3m42.971071939s#Type:Follower#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Network Issue (Raft.RequestVote) send it to (0) {2 2 {0 -7 0}} [Me:2#LeaderTimeout:333.658835ms#Type:Follower#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+Votes 0 [Me:2#LeaderTimeout:333.642554ms#Type:Follower#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+GetState, LeaderId: 1 [Me:0#LeaderTimeout:100.157255ms#Type:Follower#CommitIndex:-1#Term:2#Logs: [{1 -7 0}] ]
+GetState, LeaderId: 0 [Me:1#LeaderTimeout:-1.770390404s#Type:Leader#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+GetState, LeaderId: 1 [Me:2#LeaderTimeout:336.584758ms#Type:Follower#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+ *****************
+ ****** T4 *******
+ *****************
+disconnect(1)
+disconnect(2)
+Network Issue (Raft.AppendEntries) send it to (0) {2 1 {0 <nil> 0} [] -1} [Me:1#LeaderTimeout:-1.963692149s#Type:Leader#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+Network Issue (Raft.AppendEntries) send it to (2) {2 1 {0 <nil> 0} [] -1} [Me:1#LeaderTimeout:-2.087001855s#Type:Leader#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+Disconnected (Follower) <nil> [Me:0#LeaderTimeout:-793.397144ms#Type:Follower#CommitIndex:-1#Term:2#Logs: [{1 -7 0}] ]
+Disconnected (Leader) <nil> [Me:1#LeaderTimeout:-2.826723679s#Type:Leader#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+Disconnected (Follower) <nil> [Me:2#LeaderTimeout:-780.455435ms#Type:Follower#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+I am disconnected <nil> [Me:0#LeaderTimeout:-1.674754054s#Type:Follower#CommitIndex:-1#Term:2#Logs: [{1 -7 0}] ]
+I am disconnected <nil> [Me:1#LeaderTimeout:-3.666664382s#Type:Follower#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+I am disconnected <nil> [Me:2#LeaderTimeout:-1.614408526s#Type:Follower#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+GetState, LeaderId: -1 [Me:0#LeaderTimeout:-1.900023723s#Type:Follower#CommitIndex:-1#Term:2#Logs: [{1 -7 0}] ]
+ *****************
+ ****** T5 *******
+ *****************
+connect(2)
+ReConnected <nil> [Me:0#LeaderTimeout:-2.170433459s#Type:Follower#CommitIndex:-1#Term:2#Logs: [{1 -7 0}] ]
+ReConnected <nil> [Me:2#LeaderTimeout:-2.082574803s#Type:Follower#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+GetState, LeaderId: -1 [Me:0#LeaderTimeout:-97.950115ms#Type:Follower#CommitIndex:-1#Term:2#Logs: [{1 -7 0}] ]
+GetState, LeaderId: -1 [Me:2#LeaderTimeout:285.652286ms#Type:Follower#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+I am disconnected <nil> [Me:1#LeaderTimeout:-4.506689294s#Type:Follower#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+RequestVote {3 0 {1 -7 0}} [Me:2#LeaderTimeout:-186.161907ms#Type:Follower#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+RequestVote New Vote with most updated entry {0 -7 0} [Me:2#LeaderTimeout:-186.176561ms#Type:Follower#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+GetState, LeaderId: -1 [Me:0#LeaderTimeout:-598.072126ms#Type:Candidate#CommitIndex:-1#Term:3#Logs: [{1 -7 0}] ]
+GetState, LeaderId: -1 [Me:2#LeaderTimeout:-214.458487ms#Type:Follower#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+Network Issue (Raft.RequestVote) send it to (1) {3 0 {1 -7 0}} [Me:0#LeaderTimeout:-701.732308ms#Type:Candidate#CommitIndex:-1#Term:3#Logs: [{1 -7 0}] ]
+RequestVote {3 2 {0 -7 0}} [Me:2#LeaderTimeout:-435.176636ms#Type:Candidate#CommitIndex:-1#Term:3#Logs: [{0 -7 0}] ]
+RequestVote Revoted since there is not leader -1 [Me:2#LeaderTimeout:-435.190546ms#Type:Candidate#CommitIndex:-1#Term:3#Logs: [{0 -7 0}] ]
+Network Issue (Raft.RequestVote) send it to (1) {3 0 {1 -7 0}} [Me:0#LeaderTimeout:-833.607075ms#Type:Candidate#CommitIndex:-1#Term:3#Logs: [{1 -7 0}] ]
+Network Issue (Raft.RequestVote) send it to (1) {3 2 {0 -7 0}} [Me:2#LeaderTimeout:-557.775651ms#Type:Candidate#CommitIndex:-1#Term:3#Logs: [{0 -7 0}] ]
+Network Issue (Raft.RequestVote) send it to (1) {3 0 {1 -7 0}} [Me:0#LeaderTimeout:-965.478336ms#Type:Candidate#CommitIndex:-1#Term:3#Logs: [{1 -7 0}] ]
+RequestVote {3 0 {1 -7 0}} [Me:0#LeaderTimeout:-965.826776ms#Type:Candidate#CommitIndex:-1#Term:3#Logs: [{1 -7 0}] ]
+RequestVote New Vote received and Entry OK {1 -7 0} [Me:0#LeaderTimeout:-965.84899ms#Type:Candidate#CommitIndex:-1#Term:3#Logs: [{1 -7 0}] ]
+Votes 2 [Me:0#LeaderTimeout:-966.039882ms#Type:Candidate#CommitIndex:-1#Term:3#Logs: [{1 -7 0}] ]
+Became Leader <nil> [Me:0#LeaderTimeout:-966.144562ms#Type:Candidate#CommitIndex:-1#Term:3#Logs: [{1 -7 0}] ]
+Network Issue (Raft.RequestVote) send it to (1) {3 2 {0 -7 0}} [Me:2#LeaderTimeout:-680.279691ms#Type:Candidate#CommitIndex:-1#Term:3#Logs: [{0 -7 0}] ]
+GetState, LeaderId: -1 [Me:0#LeaderTimeout:-1.098188842s#Type:Leader#CommitIndex:-1#Term:3#Logs: [{1 -7 0}] ]
+GetState, LeaderId: -1 [Me:2#LeaderTimeout:-714.578672ms#Type:Candidate#CommitIndex:-1#Term:3#Logs: [{0 -7 0}] ]
+ *****************
+ ****** T6 *******
+ *****************
+connect(1)
+I am disconnected <nil> [Me:1#LeaderTimeout:-5.34664449s#Type:Follower#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+Network Issue (Raft.RequestVote) send it to (1) {3 2 {0 -7 0}} [Me:2#LeaderTimeout:-802.673078ms#Type:Candidate#CommitIndex:-1#Term:3#Logs: [{0 -7 0}] ]
+RequestVote {3 2 {0 -7 0}} [Me:0#LeaderTimeout:-1.186676337s#Type:Leader#CommitIndex:-1#Term:3#Logs: [{1 -7 0}] ]
+RequestVote Revoted since there is not leader -1 [Me:0#LeaderTimeout:-1.186737964s#Type:Leader#CommitIndex:-1#Term:3#Logs: [{1 -7 0}] ]
+Votes 2 [Me:2#LeaderTimeout:-803.23629ms#Type:Candidate#CommitIndex:-1#Term:3#Logs: [{0 -7 0}] ]
+Became Leader <nil> [Me:2#LeaderTimeout:-803.248531ms#Type:Candidate#CommitIndex:-1#Term:3#Logs: [{0 -7 0}] ]
+Network Issue (Raft.AppendEntries) send it to (1) {3 0 {0 <nil> 0} [] -1} [Me:0#LeaderTimeout:-1.198074551s#Type:Leader#CommitIndex:-1#Term:3#Logs: [{1 -7 0}] ]
+ReConnected <nil> [Me:1#LeaderTimeout:-5.447511183s#Type:Follower#CommitIndex:-1#Term:2#Logs: [{0 -7 0}] ]
+GetState, LeaderId: -1 [Me:0#LeaderTimeout:-1.598417863s#Type:Leader#CommitIndex:-1#Term:3#Logs: [{1 -7 0}] ]
+GetState, LeaderId: 0 [Me:1#LeaderTimeout:162.873531ms#Type:Follower#CommitIndex:-1#Term:3#Logs: [{0 -7 0}] ]
+GetState, LeaderId: 0 [Me:2#LeaderTimeout:283.531539ms#Type:Follower#CommitIndex:-1#Term:3#Logs: [{0 -7 0}] ]
+... Passed
+Disconnected (Leader) <nil> [Me:0#LeaderTimeout:-1.615357385s#Type:Leader#CommitIndex:-1#Term:3#Logs: [{1 -7 0}] ]
+Kill <nil> [Me:0#LeaderTimeout:-1.698679075s#Type:Follower#CommitIndex:-1#Term:3#Logs: [{1 -7 0}] ]
+Disconnected (Follower) <nil> [Me:1#LeaderTimeout:-14.148585ms#Type:Follower#CommitIndex:-1#Term:3#Logs: [{0 -7 0}] ]
+Kill <nil> [Me:1#LeaderTimeout:-37.588313ms#Type:Follower#CommitIndex:-1#Term:3#Logs: [{0 -7 0}] ]
+Disconnected (Follower) <nil> [Me:2#LeaderTimeout:-5.702443ms#Type:Follower#CommitIndex:-1#Term:3#Logs: [{0 -7 0}] ]
+Kill <nil> [Me:2#LeaderTimeout:-17.140484ms#Type:Follower#CommitIndex:-1#Term:3#Logs: [{0 -7 0}] ]
+PASS
+ok  	raft	6.832s

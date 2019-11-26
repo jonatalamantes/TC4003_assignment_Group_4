@@ -1,0 +1,38 @@
+disconnect(0)
+ReadPersister <nil> [Me:0#LeaderTimeout:3m44.999962293s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+disconnect(1)
+ReadPersister <nil> [Me:1#LeaderTimeout:7m29.999946408s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+disconnect(2)
+ReadPersister <nil> [Me:2#LeaderTimeout:11m14.999967852s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+connect(0)
+connect(1)
+connect(2)
+AVG Time 418.016µs [Me:0#LeaderTimeout:3m44.986626602s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+AVG Time 256.126µs [Me:1#LeaderTimeout:7m29.979194449s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+AVG Time 218.591µs [Me:2#LeaderTimeout:11m14.972876597s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+Test: initial election...
+RequestVote {1 0 {1 -7 0}} [Me:2#LeaderTimeout:11m14.899888661s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote New Vote with most updated entry {0 -7 0} [Me:2#LeaderTimeout:11m14.899871882s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote {1 0 {1 -7 0}} [Me:1#LeaderTimeout:7m29.899175368s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote New Vote with most updated entry {0 -7 0} [Me:1#LeaderTimeout:7m29.899101221s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote {1 0 {1 -7 0}} [Me:0#LeaderTimeout:3m44.898356648s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+RequestVote New Vote received and Entry OK {1 -7 0} [Me:0#LeaderTimeout:3m44.898339105s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Votes 3 [Me:0#LeaderTimeout:3m44.89821021s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Became Leader <nil> [Me:0#LeaderTimeout:3m44.898152577s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+GetState, LeaderId: -1 [Me:0#LeaderTimeout:3m44.472029029s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+GetState, LeaderId: 0 [Me:1#LeaderTimeout:211.740954ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+GetState, LeaderId: 0 [Me:2#LeaderTimeout:276.696917ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+GetState, LeaderId: -1 [Me:0#LeaderTimeout:3m44.471975772s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+GetState, LeaderId: 0 [Me:1#LeaderTimeout:211.699631ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+GetState, LeaderId: 0 [Me:2#LeaderTimeout:276.661636ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+GetState, LeaderId: -1 [Me:0#LeaderTimeout:3m42.471777672s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+GetState, LeaderId: 0 [Me:1#LeaderTimeout:211.10635ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+GetState, LeaderId: 0 [Me:2#LeaderTimeout:276.058736ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+... Passed
+Disconnected (Leader) <nil> [Me:0#LeaderTimeout:3m42.390587671s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Kill <nil> [Me:0#LeaderTimeout:3m42.371445221s#Type:Follower#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Kill <nil> [Me:1#LeaderTimeout:10.396605ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+Disconnected (Follower) <nil> [Me:2#LeaderTimeout:-4.783703ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+Kill <nil> [Me:2#LeaderTimeout:-24.990089ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+PASS
+ok  	raft	2.833s
