@@ -1,86 +1,108 @@
 disconnect(0)
-ReadPersister <nil> [Me:0#LeaderTimeout:3m44.999989949s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+ReadPersister <nil> [Me:0#LeaderTimeout:3m44.99999056s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
 disconnect(1)
-ReadPersister <nil> [Me:1#LeaderTimeout:7m29.999992824s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+ReadPersister <nil> [Me:1#LeaderTimeout:7m29.999987318s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
 disconnect(2)
-ReadPersister <nil> [Me:2#LeaderTimeout:11m14.999993249s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+ReadPersister <nil> [Me:2#LeaderTimeout:11m14.999978675s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
 connect(0)
 connect(1)
 connect(2)
-AVG Time 409.01µs [Me:0#LeaderTimeout:3m44.98735928s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
-AVG Time 279.02µs [Me:1#LeaderTimeout:7m29.979198097s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
-AVG Time 265.465µs [Me:2#LeaderTimeout:11m14.971281049s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+AVG Time 309.947µs [Me:0#LeaderTimeout:3m44.990383204s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+AVG Time 237.34µs [Me:1#LeaderTimeout:7m29.983369436s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+AVG Time 259.771µs [Me:2#LeaderTimeout:11m14.975542609s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
 Test: partitioned leader and one follower crash, leader restarts...
 ONE Cmd 101 Servers 3
-RequestVote {1 0 {1 -7 0}} [Me:2#LeaderTimeout:11m14.899743126s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
-RequestVote New Vote with most updated entry {0 -7 0} [Me:2#LeaderTimeout:11m14.899713686s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
-RequestVote {1 0 {1 -7 0}} [Me:1#LeaderTimeout:7m29.899166612s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
-RequestVote New Vote with most updated entry {0 -7 0} [Me:1#LeaderTimeout:7m29.899154468s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
-RequestVote {1 0 {1 -7 0}} [Me:0#LeaderTimeout:3m44.898613936s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
-RequestVote New Vote received and Entry OK {1 -7 0} [Me:0#LeaderTimeout:3m44.898602354s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
-Votes 3 [Me:0#LeaderTimeout:3m44.898409081s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
-Became Leader <nil> [Me:0#LeaderTimeout:3m44.898393367s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
-Schedule map[0:3 1:3 2:3] [Me:0#LeaderTimeout:3m44.87065778s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+RequestVote {1 0 {1 -7 0}} [Me:2#LeaderTimeout:11m14.896984811s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote New Vote with most updated entry {0 -7 0} [Me:2#LeaderTimeout:11m14.896958272s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote {1 0 {1 -7 0}} [Me:1#LeaderTimeout:7m29.896443209s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote New Vote with most updated entry {0 -7 0} [Me:1#LeaderTimeout:7m29.896431801s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote {1 0 {1 -7 0}} [Me:0#LeaderTimeout:3m44.895960136s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+RequestVote New Vote received and Entry OK {1 -7 0} [Me:0#LeaderTimeout:3m44.895949005s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Votes 3 [Me:0#LeaderTimeout:3m44.895867443s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Became Leader <nil> [Me:0#LeaderTimeout:3m44.895846042s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Schedule map[0:3 1:3 2:3] [Me:0#LeaderTimeout:3m44.874986114s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
 nCommitted ( Index: 1 Count: 0 Cmd -1 )
 nCommitted ( Index: 1 Count: 0 Cmd -1 )
 nCommitted ( Index: 1 Count: 0 Cmd -1 )
 nCommitted ( Index: 1 Count: 0 Cmd -1 )
-Call AppendEntries {1 0 {1 -7 0} [101] -1} [Me:0#LeaderTimeout:3m44.798133854s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Call AppendEntries Complete 2 {1 0 {1 -7 0} [101] -1} [Me:0#LeaderTimeout:3m44.798020649s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Set Match Index 1 [Me:0#LeaderTimeout:3m44.797923428s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-nCommitted ( Index: 1 Count: 0 Cmd -1 )
-nCommitted ( Index: 1 Count: 0 Cmd -1 )
-nCommitted ( Index: 1 Count: 0 Cmd -1 )
-nCommitted ( Index: 1 Count: 0 Cmd -1 )
-nCommitted ( Index: 1 Count: 0 Cmd -1 )
-Call AppendEntries {1 0 {1 -7 0} [101] -1} [Me:1#LeaderTimeout:251.063033ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
-Call AppendEntries Complete 2 {1 0 {1 -7 0} [101] -1} [Me:1#LeaderTimeout:250.969361ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Set Match Index 1 [Me:0#LeaderTimeout:3m44.696795627s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries {1 0 {1 -7 0} [101] -1} [Me:0#LeaderTimeout:3m44.796943137s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries Complete 2 {1 0 {1 -7 0} [101] -1} [Me:0#LeaderTimeout:3m44.796915716s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Set Match Index 1 [Me:0#LeaderTimeout:3m44.796892661s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
 nCommitted ( Index: 1 Count: 0 Cmd -1 )
 nCommitted ( Index: 1 Count: 0 Cmd -1 )
 nCommitted ( Index: 1 Count: 0 Cmd -1 )
 nCommitted ( Index: 1 Count: 0 Cmd -1 )
 nCommitted ( Index: 1 Count: 0 Cmd -1 )
-Set Commit Index 1 [Me:0#LeaderTimeout:3m44.598958119s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Schedule map[0:3 1:3 2:3] [Me:0#LeaderTimeout:3m44.598935991s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Call AppendEntries {1 0 {1 -7 0} [101] 1} [Me:2#LeaderTimeout:358.357519ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
-Call AppendEntries Complete 2 {1 0 {1 -7 0} [101] 1} [Me:2#LeaderTimeout:358.343528ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Set Match Index 1 [Me:0#LeaderTimeout:3m44.596250114s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-ApplyCh {0 -7 false []} [Me:2#LeaderTimeout:357.508456ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-ApplyCh {1 101 false []} [Me:2#LeaderTimeout:357.492874ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-nCommitted ( Index: 1 Count: 1 Cmd 101 )
-nCommitted ( Index: 1 Count: 1 Cmd 101 )
-nCommitted ( Index: 1 Count: 1 Cmd 101 )
-nCommitted ( Index: 1 Count: 1 Cmd 101 )
-nCommitted ( Index: 1 Count: 1 Cmd 101 )
-ApplyCh {0 -7 false []} [Me:0#LeaderTimeout:3m44.498678448s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-ApplyCh {1 101 false []} [Me:0#LeaderTimeout:3m44.49864775s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Call AppendEntries {1 0 {1 -7 0} [101] 1} [Me:0#LeaderTimeout:3m44.496113997s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Call AppendEntries Complete 2 {1 0 {1 -7 0} [101] 1} [Me:0#LeaderTimeout:3m44.496099214s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries {1 0 {1 -7 0} [101] -1} [Me:1#LeaderTimeout:213.580096ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+Call AppendEntries Complete 2 {1 0 {1 -7 0} [101] -1} [Me:1#LeaderTimeout:213.513053ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Set Match Index 1 [Me:0#LeaderTimeout:3m44.695851666s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+nCommitted ( Index: 1 Count: 0 Cmd -1 )
+nCommitted ( Index: 1 Count: 0 Cmd -1 )
+nCommitted ( Index: 1 Count: 0 Cmd -1 )
+nCommitted ( Index: 1 Count: 0 Cmd -1 )
+nCommitted ( Index: 1 Count: 0 Cmd -1 )
+Set Commit Index 1 [Me:0#LeaderTimeout:3m44.596230631s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Schedule map[0:3 1:3 2:3] [Me:0#LeaderTimeout:3m44.596187948s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries {1 0 {1 -7 0} [101] 1} [Me:2#LeaderTimeout:350.640518ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+Call AppendEntries Complete 2 {1 0 {1 -7 0} [101] 1} [Me:2#LeaderTimeout:350.554343ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Set Match Index 1 [Me:0#LeaderTimeout:3m44.595027074s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+nCommitted ( Index: 1 Count: 0 Cmd -1 )
+nCommitted ( Index: 1 Count: 0 Cmd -1 )
+nCommitted ( Index: 1 Count: 0 Cmd -1 )
+nCommitted ( Index: 1 Count: 0 Cmd -1 )
+nCommitted ( Index: 1 Count: 0 Cmd -1 )
+ApplyCh {0 -7 false []} [Me:0#LeaderTimeout:3m44.496006352s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+ApplyCh {1 101 false []} [Me:0#LeaderTimeout:3m44.495974482s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+ApplyCh {0 -7 false []} [Me:2#LeaderTimeout:259.198215ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+ApplyCh {1 101 false []} [Me:2#LeaderTimeout:259.168065ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries {1 0 {1 -7 0} [101] 1} [Me:0#LeaderTimeout:3m44.494888016s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries Complete 2 {1 0 {1 -7 0} [101] 1} [Me:0#LeaderTimeout:3m44.494870171s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
 nCommitted ( Index: 1 Count: 2 Cmd 101 )
-Schedule map[0:3 1:3 2:3] [Me:0#LeaderTimeout:3m44.487702992s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-nCommitted ( Index: 1 Count: 2 Cmd 101 )
-nCommitted ( Index: 1 Count: 2 Cmd 101 )
+Schedule map[0:3 1:3 2:3] [Me:0#LeaderTimeout:3m44.4784397s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
 nCommitted ( Index: 1 Count: 2 Cmd 101 )
 nCommitted ( Index: 1 Count: 2 Cmd 101 )
-Call AppendEntries {1 0 {1 -7 0} [101] 1} [Me:1#LeaderTimeout:251.096175ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Call AppendEntries Complete 2 {1 0 {1 -7 0} [101] 1} [Me:1#LeaderTimeout:251.08118ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-ApplyCh {0 -7 false []} [Me:1#LeaderTimeout:250.969776ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-ApplyCh {1 101 false []} [Me:1#LeaderTimeout:250.949946ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+nCommitted ( Index: 1 Count: 2 Cmd 101 )
+nCommitted ( Index: 1 Count: 2 Cmd 101 )
+Call AppendEntries {1 0 {1 -7 0} [101] 1} [Me:1#LeaderTimeout:213.580102ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries Complete 2 {1 0 {1 -7 0} [101] 1} [Me:1#LeaderTimeout:213.564918ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+nCommitted ( Index: 1 Count: 2 Cmd 101 )
+nCommitted ( Index: 1 Count: 2 Cmd 101 )
+nCommitted ( Index: 1 Count: 2 Cmd 101 )
+nCommitted ( Index: 1 Count: 2 Cmd 101 )
+nCommitted ( Index: 1 Count: 2 Cmd 101 )
+ApplyCh {0 -7 false []} [Me:1#LeaderTimeout:131.461887ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+ApplyCh {1 101 false []} [Me:1#LeaderTimeout:131.403181ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries {1 0 {1 -7 0} [101] 1} [Me:2#LeaderTimeout:350.583046ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries Complete 2 {1 0 {1 -7 0} [101] 1} [Me:2#LeaderTimeout:350.564556ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
 nCommitted ( Index: 1 Count: 3 Cmd 101 )
-Call AppendEntries {1 0 {1 -7 0} [101] 1} [Me:2#LeaderTimeout:358.355356ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Call AppendEntries Complete 2 {1 0 {1 -7 0} [101] 1} [Me:2#LeaderTimeout:358.339786ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Call AppendEntries {1 0 {1 -7 0} [101] 1} [Me:0#LeaderTimeout:3m44.183952818s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Call AppendEntries Complete 2 {1 0 {1 -7 0} [101] 1} [Me:0#LeaderTimeout:3m44.183935279s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Schedule map[0:3 1:3 2:3] [Me:0#LeaderTimeout:3m44.083573553s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Call AppendEntries {1 0 {1 -7 0} [101] 1} [Me:1#LeaderTimeout:251.092905ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Call AppendEntries Complete 2 {1 0 {1 -7 0} [101] 1} [Me:1#LeaderTimeout:251.066238ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-GetState, LeaderId: 0 [Me:0#LeaderTimeout:3m43.886932845s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-GetState, LeaderId: 0 [Me:1#LeaderTimeout:167.565983ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-GetState, LeaderId: 0 [Me:2#LeaderTimeout:275.23207ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries {1 0 {1 -7 0} [101] 1} [Me:0#LeaderTimeout:3m44.192709113s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries Complete 2 {1 0 {1 -7 0} [101] 1} [Me:0#LeaderTimeout:3m44.192681347s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Schedule map[0:3 1:3 2:3] [Me:0#LeaderTimeout:3m44.070194795s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries {1 0 {1 -7 0} [101] 1} [Me:1#LeaderTimeout:213.579218ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries Complete 2 {1 0 {1 -7 0} [101] 1} [Me:1#LeaderTimeout:213.543636ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries {1 0 {1 -7 0} [101] 1} [Me:2#LeaderTimeout:350.672144ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries Complete 2 {1 0 {1 -7 0} [101] 1} [Me:2#LeaderTimeout:350.64843ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries {1 0 {1 -7 0} [101] 1} [Me:0#LeaderTimeout:3m43.790807661s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries Complete 2 {1 0 {1 -7 0} [101] 1} [Me:0#LeaderTimeout:3m43.790766457s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+GetState, LeaderId: 0 [Me:0#LeaderTimeout:3m43.782575407s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+GetState, LeaderId: 0 [Me:1#LeaderTimeout:138.284662ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+GetState, LeaderId: 0 [Me:2#LeaderTimeout:275.613005ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
 disconnect(2)
 ONE Cmd 102 Servers 2
-Schedule map[0:3 1:3 2:3] [Me:0#LeaderTimeout:3m43.886858638s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Schedule map[0:3 1:3 2:3] [Me:0#LeaderTimeout:3m43.782453875s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+nCommitted ( Index: 2 Count: 0 Cmd -1 )
+nCommitted ( Index: 2 Count: 0 Cmd -1 )
+nCommitted ( Index: 2 Count: 0 Cmd -1 )
+nCommitted ( Index: 2 Count: 0 Cmd -1 )
+nCommitted ( Index: 2 Count: 0 Cmd -1 )
+Call AppendEntries {1 0 {1 -7 0} [101 102] 1} [Me:1#LeaderTimeout:213.586665ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries Complete 2 {1 0 {1 -7 0} [101 102] 1} [Me:1#LeaderTimeout:213.571742ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Set Match Index 2 [Me:0#LeaderTimeout:3m43.680736327s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+nCommitted ( Index: 2 Count: 0 Cmd -1 )
+nCommitted ( Index: 2 Count: 0 Cmd -1 )
+nCommitted ( Index: 2 Count: 0 Cmd -1 )
+Network Issue (Raft.AppendEntries) send it to (2) {1 0 {0 <nil> 0} [] -1} [Me:0#LeaderTimeout:3m43.617315362s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Schedule map[0:3 1:3 2:3] [Me:0#LeaderTimeout:3m43.617279525s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
 nCommitted ( Index: 2 Count: 0 Cmd -1 )
 nCommitted ( Index: 2 Count: 0 Cmd -1 )
 nCommitted ( Index: 2 Count: 0 Cmd -1 )
@@ -90,99 +112,59 @@ nCommitted ( Index: 2 Count: 0 Cmd -1 )
 nCommitted ( Index: 2 Count: 0 Cmd -1 )
 nCommitted ( Index: 2 Count: 0 Cmd -1 )
 nCommitted ( Index: 2 Count: 0 Cmd -1 )
-nCommitted ( Index: 2 Count: 0 Cmd -1 )
-Network Issue (Raft.AppendEntries) send it to (2) {1 0 {1 -7 0} [101 102] 1} [Me:0#LeaderTimeout:3m43.696626473s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-nCommitted ( Index: 2 Count: 0 Cmd -1 )
-Network Issue (Raft.AppendEntries) send it to (2) {1 0 {0 <nil> 0} [] -1} [Me:0#LeaderTimeout:3m43.685414051s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Network Issue (Raft.AppendEntries) send it to (2) {1 0 {1 -7 0} [101 102] 1} [Me:0#LeaderTimeout:3m43.440961796s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
 nCommitted ( Index: 2 Count: 0 Cmd -1 )
 nCommitted ( Index: 2 Count: 0 Cmd -1 )
 nCommitted ( Index: 2 Count: 0 Cmd -1 )
-nCommitted ( Index: 2 Count: 0 Cmd -1 )
-Call AppendEntries {1 0 {1 -7 0} [101 102] 1} [Me:0#LeaderTimeout:3m43.596395391s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-Call AppendEntries Complete 2 {1 0 {1 -7 0} [101 102] 1} [Me:0#LeaderTimeout:3m43.596249973s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-Set Match Index 2 [Me:0#LeaderTimeout:3m43.596105788s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Network Issue (Raft.AppendEntries) send it to (2) {1 0 {0 <nil> 0} [] -1} [Me:0#LeaderTimeout:3m43.377174528s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
 nCommitted ( Index: 2 Count: 0 Cmd -1 )
 nCommitted ( Index: 2 Count: 0 Cmd -1 )
+Call AppendEntries {1 0 {1 -7 0} [101 102] 1} [Me:0#LeaderTimeout:3m43.340782491s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Call AppendEntries Complete 2 {1 0 {1 -7 0} [101 102] 1} [Me:0#LeaderTimeout:3m43.340753803s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Set Match Index 2 [Me:0#LeaderTimeout:3m43.340742396s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
 nCommitted ( Index: 2 Count: 0 Cmd -1 )
 nCommitted ( Index: 2 Count: 0 Cmd -1 )
-nCommitted ( Index: 2 Count: 0 Cmd -1 )
-nCommitted ( Index: 2 Count: 0 Cmd -1 )
-Call AppendEntries {1 0 {1 -7 0} [101 102] 1} [Me:1#LeaderTimeout:251.10426ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Call AppendEntries Complete 2 {1 0 {1 -7 0} [101 102] 1} [Me:1#LeaderTimeout:251.088458ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-Set Match Index 2 [Me:0#LeaderTimeout:3m43.478191513s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-nCommitted ( Index: 2 Count: 0 Cmd -1 )
-nCommitted ( Index: 2 Count: 0 Cmd -1 )
-nCommitted ( Index: 2 Count: 0 Cmd -1 )
-Network Issue (Raft.AppendEntries) send it to (2) {1 0 {0 <nil> 0} [] -1} [Me:0#LeaderTimeout:3m43.400362245s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-Schedule map[0:3 1:3 2:2] [Me:0#LeaderTimeout:3m43.400249571s#Type:Leader#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-nCommitted ( Index: 2 Count: 0 Cmd -1 )
-Set Commit Index 2 [Me:0#LeaderTimeout:3m43.3942769s#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-Schedule map[0:3 1:3 2:2] [Me:0#LeaderTimeout:3m43.394245785s#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Set Commit Index 2 [Me:0#LeaderTimeout:3m43.288377838s#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Schedule map[0:3 1:3 2:2] [Me:0#LeaderTimeout:3m43.288356523s#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
 nCommitted ( Index: 2 Count: 0 Cmd -1 )
 nCommitted ( Index: 2 Count: 0 Cmd -1 )
 nCommitted ( Index: 2 Count: 0 Cmd -1 )
 nCommitted ( Index: 2 Count: 0 Cmd -1 )
-ApplyCh {2 102 false []} [Me:0#LeaderTimeout:3m43.29049508s#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-nCommitted ( Index: 2 Count: 1 Cmd 102 )
-nCommitted ( Index: 2 Count: 1 Cmd 102 )
-nCommitted ( Index: 2 Count: 1 Cmd 102 )
-Network Issue (Raft.AppendEntries) send it to (2) {1 0 {1 -7 0} [101 102] 2} [Me:0#LeaderTimeout:3m43.193956494s#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-nCommitted ( Index: 2 Count: 1 Cmd 102 )
-nCommitted ( Index: 2 Count: 1 Cmd 102 )
-nCommitted ( Index: 2 Count: 1 Cmd 102 )
-nCommitted ( Index: 2 Count: 1 Cmd 102 )
-nCommitted ( Index: 2 Count: 1 Cmd 102 )
-Network Issue (Raft.AppendEntries) send it to (2) {1 0 {0 <nil> 0} [] -1} [Me:0#LeaderTimeout:3m43.102753272s#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-Call AppendEntries {1 0 {1 101 1} [102] 2} [Me:0#LeaderTimeout:3m43.093699321s#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-Call AppendEntries Complete 2 {1 0 {1 101 1} [102] 2} [Me:0#LeaderTimeout:3m43.093680282s#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-nCommitted ( Index: 2 Count: 1 Cmd 102 )
-nCommitted ( Index: 2 Count: 1 Cmd 102 )
-nCommitted ( Index: 2 Count: 1 Cmd 102 )
-nCommitted ( Index: 2 Count: 1 Cmd 102 )
-nCommitted ( Index: 2 Count: 1 Cmd 102 )
-Call AppendEntries {1 0 {1 101 1} [102] 2} [Me:1#LeaderTimeout:251.089136ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-Call AppendEntries Complete 2 {1 0 {1 101 1} [102] 2} [Me:1#LeaderTimeout:251.067259ms#Type:Follower#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-nCommitted ( Index: 2 Count: 1 Cmd 102 )
-ApplyCh {2 102 false []} [Me:1#LeaderTimeout:225.799701ms#Type:Follower#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Call AppendEntries {1 0 {1 101 1} [102] 2} [Me:1#LeaderTimeout:213.562862ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Call AppendEntries Complete 2 {1 0 {1 101 1} [102] 2} [Me:1#LeaderTimeout:213.473745ms#Type:Follower#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+nCommitted ( Index: 2 Count: 0 Cmd -1 )
+ApplyCh {2 102 false []} [Me:1#LeaderTimeout:175.506684ms#Type:Follower#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+ApplyCh {2 102 false []} [Me:0#LeaderTimeout:3m43.18462398s#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
 nCommitted ( Index: 2 Count: 2 Cmd 102 )
 disconnect(0)
-Disconnected (Follower) <nil> [Me:2#LeaderTimeout:-734.978128ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Network Issue (Raft.AppendEntries) send it to (2) {1 0 {0 <nil> 0} [] -1} [Me:0#LeaderTimeout:3m42.81799149s#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-Kill <nil> [Me:0#LeaderTimeout:3m42.814895518s#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Network Issue (Raft.AppendEntries) send it to (2) {1 0 {0 <nil> 0} [] -1} [Me:0#LeaderTimeout:3m43.123591934s#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Kill <nil> [Me:0#LeaderTimeout:3m43.082533954s#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
 disconnect(1)
-Kill <nil> [Me:1#LeaderTimeout:25.010235ms#Type:Follower#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Kill <nil> [Me:1#LeaderTimeout:-26.9756ms#Type:Candidate#CommitIndex:2#Term:2#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
 connect(2)
 disconnect(0)
-ReadPersister <nil> [Me:0#LeaderTimeout:184.041526ms#Type:Candidate#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+ReadPersister <nil> [Me:0#LeaderTimeout:139.457477ms#Type:Candidate#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
 connect(0)
 ONE Cmd 103 Servers 2
-RequestVote {1 0 {1 102 2}} [Me:2#LeaderTimeout:-947.572228ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-RequestVote Already voted by args node &{1 true} [Me:2#LeaderTimeout:-947.589641ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Network Issue (Raft.RequestVote) send it to (1) {1 0 {1 102 2}} [Me:0#LeaderTimeout:-100.664102ms#Type:Candidate#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-ReConnected <nil> [Me:2#LeaderTimeout:-1.285233778s#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Network Issue (Raft.RequestVote) send it to (1) {1 0 {1 102 2}} [Me:0#LeaderTimeout:-284.843413ms#Type:Candidate#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-Network Issue (Raft.RequestVote) send it to (1) {1 0 {1 102 2}} [Me:0#LeaderTimeout:-468.987836ms#Type:Candidate#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-RequestVote {1 0 {1 102 2}} [Me:0#LeaderTimeout:-469.506536ms#Type:Candidate#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-RequestVote Already voted by args node &{1 true} [Me:0#LeaderTimeout:-469.521731ms#Type:Candidate#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-Votes 2 [Me:0#LeaderTimeout:-469.603061ms#Type:Candidate#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-Became Leader <nil> [Me:0#LeaderTimeout:-469.615966ms#Type:Candidate#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-Schedule map[0:3 1:3 2:3] [Me:0#LeaderTimeout:-517.950649ms#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+ApplyCh {2 102 false []} [Me:0#LeaderTimeout:39.166296ms#Type:Candidate#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+RequestVote {1 0 {1 102 2}} [Me:2#LeaderTimeout:-625.554307ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+RequestVote Already voted by args node &{1 true} [Me:2#LeaderTimeout:-625.570698ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Disconnected (Follower) <nil> [Me:2#LeaderTimeout:-713.718198ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Network Issue (Raft.RequestVote) send it to (1) {1 0 {1 102 2}} [Me:0#LeaderTimeout:-100.702354ms#Type:Candidate#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Network Issue (Raft.RequestVote) send it to (1) {1 0 {1 102 2}} [Me:0#LeaderTimeout:-240.249017ms#Type:Candidate#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Network Issue (Raft.RequestVote) send it to (1) {1 0 {1 102 2}} [Me:0#LeaderTimeout:-379.782525ms#Type:Candidate#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+RequestVote {1 0 {1 102 2}} [Me:0#LeaderTimeout:-380.188962ms#Type:Candidate#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+RequestVote Already voted by args node &{1 true} [Me:0#LeaderTimeout:-380.204163ms#Type:Candidate#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Votes 2 [Me:0#LeaderTimeout:-380.295461ms#Type:Candidate#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Became Leader <nil> [Me:0#LeaderTimeout:-380.307897ms#Type:Candidate#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Schedule map[0:3 1:3 2:3] [Me:0#LeaderTimeout:-417.362613ms#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
 nCommitted ( Index: 3 Count: 0 Cmd -1 )
 nCommitted ( Index: 3 Count: 0 Cmd -1 )
 nCommitted ( Index: 3 Count: 0 Cmd -1 )
-nCommitted ( Index: 3 Count: 0 Cmd -1 )
-nCommitted ( Index: 3 Count: 0 Cmd -1 )
-Call AppendEntries {1 0 {1 -7 0} [101 102 103] 2} [Me:0#LeaderTimeout:-616.84177ms#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
-Call AppendEntries Complete 2 {1 0 {1 -7 0} [101 102 103] 2} [Me:0#LeaderTimeout:-616.860088ms#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
-Set Match Index 3 [Me:0#LeaderTimeout:-616.873102ms#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
-nCommitted ( Index: 3 Count: 0 Cmd -1 )
-nCommitted ( Index: 3 Count: 0 Cmd -1 )
-nCommitted ( Index: 3 Count: 0 Cmd -1 )
-nCommitted ( Index: 3 Count: 0 Cmd -1 )
-nCommitted ( Index: 3 Count: 0 Cmd -1 )
-nCommitted ( Index: 3 Count: 0 Cmd -1 )
-nCommitted ( Index: 3 Count: 0 Cmd -1 )
-Network Issue (Raft.AppendEntries) send it to (1) {1 0 {0 <nil> 0} [] -1} [Me:0#LeaderTimeout:-753.941861ms#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+ReConnected <nil> [Me:2#LeaderTimeout:-1.139576806s#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries {1 0 {1 -7 0} [101 102 103] 2} [Me:0#LeaderTimeout:-477.732714ms#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+Call AppendEntries Complete 2 {1 0 {1 -7 0} [101 102 103] 2} [Me:0#LeaderTimeout:-477.764146ms#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+Set Match Index 3 [Me:0#LeaderTimeout:-477.788725ms#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
 nCommitted ( Index: 3 Count: 0 Cmd -1 )
 nCommitted ( Index: 3 Count: 0 Cmd -1 )
 nCommitted ( Index: 3 Count: 0 Cmd -1 )
@@ -190,28 +172,35 @@ nCommitted ( Index: 3 Count: 0 Cmd -1 )
 nCommitted ( Index: 3 Count: 0 Cmd -1 )
 nCommitted ( Index: 3 Count: 0 Cmd -1 )
 nCommitted ( Index: 3 Count: 0 Cmd -1 )
-Network Issue (Raft.AppendEntries) send it to (1) {1 0 {1 -7 0} [101 102 103] 2} [Me:0#LeaderTimeout:-901.106138ms#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+Network Issue (Raft.AppendEntries) send it to (1) {1 0 {0 <nil> 0} [] -1} [Me:0#LeaderTimeout:-619.95538ms#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
 nCommitted ( Index: 3 Count: 0 Cmd -1 )
 nCommitted ( Index: 3 Count: 0 Cmd -1 )
 nCommitted ( Index: 3 Count: 0 Cmd -1 )
 nCommitted ( Index: 3 Count: 0 Cmd -1 )
 nCommitted ( Index: 3 Count: 0 Cmd -1 )
-Call AppendEntries {1 0 {1 -7 0} [101 102 103] 2} [Me:2#LeaderTimeout:358.287171ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
-Call AppendEntries Complete 2 {1 0 {1 -7 0} [101 102 103] 2} [Me:2#LeaderTimeout:358.178629ms#Type:Follower#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
-Set Match Index 3 [Me:0#LeaderTimeout:-1.002021337s#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
-nCommitted ( Index: 3 Count: 0 Cmd -1 )
-ApplyCh {2 102 false []} [Me:2#LeaderTimeout:342.66336ms#Type:Follower#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
-Set Commit Index 3 [Me:0#LeaderTimeout:-1.017422611s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
-Schedule map[0:3 1:2 2:3] [Me:0#LeaderTimeout:-1.017441229s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
-nCommitted ( Index: 3 Count: 0 Cmd -1 )
-Network Issue (Raft.AppendEntries) send it to (1) {1 0 {0 <nil> 0} [] -1} [Me:0#LeaderTimeout:-1.03873033s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+Network Issue (Raft.AppendEntries) send it to (1) {1 0 {1 -7 0} [101 102 103] 2} [Me:0#LeaderTimeout:-717.44574ms#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
 nCommitted ( Index: 3 Count: 0 Cmd -1 )
 nCommitted ( Index: 3 Count: 0 Cmd -1 )
 nCommitted ( Index: 3 Count: 0 Cmd -1 )
-Call AppendEntries {1 0 {1 102 2} [103] 3} [Me:0#LeaderTimeout:-1.102182346s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
-Call AppendEntries Complete 2 {1 0 {1 102 2} [103] 3} [Me:0#LeaderTimeout:-1.102200419s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
 nCommitted ( Index: 3 Count: 0 Cmd -1 )
-ApplyCh {3 103 false []} [Me:0#LeaderTimeout:-1.117579025s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+nCommitted ( Index: 3 Count: 0 Cmd -1 )
+Call AppendEntries {1 0 {1 -7 0} [101 102 103] 2} [Me:2#LeaderTimeout:350.661331ms#Type:Follower#CommitIndex:1#Term:1#Logs: [{1 -7 0} {1 101 1}] ]
+Call AppendEntries Complete 2 {1 0 {1 -7 0} [101 102 103] 2} [Me:2#LeaderTimeout:350.604188ms#Type:Follower#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+Set Match Index 3 [Me:0#LeaderTimeout:-818.269199ms#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+nCommitted ( Index: 3 Count: 0 Cmd -1 )
+nCommitted ( Index: 3 Count: 0 Cmd -1 )
+Network Issue (Raft.AppendEntries) send it to (1) {1 0 {0 <nil> 0} [] -1} [Me:0#LeaderTimeout:-860.106388ms#Type:Leader#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+ApplyCh {2 102 false []} [Me:2#LeaderTimeout:308.5207ms#Type:Follower#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+Set Commit Index 3 [Me:0#LeaderTimeout:-862.413168ms#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+Schedule map[0:3 1:2 2:3] [Me:0#LeaderTimeout:-862.42971ms#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+nCommitted ( Index: 3 Count: 0 Cmd -1 )
+nCommitted ( Index: 3 Count: 0 Cmd -1 )
+nCommitted ( Index: 3 Count: 0 Cmd -1 )
+Call AppendEntries {1 0 {1 102 2} [103] 3} [Me:0#LeaderTimeout:-918.51425ms#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+Call AppendEntries Complete 2 {1 0 {1 102 2} [103] 3} [Me:0#LeaderTimeout:-918.650589ms#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+nCommitted ( Index: 3 Count: 0 Cmd -1 )
+nCommitted ( Index: 3 Count: 0 Cmd -1 )
+ApplyCh {3 103 false []} [Me:0#LeaderTimeout:-962.573185ms#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
 nCommitted ( Index: 3 Count: 1 Cmd 103 )
 nCommitted ( Index: 3 Count: 1 Cmd 103 )
 nCommitted ( Index: 3 Count: 1 Cmd 103 )
@@ -219,82 +208,93 @@ nCommitted ( Index: 3 Count: 1 Cmd 103 )
 nCommitted ( Index: 3 Count: 1 Cmd 103 )
 nCommitted ( Index: 3 Count: 1 Cmd 103 )
 nCommitted ( Index: 3 Count: 1 Cmd 103 )
+Network Issue (Raft.AppendEntries) send it to (1) {1 0 {0 <nil> 0} [] -1} [Me:0#LeaderTimeout:-1.100253058s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
 nCommitted ( Index: 3 Count: 1 Cmd 103 )
 nCommitted ( Index: 3 Count: 1 Cmd 103 )
 nCommitted ( Index: 3 Count: 1 Cmd 103 )
-Network Issue (Raft.AppendEntries) send it to (1) {1 0 {0 <nil> 0} [] -1} [Me:0#LeaderTimeout:-1.323739742s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
-nCommitted ( Index: 3 Count: 1 Cmd 103 )
-nCommitted ( Index: 3 Count: 1 Cmd 103 )
-nCommitted ( Index: 3 Count: 1 Cmd 103 )
-Network Issue (Raft.AppendEntries) send it to (1) {1 0 {1 -7 0} [101 102 103] 3} [Me:0#LeaderTimeout:-1.386445274s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
-nCommitted ( Index: 3 Count: 1 Cmd 103 )
+Network Issue (Raft.AppendEntries) send it to (1) {1 0 {1 -7 0} [101 102 103] 3} [Me:0#LeaderTimeout:-1.158428343s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
 nCommitted ( Index: 3 Count: 1 Cmd 103 )
 nCommitted ( Index: 3 Count: 1 Cmd 103 )
 nCommitted ( Index: 3 Count: 1 Cmd 103 )
 nCommitted ( Index: 3 Count: 1 Cmd 103 )
 nCommitted ( Index: 3 Count: 1 Cmd 103 )
-Call AppendEntries {1 0 {1 102 2} [103] 3} [Me:2#LeaderTimeout:358.333859ms#Type:Follower#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
-Call AppendEntries Complete 2 {1 0 {1 102 2} [103] 3} [Me:2#LeaderTimeout:358.209047ms#Type:Follower#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+Call AppendEntries {1 0 {1 102 2} [103] 3} [Me:2#LeaderTimeout:350.675378ms#Type:Follower#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+Call AppendEntries Complete 2 {1 0 {1 102 2} [103] 3} [Me:2#LeaderTimeout:350.660022ms#Type:Follower#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
 nCommitted ( Index: 3 Count: 1 Cmd 103 )
-ApplyCh {3 103 false []} [Me:2#LeaderTimeout:329.711875ms#Type:Follower#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+nCommitted ( Index: 3 Count: 1 Cmd 103 )
+nCommitted ( Index: 3 Count: 1 Cmd 103 )
+nCommitted ( Index: 3 Count: 1 Cmd 103 )
+Network Issue (Raft.AppendEntries) send it to (1) {1 0 {0 <nil> 0} [] -1} [Me:0#LeaderTimeout:-1.340232241s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+Schedule map[0:3 1:1 2:3] [Me:0#LeaderTimeout:-1.340257778s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+nCommitted ( Index: 3 Count: 1 Cmd 103 )
+ApplyCh {3 103 false []} [Me:2#LeaderTimeout:330.1353ms#Type:Follower#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+Call AppendEntries {1 0 {1 102 2} [103] 3} [Me:0#LeaderTimeout:-1.36140295s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+Call AppendEntries Complete 2 {1 0 {1 102 2} [103] 3} [Me:0#LeaderTimeout:-1.361416517s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
 nCommitted ( Index: 3 Count: 2 Cmd 103 )
 disconnect(1)
-ReadPersister <nil> [Me:1#LeaderTimeout:251.077938ms#Type:Follower#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+ReadPersister <nil> [Me:1#LeaderTimeout:213.534998ms#Type:Follower#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
 connect(1)
 ONE Cmd 104 Servers 3
-Schedule map[0:3 1:1 2:3] [Me:0#LeaderTimeout:-1.530103871s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
-nCommitted ( Index: 4 Count: 0 Cmd -1 )
-nCommitted ( Index: 4 Count: 0 Cmd -1 )
-nCommitted ( Index: 4 Count: 0 Cmd -1 )
-Call AppendEntries {1 0 {1 102 2} [103 104] 3} [Me:0#LeaderTimeout:-1.590174676s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
-Call AppendEntries Complete 2 {1 0 {1 102 2} [103 104] 3} [Me:0#LeaderTimeout:-1.590287896s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
-Set Match Index 4 [Me:0#LeaderTimeout:-1.590402521s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
-nCommitted ( Index: 4 Count: 0 Cmd -1 )
-Network Issue (Raft.AppendEntries) send it to (1) {1 0 {0 <nil> 0} [] -1} [Me:0#LeaderTimeout:-1.608335713s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
-Schedule map[0:3 1:1 2:3] [Me:0#LeaderTimeout:-1.60844345s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Schedule map[0:3 1:1 2:3] [Me:0#LeaderTimeout:-1.37719464s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
 nCommitted ( Index: 4 Count: 0 Cmd -1 )
 nCommitted ( Index: 4 Count: 0 Cmd -1 )
 nCommitted ( Index: 4 Count: 0 Cmd -1 )
 nCommitted ( Index: 4 Count: 0 Cmd -1 )
 nCommitted ( Index: 4 Count: 0 Cmd -1 )
-Call AppendEntries {1 0 {1 -7 0} [101 102 103 104] 3} [Me:1#LeaderTimeout:251.073024ms#Type:Follower#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
-Call AppendEntries Complete 2 {1 0 {1 -7 0} [101 102 103 104] 3} [Me:1#LeaderTimeout:250.951729ms#Type:Follower#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
-Set Match Index 4 [Me:0#LeaderTimeout:-1.692168502s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
-nCommitted ( Index: 4 Count: 0 Cmd -1 )
-Set Commit Index 4 [Me:0#LeaderTimeout:-1.718876993s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
-Schedule map[0:3 1:3 2:3] [Me:0#LeaderTimeout:-1.718910355s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
-ApplyCh {3 103 false []} [Me:1#LeaderTimeout:229.851642ms#Type:Follower#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Call AppendEntries {1 0 {1 -7 0} [101 102 103 104] 3} [Me:1#LeaderTimeout:213.577041ms#Type:Follower#CommitIndex:2#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2}] ]
+Call AppendEntries Complete 2 {1 0 {1 -7 0} [101 102 103 104] 3} [Me:1#LeaderTimeout:213.558963ms#Type:Follower#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Set Match Index 4 [Me:0#LeaderTimeout:-1.462170387s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+ApplyCh {3 103 false []} [Me:1#LeaderTimeout:198.025939ms#Type:Follower#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
 nCommitted ( Index: 4 Count: 0 Cmd -1 )
 nCommitted ( Index: 4 Count: 0 Cmd -1 )
 nCommitted ( Index: 4 Count: 0 Cmd -1 )
 nCommitted ( Index: 4 Count: 0 Cmd -1 )
-Call AppendEntries {1 0 {1 102 2} [103 104] 4} [Me:2#LeaderTimeout:358.360094ms#Type:Follower#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
-Call AppendEntries Complete 2 {1 0 {1 102 2} [103 104] 4} [Me:2#LeaderTimeout:358.340365ms#Type:Follower#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
-Set Match Index 4 [Me:0#LeaderTimeout:-1.792788617s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
 nCommitted ( Index: 4 Count: 0 Cmd -1 )
-ApplyCh {4 104 false []} [Me:0#LeaderTimeout:-1.819008801s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
-ApplyCh {4 104 false []} [Me:2#LeaderTimeout:352.31885ms#Type:Follower#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Call AppendEntries {1 0 {1 102 2} [103 104] 3} [Me:2#LeaderTimeout:350.601187ms#Type:Follower#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3}] ]
+Call AppendEntries Complete 2 {1 0 {1 102 2} [103 104] 3} [Me:2#LeaderTimeout:350.461815ms#Type:Follower#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Set Match Index 4 [Me:0#LeaderTimeout:-1.563216267s#Type:Leader#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Set Commit Index 4 [Me:0#LeaderTimeout:-1.563731947s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Schedule map[0:3 1:3 2:3] [Me:0#LeaderTimeout:-1.563862104s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+nCommitted ( Index: 4 Count: 0 Cmd -1 )
+nCommitted ( Index: 4 Count: 0 Cmd -1 )
+nCommitted ( Index: 4 Count: 0 Cmd -1 )
+nCommitted ( Index: 4 Count: 0 Cmd -1 )
+nCommitted ( Index: 4 Count: 0 Cmd -1 )
+Call AppendEntries {1 0 {1 102 2} [103 104] 4} [Me:0#LeaderTimeout:-1.663401123s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Call AppendEntries Complete 2 {1 0 {1 102 2} [103 104] 4} [Me:0#LeaderTimeout:-1.663496503s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Set Match Index 4 [Me:0#LeaderTimeout:-1.663603187s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+ApplyCh {4 104 false []} [Me:0#LeaderTimeout:-1.664196358s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+nCommitted ( Index: 4 Count: 1 Cmd 104 )
+nCommitted ( Index: 4 Count: 1 Cmd 104 )
+nCommitted ( Index: 4 Count: 1 Cmd 104 )
+nCommitted ( Index: 4 Count: 1 Cmd 104 )
+Schedule map[0:3 1:3 2:3] [Me:0#LeaderTimeout:-1.74896505s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+nCommitted ( Index: 4 Count: 1 Cmd 104 )
+Call AppendEntries {1 0 {1 103 3} [104] 4} [Me:1#LeaderTimeout:213.589059ms#Type:Follower#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Call AppendEntries Complete 2 {1 0 {1 103 3} [104] 4} [Me:1#LeaderTimeout:213.537ms#Type:Follower#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+ApplyCh {4 104 false []} [Me:1#LeaderTimeout:199.582294ms#Type:Follower#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
 nCommitted ( Index: 4 Count: 2 Cmd 104 )
 nCommitted ( Index: 4 Count: 2 Cmd 104 )
 nCommitted ( Index: 4 Count: 2 Cmd 104 )
-Call AppendEntries {1 0 {1 103 3} [104] 4} [Me:0#LeaderTimeout:-1.892971431s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
-nCommitted ( Index: 4 Count: 2 Cmd 104 )
-Call AppendEntries Complete 2 {1 0 {1 103 3} [104] 4} [Me:0#LeaderTimeout:-1.893044218s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
 nCommitted ( Index: 4 Count: 2 Cmd 104 )
 nCommitted ( Index: 4 Count: 2 Cmd 104 )
+Call AppendEntries {1 0 {1 103 3} [104] 4} [Me:2#LeaderTimeout:350.652068ms#Type:Follower#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Call AppendEntries Complete 2 {1 0 {1 103 3} [104] 4} [Me:2#LeaderTimeout:350.61755ms#Type:Follower#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
 nCommitted ( Index: 4 Count: 2 Cmd 104 )
 nCommitted ( Index: 4 Count: 2 Cmd 104 )
-Call AppendEntries {1 0 {1 103 3} [104] 4} [Me:1#LeaderTimeout:251.09929ms#Type:Follower#CommitIndex:3#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
-Call AppendEntries Complete 2 {1 0 {1 103 3} [104] 4} [Me:1#LeaderTimeout:251.081909ms#Type:Follower#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
 nCommitted ( Index: 4 Count: 2 Cmd 104 )
 nCommitted ( Index: 4 Count: 2 Cmd 104 )
-Schedule map[0:3 1:3 2:3] [Me:0#LeaderTimeout:-2.014164102s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
-ApplyCh {4 104 false []} [Me:1#LeaderTimeout:238.662218ms#Type:Follower#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+nCommitted ( Index: 4 Count: 2 Cmd 104 )
+ApplyCh {4 104 false []} [Me:2#LeaderTimeout:341.445849ms#Type:Follower#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Call AppendEntries {1 0 {1 103 3} [104] 4} [Me:0#LeaderTimeout:-1.965858286s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Call AppendEntries Complete 2 {1 0 {1 103 3} [104] 4} [Me:0#LeaderTimeout:-1.965933412s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
 nCommitted ( Index: 4 Count: 3 Cmd 104 )
 ... Passed
-Disconnected (Leader) <nil> [Me:0#LeaderTimeout:-2.119179614s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
-Kill <nil> [Me:0#LeaderTimeout:-2.1343268s#Type:Follower#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
-Kill <nil> [Me:1#LeaderTimeout:34.992644ms#Type:Follower#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
-Kill <nil> [Me:2#LeaderTimeout:42.212909ms#Type:Follower#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Schedule map[0:3 1:3 2:3] [Me:0#LeaderTimeout:-2.053708545s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Disconnected (Leader) <nil> [Me:0#LeaderTimeout:-2.053727976s#Type:Leader#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Kill <nil> [Me:0#LeaderTimeout:-2.083167346s#Type:Follower#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Disconnected (Follower) <nil> [Me:1#LeaderTimeout:-12.158085ms#Type:Follower#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Kill <nil> [Me:1#LeaderTimeout:-16.873582ms#Type:Follower#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
+Kill <nil> [Me:2#LeaderTimeout:20.218101ms#Type:Follower#CommitIndex:4#Term:1#Logs: [{1 -7 0} {1 101 1} {1 102 2} {1 103 3} {1 104 4}] ]
 PASS
-ok  	raft	4.758s
+ok  	raft	4.445s
