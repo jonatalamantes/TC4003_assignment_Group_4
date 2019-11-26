@@ -65,8 +65,23 @@ Test: partitioned leader and one follower crash, leader restarts...
 ... Passed
 PASS
 ok      raft    4.234s
+### Testing Test231Figure8Unreliable ###
+Test: Figure 8 (unreliable)...
+... Passed
+PASS
+ok  	raft	45.779s
+### Testing Test232ReliableChurn ###
+Test: churn...
+... Passed
+PASS
+ok  	raft	17.616s
+### Testing Test233UnreliableChurn ###
+Test: unreliable churn...
+... Passed
+PASS
+ok  	raft	28.290s
 
-Test Results: 11/11 = 1.0
+Test Results: 14/14 = 1.0
 
 
 (1)[bash-4.2]jesandov@den02tai ~/Code/Go/TC4003_assignment_Group_4/assignment3-3 $ ./test.py --test_type all --kv 

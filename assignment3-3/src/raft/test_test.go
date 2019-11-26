@@ -794,7 +794,7 @@ func TestUnreliableAgree(t *testing.T) {
 	fmt.Println("... Passed")
 }
 
-func TestFigure8Unreliable(t *testing.T) {
+func Test231Figure8Unreliable(t *testing.T) {
 	servers := 5
 	cfg := make_config(t, servers, true)
 	defer cfg.cleanup()
@@ -994,10 +994,10 @@ func internalChurn(t *testing.T, unreliable bool) {
 	fmt.Println("... Passed")
 }
 
-func TestReliableChurn(t *testing.T) {
+func Test232ReliableChurn(t *testing.T) {
 	internalChurn(t, false)
 }
 
-func TestUnreliableChurn(t *testing.T) {
+func Test233UnreliableChurn(t *testing.T) {
 	internalChurn(t, true)
 }

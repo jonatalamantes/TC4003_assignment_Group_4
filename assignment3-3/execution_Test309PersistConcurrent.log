@@ -1,0 +1,2124 @@
+Test: persistence with concurrent clients ...
+ReadPersister <nil> [Me:0#LeaderTimeout:6m14.999961964s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+ReadPersister <nil> [Me:1#LeaderTimeout:12m29.999936569s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+ReadPersister <nil> [Me:2#LeaderTimeout:18m44.999965704s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+ReadPersister <nil> [Me:3#LeaderTimeout:24m59.999958793s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+ReadPersister <nil> [Me:4#LeaderTimeout:31m14.999945665s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+AVG Time 276.595µs [Me:0#LeaderTimeout:6m14.984946817s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+AVG Time 268.175µs [Me:1#LeaderTimeout:12m29.971751849s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+AVG Time 270.653µs [Me:2#LeaderTimeout:18m44.95831019s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+AVG Time 310.111µs [Me:3#LeaderTimeout:24m59.942891631s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+AVG Time 257.617µs [Me:4#LeaderTimeout:31m14.93018899s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+Put &{4  Put 1006} [Me:4#LeaderTimeout:31m14.92974567s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+Put Wrong Leader &{4  Put 1006} [Me:4#LeaderTimeout:31m14.929723129s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+Put &{1  Put 1007} [Me:2#LeaderTimeout:18m44.929221984s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+Put Wrong Leader &{1  Put 1007} [Me:2#LeaderTimeout:18m44.929208802s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+Put &{3  Put 1008} [Me:0#LeaderTimeout:6m14.928431071s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Put Wrong Leader &{3  Put 1008} [Me:0#LeaderTimeout:6m14.928334155s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Put &{0  Put 1009} [Me:1#LeaderTimeout:12m29.928540002s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+Put Wrong Leader &{0  Put 1009} [Me:1#LeaderTimeout:12m29.928517641s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+Put &{2  Put 1010} [Me:4#LeaderTimeout:31m14.928982598s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+Put Wrong Leader &{2  Put 1010} [Me:4#LeaderTimeout:31m14.928971042s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote {1 0 {1 -7 0}} [Me:4#LeaderTimeout:31m14.90032874s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote New Vote with most updated entry {0 -7 0} [Me:4#LeaderTimeout:31m14.900315071s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote {1 0 {1 -7 0}} [Me:3#LeaderTimeout:24m59.899744409s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote New Vote with most updated entry {0 -7 0} [Me:3#LeaderTimeout:24m59.89972958s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote {1 0 {1 -7 0}} [Me:2#LeaderTimeout:18m44.89913991s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote New Vote with most updated entry {0 -7 0} [Me:2#LeaderTimeout:18m44.899125273s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote {1 0 {1 -7 0}} [Me:1#LeaderTimeout:12m29.89853988s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote New Vote with most updated entry {0 -7 0} [Me:1#LeaderTimeout:12m29.898507917s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+RequestVote {1 0 {1 -7 0}} [Me:0#LeaderTimeout:6m14.897878396s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+RequestVote New Vote received and Entry OK {1 -7 0} [Me:0#LeaderTimeout:6m14.897867697s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Votes 5 [Me:0#LeaderTimeout:6m14.897721011s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Became Leader <nil> [Me:0#LeaderTimeout:6m14.89769048s#Type:Candidate#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Migrate Requests <nil> [Me:0#LeaderTimeout:6m14.849383389s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Migrate Requests Done map[] [Me:0#LeaderTimeout:6m14.849358515s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Put &{1  Put 1007} [Me:3#LeaderTimeout:24m59.829104677s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+Put Wrong Leader &{1  Put 1007} [Me:3#LeaderTimeout:24m59.829090535s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+Put &{4  Put 1006} [Me:1#LeaderTimeout:12m29.828618856s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+Put Wrong Leader &{4  Put 1006} [Me:1#LeaderTimeout:12m29.828597992s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+Put &{3  Put 1008} [Me:4#LeaderTimeout:31m14.828889917s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+Put Wrong Leader &{3  Put 1008} [Me:4#LeaderTimeout:31m14.828877695s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+Put &{0  Put 1009} [Me:0#LeaderTimeout:6m14.827806337s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0}] ]
+Schedule map[0:3 1:3 2:3 3:3 4:3] [Me:0#LeaderTimeout:6m14.82777491s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1}] ]
+Put Done &{false } [Me:0#LeaderTimeout:6m14.827736722s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1}] ]
+Put &{2  Put 1010} [Me:2#LeaderTimeout:18m44.82828845s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+Put Wrong Leader &{2  Put 1010} [Me:2#LeaderTimeout:18m44.828266029s#Type:Follower#CommitIndex:-1#Term:0#Logs: [{0 -7 0}] ]
+Put &{0 x 0 0 y Append 1009} [Me:0#LeaderTimeout:6m14.827575446s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1}] ]
+Schedule map[0:3 1:3 2:3 3:3 4:3] [Me:0#LeaderTimeout:6m14.827557482s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2}] ]
+Put Done &{false } [Me:0#LeaderTimeout:6m14.827541575s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2}] ]
+Put &{0 x 0 1 y Append 1009} [Me:0#LeaderTimeout:6m14.827373816s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2}] ]
+Schedule map[0:3 1:3 2:3 3:3 4:3] [Me:0#LeaderTimeout:6m14.827357219s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3}] ]
+Put Done &{false } [Me:0#LeaderTimeout:6m14.827334258s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3}] ]
+Get &{0 1009} [Me:0#LeaderTimeout:6m14.82713611s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3}] ]
+Call AppendEntries {1 0 {1 -7 0} [|0|Put|1009 x 0 0 y|0|Append|1009 x 0 1 y|0|Append|1009] -1} [Me:0#LeaderTimeout:6m14.799517123s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3}] ]
+Call AppendEntries Complete 2 {1 0 {1 -7 0} [|0|Put|1009 x 0 0 y|0|Append|1009 x 0 1 y|0|Append|1009] -1} [Me:0#LeaderTimeout:6m14.799499983s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3}] ]
+Set Match Index 3 [Me:0#LeaderTimeout:6m14.799488141s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3}] ]
+Put &{4  Put 1006} [Me:2#LeaderTimeout:539.644422ms#Type:Follower#CommitIndex:-1#Term:1#Put &{3  Put 1008} [Me:2#LeaderTimeout:539.559209ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+Put Wrong Leader &{3  Put 1008} [Me:2#LeaderTimeout:539.530926ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+Logs: [{0 -7 0}] ]
+Put Wrong Leader &{4  Put 1006} [Me:2#LeaderTimeout:539.447248ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+Put &{2  Put 1010} [Me:3#LeaderTimeout:860.999268ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+Put Wrong Leader &{2  Put 1010} [Me:3#LeaderTimeout:860.84239ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+Put &{1  Put 1007} [Me:0#LeaderTimeout:6m14.726817362s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3}] ]
+Schedule map[0:3 1:3 2:3 3:3 4:3] [Me:0#LeaderTimeout:6m14.726764182s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4}] ]
+Pending Req map[1:{ 0 Put 1009 false} 2:{x 0 0 y 0 Append 1009 false} 3:{x 0 1 y 0 Append 1009 false}] [Me:0#LeaderTimeout:6m14.72673603s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4}] ]
+Not Commited Yet {x 0 0 y 0 Append 1009 false} [Me:0#LeaderTimeout:6m14.726719671s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4}] ]
+Put Done &{false } [Me:0#LeaderTimeout:6m14.726698267s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4}] ]
+Put &{1 x 1 0 y Append 1007} [Me:0#LeaderTimeout:6m14.726532056s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4}] ]
+Schedule map[0:3 1:3 2:3 3:3 4:3] [Me:0#LeaderTimeout:6m14.726514823s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5}] ]
+Put Done &{false } [Me:0#LeaderTimeout:6m14.726497535s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5}] ]
+Get &{1 1007} [Me:0#LeaderTimeout:6m14.726381599s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5}] ]
+Call AppendEntries {1 0 {1 -7 0} [|0|Put|1009 x 0 0 y|0|Append|1009 x 0 1 y|0|Append|1009 |1|Put|1007 x 1 0 y|1|Append|1007] -1} [Me:1#LeaderTimeout:402.161126ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+Call AppendEntries Complete 2 {1 0 {1 -7 0} [|0|Put|1009 x 0 0 y|0|Append|1009 x 0 1 y|0|Append|1009 |1|Put|1007 x 1 0 y|1|Append|1007] -1} [Me:1#LeaderTimeout:402.013145ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5}] ]
+Set Match Index 5 [Me:0#LeaderTimeout:6m14.698524552s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5}] ]
+Put &{3  Put 1008} [Me:1#LeaderTimeout:333.655822ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5}] ]
+Put Wrong Leader &{3  Put 1008} [Me:1#LeaderTimeout:333.619408ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5}] ]
+Put &{4  Put 1006} [Me:0#LeaderTimeout:6m14.626920698s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5}] ]
+Schedule map[0:3 1:3 2:3 3:3 4:3] [Me:0#LeaderTimeout:6m14.626879322s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5} {1 |4|Put|1006 6}] ]
+Put Done &{false } [Me:0#LeaderTimeout:6m14.626853344s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5} {1 |4|Put|1006 6}] ]
+Get &{4 1006} [Me:0#LeaderTimeout:6m14.62658459s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5} {1 |4|Put|1006 6}] ]
+Pending Req map[1:{ 0 Put 1009 false} 2:{x 0 0 y 0 Append 1009 false} 3:{x 0 1 y 0 Append 1009 false} 4:{ 1 Put 1007 false} 5:{x 1 0 y 1 Append 1007 false} 6:{ 4 Put 1006 false}] [Me:0#LeaderTimeout:6m14.626536968s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5} {1 |4|Put|1006 6}] ]
+Not Commited Yet { 0 Put 1009 false} [Me:0#LeaderTimeout:6m14.626512584s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5} {1 |4|Put|1006 6}] ]
+Put &{2  Put 1010} [Me:1#LeaderTimeout:333.025168ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5}] ]
+Put Wrong Leader &{2  Put 1010} [Me:1#LeaderTimeout:332.99812ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5}] ]
+Pending Req map[1:{ 0 Put 1009 false} 2:{x 0 0 y 0 Append 1009 false} 3:{x 0 1 y 0 Append 1009 false} 4:{ 1 Put 1007 false} 5:{x 1 0 y 1 Append 1007 false} 6:{ 4 Put 1006 false}] [Me:0#LeaderTimeout:6m14.626302106s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5} {1 |4|Put|1006 6}] ]
+Not Commited Yet { 1 Put 1007 false} [Me:0#LeaderTimeout:6m14.626239061s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5} {1 |4|Put|1006 6}] ]
+Call AppendEntries {1 0 {1 -7 0} [|0|Put|1009 x 0 0 y|0|Append|1009 x 0 1 y|0|Append|1009 |1|Put|1007 x 1 0 y|1|Append|1007 |4|Put|1006] -1} [Me:2#LeaderTimeout:608.893446ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{0 -7 0}] ]
+Call AppendEntries Complete 2 {1 0 {1 -7 0} [|0|Put|1009 x 0 0 y|0|Append|1009 x 0 1 y|0|Append|1009 |1|Put|1007 x 1 0 y|1|Append|1007 |4|Put|1006] -1} [Me:2#LeaderTimeout:608.786062ms#Type:Follower#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5} {1 |4|Put|1006 6}] ]
+fatal error: Set Match Index 6 [Me:0#LeaderTimeout:6m14.593567631s#Type:Leader#CommitIndex:-1#Term:1#Logs: [{1 -7 0} {1 |0|Put|1009 1} {1 x 0 0 y|0|Append|1009 2} {1 x 0 1 y|0|Append|1009 3} {1 |1|Put|1007 4} {1 x 1 0 y|1|Append|1007 5} {1 |4|Put|1006 6}] ]
+concurrent map read and map write
+
+goroutine 21 [running]:
+runtime.throw(0x5e9f41, 0x21)
+	/usr/local/go/src/runtime/panic.go:617 +0x72 fp=0xc0000a1e10 sp=0xc0000a1de0 pc=0x42d072
+runtime.mapaccess2_fast64(0x5ac320, 0xc0004b96b0, 0x0, 0x0, 0x0)
+	/usr/local/go/src/runtime/map_fast64.go:61 +0x1c2 fp=0xc0000a1e38 sp=0xc0000a1e10 pc=0x410f42
+raft.(*Raft).Schedule(0xc0000ca1c0, 0x3)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:625 +0x6f fp=0xc0000a1e90 sp=0xc0000a1e38 pc=0x571a5f
+raft.(*Raft).Heartbeat(0xc0000ca1c0, 0x4)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:375 +0xa2 fp=0xc0000a1f80 sp=0xc0000a1e90 pc=0x570742
+raft.(*Raft).CheckTimeoutLeader(0xc0000ca1c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:796 +0x450 fp=0xc0000a1fd8 sp=0xc0000a1f80 pc=0x5727b0
+runtime.goexit()
+	/usr/local/go/src/runtime/asm_amd64.s:1337 +0x1 fp=0xc0000a1fe0 sp=0xc0000a1fd8 pc=0x45b131
+created by raft.(*Raft).readPersist
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:198 +0x27d
+
+goroutine 1 [chan receive]:
+testing.(*T).Run(0xc0000ee100, 0x5e780c, 0x18, 0x5ef708, 0x476201)
+	/usr/local/go/src/testing/testing.go:917 +0x381
+testing.runTests.func1(0xc0000ee000)
+	/usr/local/go/src/testing/testing.go:1157 +0x78
+testing.tRunner(0xc0000ee000, 0xc000075e30)
+	/usr/local/go/src/testing/testing.go:865 +0xc0
+testing.runTests(0xc0000887c0, 0x756100, 0xc, 0xc, 0x0)
+	/usr/local/go/src/testing/testing.go:1155 +0x2a9
+testing.(*M).Run(0xc0000d4000, 0x0)
+	/usr/local/go/src/testing/testing.go:1072 +0x162
+main.main()
+	_testmain.go:64 +0x13e
+
+goroutine 18 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x12a05f200)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+kvraft.GenericTest(0xc0000ee100, 0x5e4dbd, 0xd, 0x5, 0x100, 0xffffffffffffffff)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:179 +0x49e
+kvraft.Test309PersistConcurrent(0xc0000ee100)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:379 +0xa5
+testing.tRunner(0xc0000ee100, 0x5ef708)
+	/usr/local/go/src/testing/testing.go:865 +0xc0
+created by testing.(*T).Run
+	/usr/local/go/src/testing/testing.go:916 +0x35a
+
+goroutine 19 [chan receive]:
+labrpc.MakeNetwork.func1(0xc00009ba80)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:131 +0x109
+created by labrpc.MakeNetwork
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:130 +0x104
+
+goroutine 22 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+raft.(*Raft).UpdateStateMachine(0xc0000ca1c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:818 +0x33d
+created by raft.(*Raft).readPersist
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:199 +0x29f
+
+goroutine 23 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+raft.(*Raft).HandleNextAppendEntries(0xc0000ca1c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:862 +0x62
+created by raft.(*Raft).readPersist
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:200 +0x2c1
+
+goroutine 24 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x2faf080)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+kvraft.(*RaftKV).ReadChannelService(0xc00009bb40)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:272 +0x67
+created by kvraft.StartKVServer
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:351 +0x13a
+
+goroutine 25 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x2faf080)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+kvraft.(*RaftKV).BecameLeader(0xc00009bb40)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:223 +0x79
+created by kvraft.StartKVServer
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:352 +0x15c
+
+goroutine 26 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+raft.(*Raft).CheckTimeoutLeader(0xc0000ca2a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:743 +0x47
+created by raft.(*Raft).readPersist
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:198 +0x27d
+
+goroutine 27 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+raft.(*Raft).UpdateStateMachine(0xc0000ca2a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:818 +0x33d
+created by raft.(*Raft).readPersist
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:199 +0x29f
+
+goroutine 28 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+raft.(*Raft).HandleNextAppendEntries(0xc0000ca2a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:862 +0x62
+created by raft.(*Raft).readPersist
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:200 +0x2c1
+
+goroutine 29 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x2faf080)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+kvraft.(*RaftKV).ReadChannelService(0xc00009bc80)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:272 +0x67
+created by kvraft.StartKVServer
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:351 +0x13a
+
+goroutine 30 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x2faf080)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+kvraft.(*RaftKV).BecameLeader(0xc00009bc80)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:223 +0x79
+created by kvraft.StartKVServer
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:352 +0x15c
+
+goroutine 31 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+raft.(*Raft).CheckTimeoutLeader(0xc0000ca380)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:743 +0x47
+created by raft.(*Raft).readPersist
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:198 +0x27d
+
+goroutine 32 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+raft.(*Raft).UpdateStateMachine(0xc0000ca380)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:818 +0x33d
+created by raft.(*Raft).readPersist
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:199 +0x29f
+
+goroutine 65 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+raft.(*Raft).HandleNextAppendEntries(0xc0000ca380)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:862 +0x62
+created by raft.(*Raft).readPersist
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:200 +0x2c1
+
+goroutine 66 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x2faf080)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+kvraft.(*RaftKV).ReadChannelService(0xc00009bdc0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:272 +0x67
+created by kvraft.StartKVServer
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:351 +0x13a
+
+goroutine 67 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x2faf080)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+kvraft.(*RaftKV).BecameLeader(0xc00009bdc0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:223 +0x79
+created by kvraft.StartKVServer
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:352 +0x15c
+
+goroutine 68 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+raft.(*Raft).CheckTimeoutLeader(0xc0000ca460)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:743 +0x47
+created by raft.(*Raft).readPersist
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:198 +0x27d
+
+goroutine 69 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+raft.(*Raft).UpdateStateMachine(0xc0000ca460)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:818 +0x33d
+created by raft.(*Raft).readPersist
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:199 +0x29f
+
+goroutine 70 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+raft.(*Raft).HandleNextAppendEntries(0xc0000ca460)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:862 +0x62
+created by raft.(*Raft).readPersist
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:200 +0x2c1
+
+goroutine 71 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x2faf080)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+kvraft.(*RaftKV).ReadChannelService(0xc00009bf00)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:272 +0x67
+created by kvraft.StartKVServer
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:351 +0x13a
+
+goroutine 72 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x2faf080)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+kvraft.(*RaftKV).BecameLeader(0xc00009bf00)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:223 +0x79
+created by kvraft.StartKVServer
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:352 +0x15c
+
+goroutine 73 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+raft.(*Raft).CheckTimeoutLeader(0xc0000ca540)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:743 +0x47
+created by raft.(*Raft).readPersist
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:198 +0x27d
+
+goroutine 74 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+raft.(*Raft).UpdateStateMachine(0xc0000ca540)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:818 +0x33d
+created by raft.(*Raft).readPersist
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:199 +0x29f
+
+goroutine 75 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+raft.(*Raft).HandleNextAppendEntries(0xc0000ca540)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:862 +0x62
+created by raft.(*Raft).readPersist
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:200 +0x2c1
+
+goroutine 76 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x2faf080)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+kvraft.(*RaftKV).ReadChannelService(0xc000142040)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:272 +0x67
+created by kvraft.StartKVServer
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:351 +0x13a
+
+goroutine 77 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x2faf080)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+kvraft.(*RaftKV).BecameLeader(0xc000142040)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:223 +0x79
+created by kvraft.StartKVServer
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:352 +0x15c
+
+goroutine 78 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966c8, 0xc000098480)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 79 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966c9, 0xc0000984e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 778 [chan receive]:
+labrpc.(*ClientEnd).Call(0xc0002ba320, 0x5e4283, 0xa, 0x5936a0, 0xc000361140, 0x5936e0, 0xc0003b2390, 0xc000163d01)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:95 +0x20e
+kvraft.(*Clerk).Get(0xc0004b9260, 0x5eabb3, 0x1, 0xc0003ae1c0, 0x7)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/client.go:57 +0x116
+kvraft.GenericTest.func1(0x0, 0xc0004b9260, 0xc0000ee100)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:166 +0x327
+kvraft.run_client(0xc0000ee100, 0xc0000bc120, 0x0, 0xc0000cd140, 0xc00022a0c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:28 +0x9e
+created by kvraft.spawn_clients_and_wait
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:38 +0x91
+
+goroutine 80 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966ca, 0xc000098540)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 81 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966cb, 0xc0000985a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 82 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966cc, 0xc000098600)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 83 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966cd, 0xc000098660)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 84 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966ce, 0xc0000986c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 85 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966cf, 0xc000098720)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 86 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966d0, 0xc000098780)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 87 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966d1, 0xc0000987e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 88 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966d2, 0xc000098840)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 89 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966d3, 0xc0000988a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 90 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966d4, 0xc000098900)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 91 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966d5, 0xc000098960)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 92 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966d6, 0xc0000989c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 93 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966d7, 0xc000098a20)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 94 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966d8, 0xc000098a80)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 95 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966d9, 0xc000098ae0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 96 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966da, 0xc000098b40)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 129 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966db, 0xc000098ba0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 130 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966dc, 0xc000098c00)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 131 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966dd, 0xc000098c60)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 132 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966de, 0xc000098cc0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 133 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966df, 0xc000098d20)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 134 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966e0, 0xc000098d80)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 135 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966e1, 0xc000098de0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 136 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966e2, 0xc000098e40)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 137 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966e3, 0xc000098ea0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 138 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966e4, 0xc000098f00)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 139 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966e5, 0xc000098f60)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 140 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966e6, 0xc000098fc0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 141 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966e7, 0xc000099020)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 142 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966e8, 0xc000099080)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 143 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966e9, 0xc0000990e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 144 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966ea, 0xc000099140)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 177 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966eb, 0xc0000991a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 178 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966ec, 0xc000099200)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 179 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966ed, 0xc000099260)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 180 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966ee, 0xc0000992c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 181 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966ef, 0xc000099320)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 182 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966f0, 0xc000099380)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 183 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966f1, 0xc0000993e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 184 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966f2, 0xc000099440)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 185 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966f3, 0xc0000994a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 186 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966f4, 0xc000099500)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 187 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966f5, 0xc000099560)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 188 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966f6, 0xc0000995c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 189 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966f7, 0xc000099620)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 190 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966f8, 0xc000099680)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 191 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000966f9, 0xc0000996e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 192 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096750, 0xc000099740)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 209 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096751, 0xc0000997a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 210 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096752, 0xc000099800)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 211 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096753, 0xc000099860)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 212 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096754, 0xc0000998c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 213 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096755, 0xc000099920)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 214 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096756, 0xc000099980)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 215 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096757, 0xc0000999e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 216 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096758, 0xc000099a40)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 217 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096759, 0xc000099aa0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 218 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009675a, 0xc000099b00)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 219 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009675b, 0xc000099b60)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 220 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009675c, 0xc000099bc0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 221 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009675d, 0xc000099c20)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 222 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009675e, 0xc000099c80)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 223 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009675f, 0xc000099ce0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 224 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096760, 0xc000099d40)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 257 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096761, 0xc000099da0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 258 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096762, 0xc000099e00)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 259 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096763, 0xc000099e60)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 260 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096764, 0xc000099ec0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 261 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096765, 0xc000099f20)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 262 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096766, 0xc000099f80)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 263 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096767, 0xc00033a000)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 264 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096768, 0xc00033a060)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 265 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096769, 0xc00033a0c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 266 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009676a, 0xc00033a120)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 267 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009676b, 0xc00033a180)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 268 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009676c, 0xc00033a1e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 269 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009676d, 0xc00033a240)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 270 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009676e, 0xc00033a2a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 271 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009676f, 0xc00033a300)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 272 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096770, 0xc00033a360)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 305 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096771, 0xc00033a3c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 306 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096772, 0xc00033a420)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 307 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096773, 0xc00033a480)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 308 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096774, 0xc00033a4e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 309 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096775, 0xc00033a540)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 310 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096776, 0xc00033a5a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 311 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096777, 0xc00033a600)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 312 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096778, 0xc00033a660)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 313 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096779, 0xc00033a6c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 314 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009677a, 0xc00033a720)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 315 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009677b, 0xc00033a780)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 316 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009677c, 0xc00033a7e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 317 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009677d, 0xc00033a840)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 318 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009677e, 0xc00033a8a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 319 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009677f, 0xc00033a900)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 320 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096780, 0xc00033a960)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 353 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca2a0, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096781, 0xc00033a9c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 354 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967d8, 0xc00033aa20)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 355 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967d9, 0xc00033aa80)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 356 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967da, 0xc00033aae0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 357 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967db, 0xc00033ab40)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 358 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967dc, 0xc00033aba0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 359 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967dd, 0xc00033ac00)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 360 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967de, 0xc00033ac60)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 361 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967df, 0xc00033acc0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 362 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967e0, 0xc00033ad20)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 363 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967e1, 0xc00033ad80)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 364 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967e2, 0xc00033ade0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 365 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967e3, 0xc00033ae40)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 366 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967e4, 0xc00033aea0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 367 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967e5, 0xc00033af00)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 368 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967e6, 0xc00033af60)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 417 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967e7, 0xc00033afc0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 418 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967e8, 0xc00033b020)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 419 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967e9, 0xc00033b080)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 420 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967ea, 0xc00033b0e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 421 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967eb, 0xc00033b140)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 422 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967ec, 0xc00033b1a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 423 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967ed, 0xc00033b200)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 424 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967ee, 0xc00033b260)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 425 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967ef, 0xc00033b2c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 426 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967f0, 0xc00033b320)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 427 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967f1, 0xc00033b380)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 428 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967f2, 0xc00033b3e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 429 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967f3, 0xc00033b440)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 430 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967f4, 0xc00033b4a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 431 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967f5, 0xc00033b500)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 432 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967f6, 0xc00033b560)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 465 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967f7, 0xc00033b5c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 466 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967f8, 0xc00033b620)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 467 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967f9, 0xc00033b680)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 468 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967fa, 0xc00033b6e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 469 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967fb, 0xc00033b740)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 470 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967fc, 0xc00033b7a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 471 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967fd, 0xc00033b800)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 472 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967fe, 0xc00033b860)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 473 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc0000967ff, 0xc00033b8c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 474 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096800, 0xc00033b920)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 475 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096801, 0xc00033b980)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 476 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096802, 0xc00033b9e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 477 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096803, 0xc00033ba40)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 478 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096804, 0xc00033baa0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 479 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096805, 0xc00033bb00)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 480 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096806, 0xc00033bb60)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 513 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096807, 0xc00033bbc0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 514 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096808, 0xc00033bc20)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 515 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca380, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096809, 0xc00033bc80)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 516 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096860, 0xc00033bce0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 517 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096861, 0xc00033bd40)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 518 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096862, 0xc00033bda0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 519 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096863, 0xc00033be00)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 520 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096864, 0xc00033be60)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 521 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096865, 0xc00033bec0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 522 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096866, 0xc00033bf20)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 523 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096867, 0xc00033bf80)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 524 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096868, 0xc000562000)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 525 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096869, 0xc000562060)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 526 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009686a, 0xc0005620c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 527 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009686b, 0xc000562120)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 528 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009686c, 0xc000562180)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 545 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009686d, 0xc0005621e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 546 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009686e, 0xc000562240)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 547 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009686f, 0xc0005622a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 548 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096870, 0xc000562300)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 549 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096871, 0xc000562360)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 550 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096872, 0xc0005623c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 551 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096873, 0xc000562420)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 552 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096874, 0xc000562480)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 553 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096875, 0xc0005624e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 554 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096876, 0xc000562540)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 555 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096877, 0xc0005625a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 556 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096878, 0xc000562600)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 557 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096879, 0xc000562660)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 558 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009687a, 0xc0005626c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 559 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009687b, 0xc000562720)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 560 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009687c, 0xc000562780)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 593 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009687d, 0xc0005627e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 594 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009687e, 0xc000562840)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 595 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00009687f, 0xc0005628a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 596 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096880, 0xc000562900)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 597 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096881, 0xc000562960)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 598 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096882, 0xc0005629c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 599 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096883, 0xc000562a20)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 600 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096884, 0xc000562a80)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 601 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc000096885, 0xc000562ae0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 602 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c000, 0xc000562b40)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 848 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+kvraft.(*RaftKV).Get(0xc00009bb40, 0xc00037fc60, 0xc0005a4960)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:99 +0x6fe
+reflect.Value.call(0xc000084360, 0xc000082568, 0x13, 0x5e32b4, 0x4, 0xc00017dbb8, 0x3, 0x3, 0x5936e0, 0xc000391280, ...)
+	/usr/local/go/src/reflect/value.go:447 +0x461
+reflect.Value.Call(0xc000084360, 0xc000082568, 0x13, 0xc00017dbb8, 0x3, 0x3, 0x0, 0x0, 0x11)
+	/usr/local/go/src/reflect/value.go:308 +0xa4
+labrpc.(*Service).dispatch(0xc00009bb80, 0x5e428a, 0x3, 0x59dbc0, 0xc0000522b0, 0x5e4283, 0xa, 0x6211a0, 0x5936a0, 0xc0000d9b40, ...)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:441 +0x68c
+labrpc.(*Server).dispatch(0xc0000890a0, 0x59dbc0, 0xc0000522b0, 0x5e4283, 0xa, 0x6211a0, 0x5936a0, 0xc0000d9b40, 0x36, 0x40, ...)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:365 +0x4e3
+labrpc.(*Network).ProcessReq.func1(0xc0000890a0, 0x59dbc0, 0xc0000522b0, 0x5e4283, 0xa, 0x6211a0, 0x5936a0, 0xc0000d9b40, 0x36, 0x40, ...)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:208 +0x60
+created by labrpc.(*Network).ProcessReq
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:207 +0x13e
+
+goroutine 858 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x1, 0x5e5df9, 0x12, 0x5cc4c0, 0xc0000c8a50, 0x5948e0, 0xc0003aee80, 0xc0005404e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 603 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c001, 0xc000562ba0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 779 [chan receive]:
+labrpc.(*ClientEnd).Call(0xc000134140, 0x5e4283, 0xa, 0x5936a0, 0xc00037f8c0, 0x5936e0, 0xc0005a4600, 0xc0005a01e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:95 +0x20e
+kvraft.(*Clerk).Get(0xc00022a150, 0x5eabb4, 0x1, 0xc0005a01e0, 0x7)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/client.go:57 +0x116
+kvraft.GenericTest.func1(0x1, 0xc00022a150, 0xc0000ee100)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:166 +0x327
+kvraft.run_client(0xc0000ee100, 0xc0000bc120, 0x1, 0xc0000cd1a0, 0xc00022a0c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:28 +0x9e
+created by kvraft.spawn_clients_and_wait
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:38 +0x91
+
+goroutine 604 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c002, 0xc000562c00)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 605 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c003, 0xc000562c60)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 606 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c004, 0xc000562cc0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 607 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c005, 0xc000562d20)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 608 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c006, 0xc000562d80)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 657 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c007, 0xc000562de0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 658 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c008, 0xc000562e40)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 659 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c009, 0xc000562ea0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 660 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c00a, 0xc000562f00)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 661 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca460, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c00b, 0xc000562f60)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 662 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c078, 0xc000562fc0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 663 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c079, 0xc000563020)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 664 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c07a, 0xc000563080)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 665 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c07b, 0xc0005630e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 666 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c07c, 0xc000563140)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 667 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c07d, 0xc0005631a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 668 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c07e, 0xc000563200)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 669 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c07f, 0xc000563260)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 670 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c080, 0xc0005632c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 671 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c081, 0xc000563320)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 672 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c082, 0xc000563380)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 705 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c083, 0xc0005633e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 706 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c084, 0xc000563440)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 707 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c085, 0xc0005634a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 708 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c086, 0xc000563500)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 709 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c087, 0xc000563560)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 710 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c088, 0xc0005635c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 711 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c089, 0xc000563620)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 712 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c08a, 0xc000563680)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 713 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c08b, 0xc0005636e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 714 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c08c, 0xc000563740)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 715 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c08d, 0xc0005637a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 716 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c08e, 0xc000563800)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 717 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c08f, 0xc000563860)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 718 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c090, 0xc0005638c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 719 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c091, 0xc000563920)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 720 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c092, 0xc000563980)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 737 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c093, 0xc0005639e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 738 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c094, 0xc000563a40)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 739 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c095, 0xc000563aa0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 740 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c096, 0xc000563b00)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 741 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c097, 0xc000563b60)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 742 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c098, 0xc000563bc0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 743 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c099, 0xc000563c20)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 744 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c09a, 0xc000563c80)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 745 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c09b, 0xc000563ce0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 746 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c09c, 0xc000563d40)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 747 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c09d, 0xc000563da0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 748 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c09e, 0xc000563e00)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 749 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c09f, 0xc000563e60)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 750 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c0a0, 0xc000563ec0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 751 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c0a1, 0xc000563f20)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 752 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c0a2, 0xc000563f80)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 785 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c0a3, 0xc0004d8000)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 786 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c0a4, 0xc0004d8060)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 787 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x0, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c0a5, 0xc0004d80c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 788 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x1, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c0a6, 0xc0004d8120)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 789 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x2, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c0a7, 0xc0004d8180)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 790 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x3, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c0a8, 0xc0004d81e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 791 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca540, 0x4, 0x5e48f2, 0xc, 0x5b5ce0, 0x776180, 0x5949e0, 0xc00057c0a9, 0xc0004d8240)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 792 [chan receive]:
+kvraft.spawn_clients_and_wait(0xc0000ee100, 0xc0000bc120, 0x5, 0xc00022a0c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:42 +0x149
+created by kvraft.GenericTest
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:149 +0x47b
+
+goroutine 780 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+kvraft.(*Clerk).PutAppend(0xc00022a870, 0x5eabb5, 0x1, 0x0, 0x0, 0x5e31f0, 0x3)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/client.go:111 +0x1c2
+kvraft.(*Clerk).Put(...)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/client.go:118
+kvraft.GenericTest.func1(0x2, 0xc00022a870, 0xc0000ee100)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:156 +0x10d
+kvraft.run_client(0xc0000ee100, 0xc0000bc120, 0x2, 0xc0000cd200, 0xc00022a0c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:28 +0x9e
+created by kvraft.spawn_clients_and_wait
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:38 +0x91
+
+goroutine 781 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+kvraft.(*Clerk).PutAppend(0xc000577b30, 0x5eabb6, 0x1, 0x0, 0x0, 0x5e31f0, 0x3)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/client.go:111 +0x1c2
+kvraft.(*Clerk).Put(...)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/client.go:118
+kvraft.GenericTest.func1(0x3, 0xc000577b30, 0xc0000ee100)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:156 +0x10d
+kvraft.run_client(0xc0000ee100, 0xc0000bc120, 0x3, 0xc0000cd260, 0xc00022a0c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:28 +0x9e
+created by kvraft.spawn_clients_and_wait
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:38 +0x91
+
+goroutine 782 [chan receive]:
+labrpc.(*ClientEnd).Call(0xc0002838a0, 0x5e4283, 0xa, 0x5936a0, 0xc0003f71a0, 0x5936e0, 0xc0005a5740, 0xc000148501)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:95 +0x20e
+kvraft.(*Clerk).Get(0xc0004b88d0, 0x5eabb7, 0x1, 0x0, 0x0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/client.go:57 +0x116
+kvraft.GenericTest.func1(0x4, 0xc0004b88d0, 0xc0000ee100)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:166 +0x327
+kvraft.run_client(0xc0000ee100, 0xc0000bc120, 0x4, 0xc0000cd2c0, 0xc00022a0c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:28 +0x9e
+created by kvraft.spawn_clients_and_wait
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/test_test.go:38 +0x91
+
+goroutine 839 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x1, 0x5e5df9, 0x12, 0x5cc4c0, 0xc00022c320, 0x5948e0, 0xc00057dc00, 0xc0004d8a20)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 840 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x2, 0x5e5df9, 0x12, 0x5cc4c0, 0xc00022c370, 0x5948e0, 0xc00057dc10, 0xc0004d8a80)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 819 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x4, 0x5e55ec, 0x10, 0x5c2760, 0xc0004b95c0, 0x594a60, 0xc000097640, 0xc0000cd4a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 820 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x3, 0x5e55ec, 0x10, 0x5c2760, 0xc0004b95f0, 0x594a60, 0xc000097650, 0xc0000cd500)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 821 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x2, 0x5e55ec, 0x10, 0x5c2760, 0xc0004b9620, 0x594a60, 0xc000097660, 0xc0000cd560)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 822 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x1, 0x5e55ec, 0x10, 0x5c2760, 0xc0004b9650, 0x594a60, 0xc000097670, 0xc0000cd5c0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 823 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x0, 0x5e55ec, 0x10, 0x5c2760, 0xc0004b9680, 0x594a60, 0xc000097680, 0xc0000cd620)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 855 [select]:
+labrpc.(*Network).ProcessReq(0xc00009ba80, 0x59dbc0, 0xc0004b4f90, 0x5e4283, 0xa, 0x6211a0, 0x5936a0, 0xc0001710c0, 0x36, 0x40, ...)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:219 +0x25c
+created by labrpc.MakeNetwork.func1
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:132 +0xee
+
+goroutine 856 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+kvraft.(*RaftKV).Get(0xc00009bb40, 0xc000361560, 0xc0003b27e0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:99 +0x6fe
+reflect.Value.call(0xc000084360, 0xc000082568, 0x13, 0x5e32b4, 0x4, 0xc0001a7bb8, 0x3, 0x3, 0x5936e0, 0xc000391280, ...)
+	/usr/local/go/src/reflect/value.go:447 +0x461
+reflect.Value.Call(0xc000084360, 0xc000082568, 0x13, 0xc0001a7bb8, 0x3, 0x3, 0x0, 0x0, 0x0)
+	/usr/local/go/src/reflect/value.go:308 +0xa4
+labrpc.(*Service).dispatch(0xc00009bb80, 0x5e428a, 0x3, 0x59dbc0, 0xc0004b4f90, 0x5e4283, 0xa, 0x6211a0, 0x5936a0, 0xc0001710c0, ...)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:441 +0x68c
+labrpc.(*Server).dispatch(0xc0000890a0, 0x59dbc0, 0xc0004b4f90, 0x5e4283, 0xa, 0x6211a0, 0x5936a0, 0xc0001710c0, 0x36, 0x40, ...)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:365 +0x4e3
+labrpc.(*Network).ProcessReq.func1(0xc0000890a0, 0x59dbc0, 0xc0004b4f90, 0x5e4283, 0xa, 0x6211a0, 0x5936a0, 0xc0001710c0, 0x36, 0x40, ...)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:208 +0x60
+created by labrpc.(*Network).ProcessReq
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:207 +0x13e
+
+goroutine 847 [select]:
+labrpc.(*Network).ProcessReq(0xc00009ba80, 0x59dbc0, 0xc0000522b0, 0x5e4283, 0xa, 0x6211a0, 0x5936a0, 0xc0000d9b40, 0x36, 0x40, ...)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:219 +0x25c
+created by labrpc.MakeNetwork.func1
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:132 +0xee
+
+goroutine 841 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x3, 0x5e5df9, 0x12, 0x5cc4c0, 0xc00022c3c0, 0x5948e0, 0xc00057dc20, 0xc0004d8ae0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 842 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x4, 0x5e5df9, 0x12, 0x5cc4c0, 0xc00022c410, 0x5948e0, 0xc00057dc30, 0xc0004d8b40)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 875 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x2, 0x5e5df9, 0x12, 0x5cc4c0, 0xc000531270, 0x5948e0, 0xc0004576d0, 0xc0000cdf20)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 881 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x1, 0x5e5df9, 0x12, 0x5cc4c0, 0xc00022c640, 0x5948e0, 0xc0005a0810, 0xc0004d8e40)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 859 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x2, 0x5e5df9, 0x12, 0x5cc4c0, 0xc0000c8aa0, 0x5948e0, 0xc0003aee90, 0xc000540540)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 860 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x3, 0x5e5df9, 0x12, 0x5cc4c0, 0xc0000c8af0, 0x5948e0, 0xc0003aeea0, 0xc0005405a0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 861 [chan send]:
+raft.(*Raft).CallWrapper(0xc0000ca1c0, 0x4, 0x5e5df9, 0x12, 0x5cc4c0, 0xc0000c8b40, 0x5948e0, 0xc0003aeeb0, 0xc000540600)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:938 +0x4c
+created by raft.(*Raft).MakeCall
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/raft/raft.go:948 +0xef
+
+goroutine 886 [select]:
+labrpc.(*Network).ProcessReq(0xc00009ba80, 0x59dbc0, 0xc0004b49a0, 0x5e4283, 0xa, 0x6211a0, 0x5936a0, 0xc0000d9d80, 0x36, 0x40, ...)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:219 +0x25c
+created by labrpc.MakeNetwork.func1
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:132 +0xee
+
+goroutine 887 [sleep]:
+runtime.goparkunlock(...)
+	/usr/local/go/src/runtime/proc.go:307
+time.Sleep(0x5f5e100)
+	/usr/local/go/src/runtime/time.go:105 +0x159
+kvraft.(*RaftKV).Get(0xc00009bb40, 0xc0003f7540, 0xc0005a5aa0)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/kvraft/server.go:99 +0x6fe
+reflect.Value.call(0xc000084360, 0xc000082568, 0x13, 0x5e32b4, 0x4, 0xc00038bbb8, 0x3, 0x3, 0x5936e0, 0xc000391280, ...)
+	/usr/local/go/src/reflect/value.go:447 +0x461
+reflect.Value.Call(0xc000084360, 0xc000082568, 0x13, 0xc00038bbb8, 0x3, 0x3, 0x0, 0x0, 0x11)
+	/usr/local/go/src/reflect/value.go:308 +0xa4
+labrpc.(*Service).dispatch(0xc00009bb80, 0x5e428a, 0x3, 0x59dbc0, 0xc0004b49a0, 0x5e4283, 0xa, 0x6211a0, 0x5936a0, 0xc0000d9d80, ...)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:441 +0x68c
+labrpc.(*Server).dispatch(0xc0000890a0, 0x59dbc0, 0xc0004b49a0, 0x5e4283, 0xa, 0x6211a0, 0x5936a0, 0xc0000d9d80, 0x36, 0x40, ...)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:365 +0x4e3
+labrpc.(*Network).ProcessReq.func1(0xc0000890a0, 0x59dbc0, 0xc0004b49a0, 0x5e4283, 0xa, 0x6211a0, 0x5936a0, 0xc0000d9d80, 0x36, 0x40, ...)
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:208 +0x60
+created by labrpc.(*Network).ProcessReq
+	/home/jesandov/Code/Go/TC4003_assignment_Group_4/assignment3-3/src/labrpc/labrpc.go:207 +0x13e
+exit status 2
+FAIL	kvraft	0.457s
