@@ -1,0 +1,98 @@
+(1)[bash-4.2]jesandov@den02tai ~/Code/Go/TC4003_assignment_Group_4/assignment3-3 $ ./test.py --test_type "Test1"
+ *** Start Test Suite Iteration 1 ***
+### Testing Test111InitialElection ###
+Test: initial election...
+... Passed
+PASS
+ok      raft    2.832s
+### Testing Test112ReElection ###
+Test: election after network failure...
+... Passed
+PASS
+ok      raft    7.835s
+
+Test Results: 3/3 = 1.0
+
+(1)[bash-4.2]jesandov@den02tai ~/Code/Go/TC4003_assignment_Group_4/assignment3-3 $ ./test.py --test_type "Test2"
+ *** Start Test Suite Iteration 1 ***
+### Testing Test211BasicAgree ###
+Test: basic agreement...
+... Passed
+PASS
+ok      raft    3.230s
+### Testing Test212FailAgree ###
+Test: agreement despite follower failure...
+... Passed
+PASS
+ok      raft    8.648s
+### Testing Test213FailNoAgree ###
+Test: no agreement if too many followers fail...
+... Passed
+PASS
+ok      raft    5.303s
+### Testing Test214ConcurrentStarts ###
+Test: concurrent Start()s...
+... Passed
+PASS
+ok      raft    1.414s
+### Testing Test215Rejoin ###
+Test: rejoin of partitioned leader...
+... Passed
+PASS
+ok      raft    6.802s
+### Testing Test216Backup ###
+Test: leader backs up quickly over incorrect follower logs...
+... Passed
+PASS
+ok      raft    33.851s
+### Testing Test217Count ###
+Test: RPC counts aren't too high...
+... Passed
+PASS
+ok      raft    2.917s
+### Testing Test221Persist1 ###
+Test: basic persistence...
+... Passed
+PASS
+ok      raft    9.670s
+### Testing Test222Persist2 ###
+Test: more persistence...
+... Passed
+PASS
+ok      raft    47.275s
+### Testing Test223Persist3 ###
+Test: partitioned leader and one follower crash, leader restarts...
+... Passed
+PASS
+ok      raft    4.234s
+
+Test Results: 11/11 = 1.0
+
+
+(1)[bash-4.2]jesandov@den02tai ~/Code/Go/TC4003_assignment_Group_4/assignment3-3 $ ./test.py --test_type all --kv 
+ *** Start Test Suite Iteration 1 ***
+### Testing Test301Basic ###
+Test: One client ...
+  ... Passed
+PASS
+ok  	kvraft	16.639s
+### Testing Test302Concurrent ###
+Test: concurrent clients ...
+  ... Passed
+PASS
+ok  	kvraft	18.055s
+### Testing Test303Unreliable ###
+Test: unreliable ...
+  ... Passed
+PASS
+ok  	kvraft	20.448s
+### Testing Test304UnreliableOneKey ###
+Test: Concurrent Append to same key, unreliable ...
+  ... Passed
+PASS
+ok  	kvraft	4.123s
+### Testing Test305OnePartition ###
+^CKeyboardInterrupt: FAIL
+
+Test Results: 5/13 = 0.38461538461538464
+

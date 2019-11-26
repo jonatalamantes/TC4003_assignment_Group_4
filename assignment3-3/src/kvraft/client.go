@@ -3,10 +3,14 @@ package raftkv
 import "labrpc"
 import "crypto/rand"
 import "math/big"
+import "fmt"
+import "time"
 
 
 type Clerk struct {
+    me int
 	servers []*labrpc.ClientEnd
+    lastServer int
 	// You will have to modify this struct.
 }
 
@@ -17,9 +21,13 @@ func nrand() int64 {
 	return x
 }
 
-func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
+func MakeClerk(servers []*labrpc.ClientEnd, me int) *Clerk {
+
 	ck := new(Clerk)
+    ck.me = me
 	ck.servers = servers
+    ck.lastServer = 0
+
 	// You'll have to add code here.
 	return ck
 }
@@ -38,8 +46,35 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 //
 func (ck *Clerk) Get(key string) string {
 
-	// You will have to modify this function.
-	return ""
+    ok := false
+    value := ""
+
+    for ! ok {
+
+        retry := false
+        args := GetArgs{key, ck.me}
+        reply := GetReply{}
+
+        ok = ck.servers[ck.lastServer].Call("RaftKV.Get", &args, &reply)
+
+        if ok {
+            if reply.WrongLeader {
+                retry = true
+            } else {
+                value = reply.Value
+                fmt.Println("Call OK")
+            }
+        } 
+        
+        if retry {
+            ck.lastServer = (ck.lastServer + 1)%len(ck.servers)
+            time.Sleep(time.Duration(100) * time.Millisecond)
+            ok = false
+        }
+
+    }
+
+	return value
 }
 
 //
@@ -53,7 +88,31 @@ func (ck *Clerk) Get(key string) string {
 // arguments. and reply must be passed as a pointer.
 //
 func (ck *Clerk) PutAppend(key string, value string, op string) {
-	// You will have to modify this function.
+
+    ok := false
+
+    for ! ok {
+
+        retry := false
+        args := PutAppendArgs{key, value, op, ck.me}
+        reply := PutAppendReply{}
+
+        ok = ck.servers[ck.lastServer].Call("RaftKV.PutAppend", &args, &reply)
+
+        if ok {
+            if reply.WrongLeader {
+                retry = true
+            }
+        } else {
+            retry = true
+        }
+
+        if retry {
+            ck.lastServer = (ck.lastServer + 1)%len(ck.servers)
+            time.Sleep(time.Duration(100) * time.Millisecond)
+            ok = false
+        }
+    }
 }
 
 func (ck *Clerk) Put(key string, value string) {

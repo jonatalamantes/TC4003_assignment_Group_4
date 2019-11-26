@@ -68,6 +68,10 @@ func make_config(t *testing.T, n int, unreliable bool) *config {
 		cfg.connect(i)
 	}
 
+    for i := 0; i < len(cfg.rafts); i++ {
+        cfg.rafts[i].Bootstrap()
+    }
+
 	return cfg
 }
 
@@ -168,7 +172,10 @@ func (cfg *config) start1(i int) {
 			}
 
 			if err_msg != "" {
-				log.Fatalf("apply error: %v\n", err_msg)
+                for i := 0; i < cfg.n; i++ {
+                    cfg.rafts[i].Print("Dump State, Connected:", cfg.connected[i])
+                }
+                log.Fatalf("apply error: %v\n", err_msg)
 				cfg.applyErr[i] = err_msg
 				// keep reading after error so that Raft doesn't block
 				// holding locks...
@@ -199,7 +206,7 @@ func (cfg *config) cleanup() {
 
 // attach server i to the net.
 func (cfg *config) connect(i int) {
-	// fmt.Printf("connect(%d)\n", i)
+	 fmt.Printf("connect(%d)\n", i)
 
 	cfg.connected[i] = true
 
@@ -222,7 +229,7 @@ func (cfg *config) connect(i int) {
 
 // detach server i from the net.
 func (cfg *config) disconnect(i int) {
-	// fmt.Printf("disconnect(%d)\n", i)
+	 fmt.Printf("disconnect(%d)\n", i)
 
 	cfg.connected[i] = false
 
@@ -244,7 +251,7 @@ func (cfg *config) disconnect(i int) {
 }
 
 func (cfg *config) rpcCount(server int) int {
-	return cfg.net.GetCount(server)
+	return cfg.net.GetCount(server) - cfg.rafts[server].GetPingCount()
 }
 
 func (cfg *config) setunreliable(unrel bool) {
@@ -337,6 +344,10 @@ func (cfg *config) nCommitted(index int) (int, interface{}) {
 			cmd = cmd1
 		}
 	}
+	for i := 0; i < cfg.n; i++ {
+		//cfg.rafts[i].GetState()
+    }
+    fmt.Println("nCommitted ( Index:", index, "Count:", count, "Cmd", cmd, ")")
 	return count, cmd
 }
 
@@ -380,6 +391,7 @@ func (cfg *config) wait(index int, n int, startTerm int) interface{} {
 // as do the threads that read from applyCh.
 // returns index.
 func (cfg *config) one(cmd int, expectedServers int) int {
+    fmt.Println("ONE Cmd", cmd, "Servers", expectedServers)
 	t0 := time.Now()
 	starts := 0
 	for time.Since(t0).Seconds() < 10 {

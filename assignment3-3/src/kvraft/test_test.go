@@ -234,22 +234,22 @@ func GenericTest(t *testing.T, tag string, nclients int, unreliable bool, crash 
 	fmt.Printf("  ... Passed\n")
 }
 
-func TestBasic(t *testing.T) {
+func Test301Basic(t *testing.T) {
 	fmt.Printf("Test: One client ...\n")
 	GenericTest(t, "basic", 1, false, false, false, -1)
 }
 
-func TestConcurrent(t *testing.T) {
+func Test302Concurrent(t *testing.T) {
 	fmt.Printf("Test: concurrent clients ...\n")
 	GenericTest(t, "concur", 5, false, false, false, -1)
 }
 
-func TestUnreliable(t *testing.T) {
+func Test303Unreliable(t *testing.T) {
 	fmt.Printf("Test: unreliable ...\n")
 	GenericTest(t, "unreliable", 5, true, false, false, -1)
 }
 
-func TestUnreliableOneKey(t *testing.T) {
+func Test304UnreliableOneKey(t *testing.T) {
 	const nservers = 3
 	cfg := make_config(t, "onekey", nservers, true, -1)
 	defer cfg.cleanup()
@@ -284,7 +284,7 @@ func TestUnreliableOneKey(t *testing.T) {
 // Submit a request in the minority partition and check that the requests
 // doesn't go through until the partition heals.  The leader in the original
 // network ends up in the minority partition.
-func TestOnePartition(t *testing.T) {
+func Test305OnePartition(t *testing.T) {
 	const nservers = 5
 	cfg := make_config(t, "partition", nservers, false, -1)
 	defer cfg.cleanup()
@@ -359,37 +359,37 @@ func TestOnePartition(t *testing.T) {
 	fmt.Printf("  ... Passed\n")
 }
 
-func TestManyPartitionsOneClient(t *testing.T) {
+func Test306ManyPartitionsOneClient(t *testing.T) {
 	fmt.Printf("Test: many partitions ...\n")
 	GenericTest(t, "manypartitions", 1, false, false, true, -1)
 }
 
-func TestManyPartitionsManyClients(t *testing.T) {
+func Test307ManyPartitionsManyClients(t *testing.T) {
 	fmt.Printf("Test: many partitions, many clients ...\n")
 	GenericTest(t, "manypartitionsclnts", 5, false, false, true, -1)
 }
 
-func TestPersistOneClient(t *testing.T) {
+func Test308PersistOneClient(t *testing.T) {
 	fmt.Printf("Test: persistence with one client ...\n")
 	GenericTest(t, "persistone", 1, false, true, false, -1)
 }
 
-func TestPersistConcurrent(t *testing.T) {
+func Test309PersistConcurrent(t *testing.T) {
 	fmt.Printf("Test: persistence with concurrent clients ...\n")
 	GenericTest(t, "persistconcur", 5, false, true, false, -1)
 }
 
-func TestPersistConcurrentUnreliable(t *testing.T) {
+func Test310PersistConcurrentUnreliable(t *testing.T) {
 	fmt.Printf("Test: persistence with concurrent clients, unreliable ...\n")
 	GenericTest(t, "persistconcurunreliable", 5, true, true, false, -1)
 }
 
-func TestPersistPartition(t *testing.T) {
+func Test311PersistPartition(t *testing.T) {
 	fmt.Printf("Test: persistence with concurrent clients and repartitioning servers...\n")
 	GenericTest(t, "persistpart", 5, false, true, true, -1)
 }
 
-func TestPersistPartitionUnreliable(t *testing.T) {
+func Test312PersistPartitionUnreliable(t *testing.T) {
 	fmt.Printf("Test: persistence with concurrent clients and repartitioning servers, unreliable...\n")
 	GenericTest(t, "persistpartunreliable", 5, true, true, true, -1)
 }
