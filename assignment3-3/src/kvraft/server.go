@@ -5,11 +5,11 @@ import (
 	"labrpc"
 	"log"
 	"raft"
+	"sort"
+	"strconv"
+	"strings"
 	"sync"
-    "time"
-    "sort"
-    "strings"
-    "strconv"
+	"time"
 )
 
 const Debug = 0
@@ -21,7 +21,6 @@ func DPrintf(format string, a ...interface{}) (n int, err error) {
 	return
 }
 
-
 type Op struct {
 	// Your definitions here.
 	// Field names must start with capital letters,
@@ -29,32 +28,31 @@ type Op struct {
 }
 
 type Request struct {
-    Command string
-    Index string
-    Op string
-    ClientId int
-    Commited bool
+	Command  string
+	Index    string
+	Op       string
+	ClientId int
+	Commited bool
 }
 
 func (req *Request) ToStr() string {
-    fields := make([]string, 0)
-    fields = append(fields, req.Command)
-    fields = append(fields, req.Index)
-    fields = append(fields, req.Op)
-    fields = append(fields, strconv.Itoa(req.ClientId))
+	fields := make([]string, 0)
+	fields = append(fields, req.Command)
+	fields = append(fields, req.Index)
+	fields = append(fields, req.Op)
+	fields = append(fields, strconv.Itoa(req.ClientId))
 
-    return strings.Join(fields, "|")
+	return strings.Join(fields, "|")
 }
 
 func (req *Request) FromStr(reqStr string) {
-    fields := strings.Split(reqStr, "|")
+	fields := strings.Split(reqStr, "|")
 
-    req.Command = fields[0]
-    req.Index = fields[1]
-    req.Op = fields[2]
-    req.ClientId, _ = strconv.Atoi(fields[3])
+	req.Command = fields[0]
+	req.Index = fields[1]
+	req.Op = fields[2]
+	req.ClientId, _ = strconv.Atoi(fields[3])
 }
-
 
 type RaftKV struct {
 	mu      sync.Mutex
@@ -65,141 +63,139 @@ type RaftKV struct {
 	maxraftstate int // snapshot if log grows this big
 
 	// Your definitions here.
-    requests map[int]Request
-    services int
+	requests map[int]Request
+	services int
 }
 
 func (kv *RaftKV) Print(msg string, msg2 interface{}) {
-    kv.rf.DebugPrint = true
-    kv.rf.Print(msg, msg2)
-    //kv.rf.DebugPrint = false
+	kv.rf.DebugPrint = true
+	kv.rf.Print(msg, msg2)
+	//kv.rf.DebugPrint = false
 }
 
 func (kv *RaftKV) Get(args *GetArgs, reply *GetReply) {
 
-    kv.Print("Get", args)
+	kv.Print("Get", args)
 
-    if kv.rf.GetNodeType() != "Leader" {
-        reply.WrongLeader = true
-        kv.Print("Get Wrong Leader", args)
-        return
-    }
+	if kv.rf.GetNodeType() != "Leader" {
+		reply.WrongLeader = true
+		kv.Print("Get Wrong Leader", args)
+		return
+	}
 
-    reply.WrongLeader = false
+	reply.WrongLeader = false
 
-    //Fetch the values until commited
-    result := make([]string, 0)
-    ok := false
-    for ! ok {
+	//Fetch the values until commited
+	result := make([]string, 0)
+	ok := false
+	for !ok {
 
-        if kv.rf.GetNodeType() != "Leader" {
-            reply.WrongLeader = true
-            kv.Print("Get Wrong Leader", args)
-            return
-        }
+		if kv.rf.GetNodeType() != "Leader" {
+			reply.WrongLeader = true
+			kv.Print("Get Wrong Leader", args)
+			return
+		}
 
-        time.Sleep(time.Duration(100) * time.Millisecond)
+		time.Sleep(time.Duration(100) * time.Millisecond)
 
-        kv.mu.Lock()
+		kv.mu.Lock()
 
-        ok = true
-        result = make([]string, 0)
-        kv.Print("Pending Req", kv.requests)
+		ok = true
+		result = make([]string, 0)
+		kv.Print("Pending Req", kv.requests)
 
-        commitReq := make([]int, 0)
+		commitReq := make([]int, 0)
 
-        for Idx, req := range kv.requests {
+		for Idx, req := range kv.requests {
 
-            //Found one request
-            if req.Index == args.Key {
+			//Found one request
+			if req.Index == args.Key {
 
-                if ! req.Commited {
-                    ok = false
-                    kv.Print("Not Commited Yet", req)
-                    break
-                } else {
-                    commitReq = append(commitReq, Idx)
-                }
-            }
-        }
+				if !req.Commited {
+					ok = false
+					kv.Print("Not Commited Yet", req)
+					break
+				} else {
+					commitReq = append(commitReq, Idx)
+				}
+			}
+		}
 
-        //Sort the found keys
-        sort.Slice(commitReq, func(i, j int) bool {
-            return commitReq[i] < commitReq[j]
-        })
+		//Sort the found keys
+		sort.Slice(commitReq, func(i, j int) bool {
+			return commitReq[i] < commitReq[j]
+		})
 
-        for _, reqIdx := range commitReq {
+		for _, reqIdx := range commitReq {
 
-            req := kv.requests[reqIdx]
+			req := kv.requests[reqIdx]
 
-            if req.Op == "Put" {
-                result = make([]string, 0)
-            }
+			if req.Op == "Put" {
+				result = make([]string, 0)
+			}
 
-            //Asume append
-            add := true
-            for _, cmd := range result {
-                if cmd == req.Command {
-                    add = false
-                    break
-                }
-            }
+			//Asume append
+			add := true
+			for _, cmd := range result {
+				if cmd == req.Command {
+					add = false
+					break
+				}
+			}
 
-            if add {
-                result = append(result, req.Command)
-            }
-        }
+			if add {
+				result = append(result, req.Command)
+			}
+		}
 
-        kv.mu.Unlock()
-    }
+		kv.mu.Unlock()
+	}
 
-    reply.Value = strings.Join(result, "")
+	reply.Value = strings.Join(result, "")
 
-    kv.Print("Get Done", reply)
+	kv.Print("Get Done", reply)
 }
 
 func (kv *RaftKV) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 
-    kv.Print("Put", args)
+	kv.Print("Put", args)
 
-    if kv.rf.GetNodeType() != "Leader" {
-        reply.WrongLeader = true
-        kv.Print("Put Wrong Leader", args)
-        return
-    }
+	if kv.rf.GetNodeType() != "Leader" {
+		reply.WrongLeader = true
+		kv.Print("Put Wrong Leader", args)
+		return
+	}
 
-    reply.WrongLeader = false
+	reply.WrongLeader = false
 
-    //Create the new requests
-    req := Request{args.Value, args.Key, args.Op, args.ClientId, false}
-    idx, _, _ := kv.rf.Start(req.ToStr())
+	//Create the new requests
+	req := Request{args.Value, args.Key, args.Op, args.ClientId, false}
+	idx, _, _ := kv.rf.Start(req.ToStr())
 
-    
-    kv.mu.Lock()
-    kv.requests[idx] = req
-    kv.mu.Unlock()
+	kv.mu.Lock()
+	kv.requests[idx] = req
+	kv.mu.Unlock()
 
-    // Wait until commited
-    /*ok := false
-    for ! ok {
+	// Wait until commited
+	/*ok := false
+	  for ! ok {
 
-        time.Sleep(time.Duration(100) * time.Millisecond)
+	      time.Sleep(time.Duration(100) * time.Millisecond)
 
-        if kv.rf.GetNodeType() != "Leader" {
-            reply.WrongLeader = true
-            kv.Print("Get Wrong Leader", args)
-            return
-        }
+	      if kv.rf.GetNodeType() != "Leader" {
+	          reply.WrongLeader = true
+	          kv.Print("Get Wrong Leader", args)
+	          return
+	      }
 
-        kv.mu.Lock()
-        if kv.requests[idx].Commited {
-            ok = true
-        }
-        kv.mu.Unlock()
-    }*/
+	      kv.mu.Lock()
+	      if kv.requests[idx].Commited {
+	          ok = true
+	      }
+	      kv.mu.Unlock()
+	  }*/
 
-
-    kv.Print("Put Done", reply)
+	kv.Print("Put Done", reply)
 }
 
 //
@@ -211,114 +207,114 @@ func (kv *RaftKV) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 func (kv *RaftKV) Kill() {
 	kv.rf.Kill()
 
-    for kv.services > 0 {
-        time.Sleep(time.Duration(100) * time.Millisecond)
-    }
+	for kv.services > 0 {
+		time.Sleep(time.Duration(100) * time.Millisecond)
+	}
 
 	kv.rf.Kill()
 }
 
 func (kv *RaftKV) BecameLeader() {
 
-    kv.services += 1
-    lastState := kv.rf.GetNodeType()
+	kv.services += 1
+	lastState := kv.rf.GetNodeType()
 
-    for ! kv.rf.IsKilled() {
-        time.Sleep(time.Duration(50) * time.Millisecond)
+	for !kv.rf.IsKilled() {
+		time.Sleep(time.Duration(50) * time.Millisecond)
 
-        currentState := kv.rf.GetNodeType()
+		currentState := kv.rf.GetNodeType()
 
-        if lastState == "Follower" && currentState == "Candidate" {
-            //kv.rf.SetLeaderId(-1)
-        }
+		if lastState == "Follower" && currentState == "Candidate" {
+			//kv.rf.SetLeaderId(-1)
+		}
 
-        if lastState == "Candidate" && currentState == "Leader" {
+		if lastState == "Candidate" && currentState == "Leader" {
 
-            kv.Print("Migrate Requests", nil)
+			kv.Print("Migrate Requests", nil)
 
-            kv.mu.Lock()
-            kv.rf.MutexLock()
+			kv.mu.Lock()
+			kv.rf.MutexLock()
 
-            for idx, entry := range kv.rf.GetHistory() {
+			for idx, entry := range kv.rf.GetHistory() {
 
-                strCommand, ok := entry.Command.(string)
-                if ok {
-                    req := Request{}
-                    req.FromStr(strCommand)
+				strCommand, ok := entry.Command.(string)
+				if ok {
+					req := Request{}
+					req.FromStr(strCommand)
 
-                    if idx-1 <= kv.rf.GetCommitIndex() {
-                       req.Commited = true
-                    } else {
-                       req.Commited = false
-                    }
+					if idx-1 <= kv.rf.GetCommitIndex() {
+						req.Commited = true
+					} else {
+						req.Commited = false
+					}
 
-                    kv.requests[idx-1] = req
-                }
-            }
+					kv.requests[idx-1] = req
+				}
+			}
 
-            kv.Print("Migrate Requests Done", kv.requests)
+			kv.Print("Migrate Requests Done", kv.requests)
 
-            kv.rf.MutexUnlock()
-            kv.mu.Unlock()
-        }
+			kv.rf.MutexUnlock()
+			kv.mu.Unlock()
+		}
 
-        lastState = currentState
-    }
+		lastState = currentState
+	}
 
-    kv.services -= 1
+	kv.services -= 1
 }
 
 func (kv *RaftKV) ReadChannelService() {
 
-    kv.services += 1
+	kv.services += 1
 
-    for ! kv.rf.IsKilled() {
-        time.Sleep(time.Duration(50) * time.Millisecond)
+	for !kv.rf.IsKilled() {
+		time.Sleep(time.Duration(50) * time.Millisecond)
 
-        commitIteration := 0
+		commitIteration := 0
 
-        select {
-        case msg := <-kv.applyCh:
-            kv.Print("SuperCommited", msg)
-            if msg.Index != 0 {
+		select {
+		case msg := <-kv.applyCh:
+			kv.Print("SuperCommited", msg)
+			if msg.Index != 0 {
 
-                kv.mu.Lock()
-                req := kv.requests[msg.Index]
+				kv.mu.Lock()
+				req := kv.requests[msg.Index]
 
-                //Could happend a posible change of leader
-                strCommand := msg.Command.(string)
-                req.FromStr(strCommand)
-                req.Commited = true
+				//Could happend a posible change of leader
+				strCommand := msg.Command.(string)
+				req.FromStr(strCommand)
+				req.Commited = true
 
-                kv.requests[msg.Index] = req
-                kv.mu.Unlock()
-            }
-        default:
-            commitIteration += 1
+				kv.requests[msg.Index] = req
+				kv.mu.Unlock()
+			}
+		default:
+			commitIteration += 1
 
-            if commitIteration > 20 {
+			if commitIteration > 20 {
 
-                kv.mu.Lock()
+				kv.mu.Lock()
 
-                for idx, req1 := range kv.requests {
-                    if idx < kv.rf.GetCommitIndex() && ! req1.Commited {
+				for idx, req1 := range kv.requests {
+					if idx < kv.rf.GetCommitIndex() && !req1.Commited {
 
-                        req := kv.requests[idx]
-                        req.Commited = true
-                        kv.requests[idx] = req
-                        kv.Print("Force of Commit", req)
-                    }
-                }
+						req := kv.requests[idx]
+						req.Commited = true
+						kv.requests[idx] = req
+						kv.Print("Force of Commit", req)
+					}
+				}
 
-                kv.mu.Unlock()
+				kv.mu.Unlock()
 
-                commitIteration = 0
-            }
+				commitIteration = 0
+			}
 
-        }
-    }
+		}
+	}
 
-    kv.services -= 1
+	kv.services -= 1
 }
 
 //
@@ -347,17 +343,17 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 
 	kv.applyCh = make(chan raft.ApplyMsg)
 	kv.rf = raft.Make(servers, me, persister, kv.applyCh)
-    kv.rf.DebugPrint = true
+	kv.rf.DebugPrint = true
 
-    kv.requests = make(map[int]Request)
-    kv.services = 0
+	kv.requests = make(map[int]Request)
+	kv.services = 0
 
-    go kv.ReadChannelService()
-    go kv.BecameLeader()
+	go kv.ReadChannelService()
+	go kv.BecameLeader()
 
 	return kv
 }
 
 func (kv *RaftKV) Bootstrap() {
-    kv.rf.Bootstrap()
+	kv.rf.Bootstrap()
 }

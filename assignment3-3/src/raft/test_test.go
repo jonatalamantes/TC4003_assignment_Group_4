@@ -363,7 +363,7 @@ func Test215Rejoin(t *testing.T) {
 
 func Test216Backup(t *testing.T) {
 	servers := 5
-    entries := 5
+	entries := 5
 	cfg := make_config(t, servers, false)
 	defer cfg.cleanup()
 

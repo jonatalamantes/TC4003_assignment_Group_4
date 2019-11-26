@@ -165,8 +165,6 @@ func (cfg *config) makeClient(to []int) *Clerk {
 		cfg.net.Connect(endnames[j], j)
 	}
 
-    
-
 	ck := MakeClerk(random_handles(ends), cfg.nextClientId)
 	cfg.clerks[ck] = endnames
 	cfg.nextClientId++
@@ -342,9 +340,9 @@ func make_config(t *testing.T, tag string, n int, unreliable bool, maxraftstate 
 
 	cfg.ConnectAll()
 
-    for _, kvserver := range cfg.kvservers {
-        kvserver.Bootstrap()
-    }
+	for _, kvserver := range cfg.kvservers {
+		kvserver.Bootstrap()
+	}
 
 	cfg.net.Reliable(!unreliable)
 

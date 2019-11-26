@@ -40,9 +40,9 @@ type ApplyMsg struct {
 }
 
 type Entry struct {
-    Term int
-    Command interface{}
-    Index int
+	Term    int
+	Command interface{}
+	Index   int
 }
 
 //
@@ -53,96 +53,96 @@ type Raft struct {
 	peers     []*labrpc.ClientEnd
 	persister *Persister
 	me        int // index into peers[]
-    applyCh chan ApplyMsg
+	applyCh   chan ApplyMsg
 
 	// Your data here.
 	// Look at the paper's Figure 2 for a description of what
 	// state a Raft server must maintain.
 
-    // Persistent state on all servers
-    currentTerm int
-    votedFor map[int]int //key = term, value = serverId
-    history []Entry
-    leaderId int
+	// Persistent state on all servers
+	currentTerm int
+	votedFor    map[int]int //key = term, value = serverId
+	history     []Entry
+	leaderId    int
 
-    // Volatile state on all servers
-   commitIndex int
-   lastApplied int
+	// Volatile state on all servers
+	commitIndex int
+	lastApplied int
 
-   // Volatile state on leaders
-   nodeType string
-   nextIndex map[int]int //key = serverId, value = retries
-   matchIndex map[int]int //key = serverId
+	// Volatile state on leaders
+	nodeType   string
+	nextIndex  map[int]int //key = serverId, value = retries
+	matchIndex map[int]int //key = serverId
 
-   //New variables to control the laders
-   timeoutLeader time.Time
-   avgPackage time.Duration
-   disconnected bool
+	//New variables to control the laders
+	timeoutLeader time.Time
+	avgPackage    time.Duration
+	disconnected  bool
 
-   kill bool
-   aliveServices int
-   pingSend int
-   heartbeatsCount int
-   DebugPrint bool
+	kill            bool
+	aliveServices   int
+	pingSend        int
+	heartbeatsCount int
+	DebugPrint      bool
 }
 
 func (rf *Raft) Print(Msg string, Msg2 interface{}) {
 
-    if rf.DebugPrint {
+	if rf.DebugPrint {
 
-        fmt.Print(Msg, " ", Msg2, " ")
-        fmt.Print("[Me:", rf.me, "#")
-        fmt.Print("LeaderTimeout:", rf.timeoutLeader.Sub(time.Now()), "#")
-        fmt.Print("Type:", rf.nodeType, "#")
-        fmt.Print("CommitIndex:", rf.commitIndex, "#")
-        fmt.Print("Term:", rf.currentTerm, "#")
-        fmt.Println("Logs:", rf.history, "]")
-    }
+		fmt.Print(Msg, " ", Msg2, " ")
+		fmt.Print("[Me:", rf.me, "#")
+		fmt.Print("LeaderTimeout:", rf.timeoutLeader.Sub(time.Now()), "#")
+		fmt.Print("Type:", rf.nodeType, "#")
+		fmt.Print("CommitIndex:", rf.commitIndex, "#")
+		fmt.Print("Term:", rf.currentTerm, "#")
+		fmt.Println("Logs:", rf.history, "]")
+	}
 }
 
 // return currentTerm and whether this server
 // believes it is the leader.
 func (rf *Raft) GetState() (int, bool) {
 
-    rf.Print("GetState, LeaderId:", rf.leaderId)
+	rf.Print("GetState, LeaderId:", rf.leaderId)
 
-    if rf.nodeType == "Leader" {
-        return rf.currentTerm, true
-    } else {
-        return rf.currentTerm, false
-    }
+	if rf.nodeType == "Leader" {
+		return rf.currentTerm, true
+	} else {
+		return rf.currentTerm, false
+	}
 }
 
 func (rf *Raft) GetNodeType() string {
-    return rf.nodeType
+	return rf.nodeType
 }
 
 func (rf *Raft) IsKilled() bool {
-    return rf.kill
+	return rf.kill
 }
 
 func (rf *Raft) GetCommitIndex() int {
-    return rf.commitIndex
+	return rf.commitIndex
 }
 
 func (rf *Raft) GetHistory() []Entry {
-    return rf.history
+	return rf.history
 }
 
 func (rf *Raft) MutexLock() {
-    rf.mu.Lock()
+	rf.mu.Lock()
 }
 
 func (rf *Raft) MutexUnlock() {
-    rf.mu.Unlock()
+	rf.mu.Unlock()
 }
 
 func (rf *Raft) GetLeaderId() int {
-    return rf.leaderId
+	return rf.leaderId
 }
 
 func (rf *Raft) SetLeaderId(leader int) {
-    rf.leaderId = leader
+	rf.leaderId = leader
 }
 
 //
@@ -152,22 +152,22 @@ func (rf *Raft) SetLeaderId(leader int) {
 //
 func (rf *Raft) persist() {
 
-    w := new(bytes.Buffer)
-    e := gob.NewEncoder(w)
-    e.Encode(rf.currentTerm)
-    e.Encode(rf.votedFor)
-    e.Encode(rf.history)
-    e.Encode(rf.commitIndex)
-    e.Encode(rf.lastApplied)
-    e.Encode(rf.nodeType)
-    rf.mu.Lock()
-    e.Encode(rf.nextIndex)
-    e.Encode(rf.matchIndex)
-    rf.mu.Unlock()
-    e.Encode(rf.avgPackage)
-    data := w.Bytes()
+	w := new(bytes.Buffer)
+	e := gob.NewEncoder(w)
+	e.Encode(rf.currentTerm)
+	e.Encode(rf.votedFor)
+	e.Encode(rf.history)
+	e.Encode(rf.commitIndex)
+	e.Encode(rf.lastApplied)
+	e.Encode(rf.nodeType)
+	rf.mu.Lock()
+	e.Encode(rf.nextIndex)
+	e.Encode(rf.matchIndex)
+	rf.mu.Unlock()
+	e.Encode(rf.avgPackage)
+	data := w.Bytes()
 
-    rf.persister.SaveRaftState(data)
+	rf.persister.SaveRaftState(data)
 
 }
 
@@ -176,82 +176,82 @@ func (rf *Raft) persist() {
 //
 func (rf *Raft) readPersist(data []byte) {
 
-    r := bytes.NewBuffer(data)
-    d := gob.NewDecoder(r)
-    d.Decode(&rf.currentTerm)
-    d.Decode(&rf.votedFor)
-    d.Decode(&rf.history)
-    d.Decode(&rf.commitIndex)
-    d.Decode(&rf.lastApplied)
-    d.Decode(&rf.nodeType)
-    rf.mu.Lock()
-    d.Decode(&rf.nextIndex)
-    d.Decode(&rf.matchIndex)
-    rf.mu.Unlock()
-    d.Decode(&rf.avgPackage)
+	r := bytes.NewBuffer(data)
+	d := gob.NewDecoder(r)
+	d.Decode(&rf.currentTerm)
+	d.Decode(&rf.votedFor)
+	d.Decode(&rf.history)
+	d.Decode(&rf.commitIndex)
+	d.Decode(&rf.lastApplied)
+	d.Decode(&rf.nodeType)
+	rf.mu.Lock()
+	d.Decode(&rf.nextIndex)
+	d.Decode(&rf.matchIndex)
+	rf.mu.Unlock()
+	d.Decode(&rf.avgPackage)
 
-    if rf.nodeType == "Leader" {
-        rf.nodeType = "Candidate"
-    }
+	if rf.nodeType == "Leader" {
+		rf.nodeType = "Candidate"
+	}
 
-    rf.ResetTime()
-    go rf.CheckTimeoutLeader()
-    go rf.UpdateStateMachine()
-    go rf.HandleNextAppendEntries()
+	rf.ResetTime()
+	go rf.CheckTimeoutLeader()
+	go rf.UpdateStateMachine()
+	go rf.HandleNextAppendEntries()
 
-    rf.Print("ReadPersister", nil)
+	rf.Print("ReadPersister", nil)
 }
 
 /*
   Dynamic history interaction functions
 */
 func (rf *Raft) FindCommand(cmd int) *Entry {
-    for i := len(rf.history)-1; i >= 0; i-- {
-        entry := rf.history[i]
-        if cmd == entry.Command {
-            return &entry
-        }
-    }
-    return nil
+	for i := len(rf.history) - 1; i >= 0; i-- {
+		entry := rf.history[i]
+		if cmd == entry.Command {
+			return &entry
+		}
+	}
+	return nil
 }
 
-func (rf *Raft) AppendCommand(cmd interface{}) *Entry{
-    add := true
-    if len(rf.history) > 0 {
-        if rf.history[len(rf.history)-1].Command == cmd {
-            add = false
-        }
-    }
-    if add {
-        entry := Entry{rf.currentTerm, cmd, len(rf.history)}
-        rf.history = append(rf.history, entry)
-        return &entry
-    } else {
-        return &rf.history[len(rf.history)-1]
-    }
+func (rf *Raft) AppendCommand(cmd interface{}) *Entry {
+	add := true
+	if len(rf.history) > 0 {
+		if rf.history[len(rf.history)-1].Command == cmd {
+			add = false
+		}
+	}
+	if add {
+		entry := Entry{rf.currentTerm, cmd, len(rf.history)}
+		rf.history = append(rf.history, entry)
+		return &entry
+	} else {
+		return &rf.history[len(rf.history)-1]
+	}
 }
 
-func (rf *Raft) PopCommand() *Entry{
-    if len(rf.history) > 0 {
-        entry := rf.history[len(rf.history)-1]
-        rf.history = rf.history[:len(rf.history)-1]
-        return &entry
-    }
-    return nil
+func (rf *Raft) PopCommand() *Entry {
+	if len(rf.history) > 0 {
+		entry := rf.history[len(rf.history)-1]
+		rf.history = rf.history[:len(rf.history)-1]
+		return &entry
+	}
+	return nil
 }
 
 func (rf *Raft) MapCommands(from int) []interface{} {
-    cmds := make([]interface{}, 0)
-    if from > 0 {
-        for i := from; i < len(rf.history); i++ {
-            cmds = append(cmds, rf.history[i].Command)
-        }
-    }
-    return cmds
+	cmds := make([]interface{}, 0)
+	if from > 0 {
+		for i := from; i < len(rf.history); i++ {
+			cmds = append(cmds, rf.history[i].Command)
+		}
+	}
+	return cmds
 }
 
 func (rf *Raft) Clear() {
-    rf.history = make([]Entry, 0)
+	rf.history = make([]Entry, 0)
 }
 
 //
@@ -259,19 +259,19 @@ func (rf *Raft) Clear() {
 //
 
 type AppendEntriesArgs struct {
-    Term int
-    LeaderId int
-    PrevEntry Entry
-    Entries []interface{}
-    LeaderCommit int
+	Term         int
+	LeaderId     int
+	PrevEntry    Entry
+	Entries      []interface{}
+	LeaderCommit int
 }
 
 //
 // AppendEntries RPC reply structure
 //
 type AppendEntriesReply struct {
-    Term int
-    Success bool
+	Term    int
+	Success bool
 }
 
 //
@@ -279,204 +279,205 @@ type AppendEntriesReply struct {
 //
 func (rf *Raft) AppendEntries(args AppendEntriesArgs, reply *AppendEntriesReply) {
 
-    reply.Term = rf.currentTerm
+	reply.Term = rf.currentTerm
 
-    if args.Term < rf.currentTerm {
-        rf.Print("AppendEntries, Incorrect Term", args)
-        reply.Success = false
+	if args.Term < rf.currentTerm {
+		rf.Print("AppendEntries, Incorrect Term", args)
+		reply.Success = false
 
-    } else {
+	} else {
 
-        if rf.me != args.LeaderId {
-            rf.nodeType = "Follower"
-            rf.ResetTime()
-            rf.currentTerm = args.Term
-        } 
+		if rf.me != args.LeaderId {
+			rf.nodeType = "Follower"
+			rf.ResetTime()
+			rf.currentTerm = args.Term
+		}
 
-        rf.leaderId = args.LeaderId
+		rf.leaderId = args.LeaderId
 
-        // Heartbeat package
-        if len(args.Entries) == 0 {
-            reply.Success = true
-            return
-        }
+		// Heartbeat package
+		if len(args.Entries) == 0 {
+			reply.Success = true
+			return
+		}
 
-        rf.Print("Call AppendEntries", args)
+		rf.Print("Call AppendEntries", args)
 
-        if args.PrevEntry.Index == -1 {
-            rf.Clear()
-            //rf.AppendCommand(args.PrevEntry.Command)
-            for _, cmd := range args.Entries {
-                rf.AppendCommand(cmd)
-            }
-            if args.LeaderCommit > rf.commitIndex {
-                rf.commitIndex = args.LeaderCommit
-            }
-            rf.Print("Call AppendEntries Complete 1", args)
-            reply.Success = true
-            return
-        }
+		if args.PrevEntry.Index == -1 {
+			rf.Clear()
+			//rf.AppendCommand(args.PrevEntry.Command)
+			for _, cmd := range args.Entries {
+				rf.AppendCommand(cmd)
+			}
+			if args.LeaderCommit > rf.commitIndex {
+				rf.commitIndex = args.LeaderCommit
+			}
+			rf.Print("Call AppendEntries Complete 1", args)
+			reply.Success = true
+			return
+		}
 
-        if args.PrevEntry.Index > len(rf.history)-1 {
-            reply.Success = false
-            rf.Print("AppendEntries PrevEntry not exists", args)
-            return
-        }
+		if args.PrevEntry.Index > len(rf.history)-1 {
+			reply.Success = false
+			rf.Print("AppendEntries PrevEntry not exists", args)
+			return
+		}
 
-        prevEntry := rf.history[args.PrevEntry.Index]
+		prevEntry := rf.history[args.PrevEntry.Index]
 
-        if prevEntry.Command != args.PrevEntry.Command {
-            rf.Print("AppendEntries PrevEntry Term conflict", args)
-            reply.Success = false
-            return
-        }
+		if prevEntry.Command != args.PrevEntry.Command {
+			rf.Print("AppendEntries PrevEntry Term conflict", args)
+			reply.Success = false
+			return
+		}
 
-        //Override logs after prevEntry
-        removed := rf.PopCommand()
-        for removed.Index != args.PrevEntry.Index {
-           removed = rf.PopCommand()
-        }
-        rf.AppendCommand(args.PrevEntry.Command)
+		//Override logs after prevEntry
+		removed := rf.PopCommand()
+		for removed.Index != args.PrevEntry.Index {
+			removed = rf.PopCommand()
+		}
+		rf.AppendCommand(args.PrevEntry.Command)
 
-        //Apply new commands
-        for _, cmd := range args.Entries {
-            rf.AppendCommand(cmd)
-        }
-        if args.LeaderCommit > rf.commitIndex {
-            if len(rf.history)-1 > args.LeaderCommit {
-                rf.commitIndex = args.LeaderCommit
-            } else {
-                rf.commitIndex = len(rf.history)-1
-            }
-        }
+		//Apply new commands
+		for _, cmd := range args.Entries {
+			rf.AppendCommand(cmd)
+		}
+		if args.LeaderCommit > rf.commitIndex {
+			if len(rf.history)-1 > args.LeaderCommit {
+				rf.commitIndex = args.LeaderCommit
+			} else {
+				rf.commitIndex = len(rf.history) - 1
+			}
+		}
 
-        rf.Print("Call AppendEntries Complete 2", args)
-        reply.Success = true
-    }
+		rf.Print("Call AppendEntries Complete 2", args)
+		reply.Success = true
+	}
 }
 
 func (rf *Raft) Heartbeat() int {
-    count := 0
-    for peerIdx, _ := range rf.peers {
-        if peerIdx != rf.me {
-            entry := Entry{}
-            args := AppendEntriesArgs{rf.currentTerm, rf.me, entry, nil, -1}
-            reply := AppendEntriesReply{}
-            reason := rf.SendAppendEntries(peerIdx, args, &reply)
-            if reason == 0 {
-                count += 1
-            }
-        }
+	count := 0
+	for peerIdx, _ := range rf.peers {
+		if peerIdx != rf.me {
+			entry := Entry{}
+			args := AppendEntriesArgs{rf.currentTerm, rf.me, entry, nil, -1}
+			reply := AppendEntriesReply{}
+			reason := rf.SendAppendEntries(peerIdx, args, &reply)
+			if reason == 0 {
+				count += 1
+			}
+		}
 
-        rf.heartbeatsCount += 1
+		rf.heartbeatsCount += 1
 
-        if rf.heartbeatsCount > 10 {
-            if len(rf.history) > 1 {
-                rf.Schedule(3)
-            }
-            rf.heartbeatsCount = 0
-        }
+		if rf.heartbeatsCount > 10 {
+			if len(rf.history) > 1 {
+				rf.Schedule(3)
+			}
+			rf.heartbeatsCount = 0
+		}
 
-    }
-    return count
+	}
+	return count
 }
 
 //
 // Return reason of failure (0 = success, 1 = failure, 2 = network issue)
 //
 func (rf *Raft) SendAppendEntries(server int, args AppendEntriesArgs, reply *AppendEntriesReply) int {
-    if server == rf.me {
-        rf.AppendEntries(args, reply)
-        if reply.Success {
-            return 0
-        } else {
-            return 1
-        }
-    } else {
-        response := rf.MakeCall(server, "Raft.AppendEntries", args, reply, false)
-        if ! response {
-            return 2
-        } else {
-            if reply.Success {
-                return 0
-            } else {
-                return 1
-            }
-        }
-    }
+	if server == rf.me {
+		rf.AppendEntries(args, reply)
+		if reply.Success {
+			return 0
+		} else {
+			return 1
+		}
+	} else {
+		response := rf.MakeCall(server, "Raft.AppendEntries", args, reply, false)
+		if !response {
+			return 2
+		} else {
+			if reply.Success {
+				return 0
+			} else {
+				return 1
+			}
+		}
+	}
 }
+
 //
 // Ping structures
 //
 type PingArgs struct {
-    Sleep int
+	Sleep int
 }
 
 type PingReply struct {
-    Ok bool
+	Ok bool
 }
 
-func (rf *Raft) PingRPC (args PingArgs, reply *PingReply) {
-    if args.Sleep != 0 {
-        time.Sleep(time.Duration(args.Sleep) * time.Millisecond)
-    }
-    reply.Ok = true
+func (rf *Raft) PingRPC(args PingArgs, reply *PingReply) {
+	if args.Sleep != 0 {
+		time.Sleep(time.Duration(args.Sleep) * time.Millisecond)
+	}
+	reply.Ok = true
 }
 
 func (rf *Raft) TestPing(serverId int, sleep int) {
-    args := PingArgs{sleep}
-    reply := PingReply{false}
-    rf.MakeCall(serverId, "Raft.PingRPC", args, &reply, true)
-    rf.pingSend += 1
+	args := PingArgs{sleep}
+	reply := PingReply{false}
+	rf.MakeCall(serverId, "Raft.PingRPC", args, &reply, true)
+	rf.pingSend += 1
 }
 
 func (rf *Raft) PeersAlives(retries int) int {
-    count := 0
-    for peerIdx, _ := range rf.peers {
-        if peerIdx != rf.me {
-            if rf.DoPing(peerIdx, retries) {
-                count += 1
-            }
-        }
-    }
-    return count
+	count := 0
+	for peerIdx, _ := range rf.peers {
+		if peerIdx != rf.me {
+			if rf.DoPing(peerIdx, retries) {
+				count += 1
+			}
+		}
+	}
+	return count
 }
 
 func (rf *Raft) GetPingCount() int {
-    return rf.pingSend
+	return rf.pingSend
 }
 
 func (rf *Raft) DoPing(serverId int, retries int) bool {
-    if rf.leaderId == -1 && serverId == rf.leaderId{
-        return false
-    }
-    for i := 0; i < retries; i++ {
-        args := PingArgs{0}
-        reply := PingReply{false}
-        ok := rf.MakeCall(serverId, "Raft.PingRPC", args, &reply, false)
-        rf.pingSend += 1
-        if ok && reply.Ok {
-            return true
-        }
-    }
-    return false
+	if rf.leaderId == -1 && serverId == rf.leaderId {
+		return false
+	}
+	for i := 0; i < retries; i++ {
+		args := PingArgs{0}
+		reply := PingReply{false}
+		ok := rf.MakeCall(serverId, "Raft.PingRPC", args, &reply, false)
+		rf.pingSend += 1
+		if ok && reply.Ok {
+			return true
+		}
+	}
+	return false
 }
 
 //
 // RequestVote RPC arguments structure.
 //
 type RequestVoteArgs struct {
-    Term int
-    CandidateId int
-    LastEntry Entry
+	Term        int
+	CandidateId int
+	LastEntry   Entry
 }
 
 //
 // RequestVote RPC reply structure.
 //
 type RequestVoteReply struct {
-    Term int
-    VoteGranted bool
+	Term        int
+	VoteGranted bool
 }
 
 //
@@ -484,71 +485,69 @@ type RequestVoteReply struct {
 //
 func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 
-    rf.Print("RequestVote", args)
+	rf.Print("RequestVote", args)
 
-    reply.Term = rf.currentTerm
+	reply.Term = rf.currentTerm
 
-    if args.Term < rf.currentTerm {
-        rf.Print("RequestVote Incorrect Terms", args)
-        return
-    }
+	if args.Term < rf.currentTerm {
+		rf.Print("RequestVote Incorrect Terms", args)
+		return
+	}
 
-    votedFor, exist := rf.votedFor[args.Term]
-    if ! exist && args.CandidateId != -1 {
+	votedFor, exist := rf.votedFor[args.Term]
+	if !exist && args.CandidateId != -1 {
 
-        if args.LastEntry.Index >= len(rf.history) {
-            rf.votedFor[args.Term] = args.CandidateId
-            reply.VoteGranted = true
-            rf.Print("RequestVote New Vote received and Upper Logs", reply)
-            return
-        }
+		if args.LastEntry.Index >= len(rf.history) {
+			rf.votedFor[args.Term] = args.CandidateId
+			reply.VoteGranted = true
+			rf.Print("RequestVote New Vote received and Upper Logs", reply)
+			return
+		}
 
-        entry := rf.history[args.LastEntry.Index]
+		entry := rf.history[args.LastEntry.Index]
 
-        if entry.Index < rf.commitIndex {
-            reply.VoteGranted = false
-            rf.Print("RequestVote No Vote for commit leaser", entry)
-            return
-        }
+		if entry.Index < rf.commitIndex {
+			reply.VoteGranted = false
+			rf.Print("RequestVote No Vote for commit leaser", entry)
+			return
+		}
 
-        if entry.Command == args.LastEntry.Command && entry.Term == args.LastEntry.Term {
+		if entry.Command == args.LastEntry.Command && entry.Term == args.LastEntry.Term {
 
-            rf.votedFor[args.Term] = args.CandidateId
-            reply.VoteGranted = true
-            rf.Print("RequestVote New Vote received and Entry OK", entry)
-            return
-        }
+			rf.votedFor[args.Term] = args.CandidateId
+			reply.VoteGranted = true
+			rf.Print("RequestVote New Vote received and Entry OK", entry)
+			return
+		}
 
-        if args.LastEntry.Term > entry.Term {
-            rf.votedFor[args.Term] = args.CandidateId
-            reply.VoteGranted = true
-            rf.Print("RequestVote New Vote with most updated entry", entry)
-            return
-        }
+		if args.LastEntry.Term > entry.Term {
+			rf.votedFor[args.Term] = args.CandidateId
+			reply.VoteGranted = true
+			rf.Print("RequestVote New Vote with most updated entry", entry)
+			return
+		}
 
-        rf.Print("RequestVote Denial, Incosistence Log", entry)
-        reply.VoteGranted = false
-        return
-    }
+		rf.Print("RequestVote Denial, Incosistence Log", entry)
+		reply.VoteGranted = false
+		return
+	}
 
-    if votedFor == args.CandidateId {
-        reply.VoteGranted = true
-        rf.Print("RequestVote Already voted by args node", reply)
-        return
-    }
+	if votedFor == args.CandidateId {
+		reply.VoteGranted = true
+		rf.Print("RequestVote Already voted by args node", reply)
+		return
+	}
 
-    if rf.leaderId != -1 {
-        rf.Print("RequestVote Denial, Voted for", votedFor)
-        reply.VoteGranted = false
-        return
-    }
+	if rf.leaderId != -1 {
+		rf.Print("RequestVote Denial, Voted for", votedFor)
+		reply.VoteGranted = false
+		return
+	}
 
-    rf.votedFor[args.Term] = args.CandidateId
-    reply.VoteGranted = true
-    rf.Print("RequestVote Revoted since there is not leader", -1)
+	rf.votedFor[args.Term] = args.CandidateId
+	reply.VoteGranted = true
+	rf.Print("RequestVote Revoted since there is not leader", -1)
 }
-
-
 
 //
 // example code to send a RequestVote RPC to a server.
@@ -568,34 +567,32 @@ func (rf *Raft) RequestVote(args RequestVoteArgs, reply *RequestVoteReply) {
 // the struct itself.
 //
 func (rf *Raft) sendRequestVote(server int, args RequestVoteArgs, reply *RequestVoteReply) bool {
-    return rf.MakeCall(server, "Raft.RequestVote", args, reply, false)
+	return rf.MakeCall(server, "Raft.RequestVote", args, reply, false)
 }
-
 
 func (rf *Raft) Votation(retries int) int {
 
-    votes := 0
+	votes := 0
 
-    //Vote for self or requests votes
-    for peerIdx := len(rf.peers)-1; peerIdx >= 0; peerIdx-- {
+	//Vote for self or requests votes
+	for peerIdx := len(rf.peers) - 1; peerIdx >= 0; peerIdx-- {
 
-            lastEntry := rf.history[len(rf.history)-1]
-            args := RequestVoteArgs{rf.currentTerm, rf.me, lastEntry}
-            reply := RequestVoteReply{}
-            ok := false
-            for i := 0; i < retries && ! ok; i++ {
-                ok = rf.sendRequestVote(peerIdx, args, &reply)
-                if ok {
-                    if reply.VoteGranted {
-                        votes += 1
-                   }
-               }
-           }
-   }
+		lastEntry := rf.history[len(rf.history)-1]
+		args := RequestVoteArgs{rf.currentTerm, rf.me, lastEntry}
+		reply := RequestVoteReply{}
+		ok := false
+		for i := 0; i < retries && !ok; i++ {
+			ok = rf.sendRequestVote(peerIdx, args, &reply)
+			if ok {
+				if reply.VoteGranted {
+					votes += 1
+				}
+			}
+		}
+	}
 
-   return votes
+	return votes
 }
-
 
 //
 // the service using Raft (e.g. a k/v server) wants to start
@@ -612,27 +609,27 @@ func (rf *Raft) Votation(retries int) int {
 //
 func (rf *Raft) Start(command interface{}) (int, int, bool) {
 
-    if rf.nodeType == "Leader" {
-        entry := rf.AppendCommand(command)
-        rf.Schedule(3)
-        return entry.Index, rf.currentTerm, true
-    } else {
-        return -1, rf.currentTerm, false
-    }
+	if rf.nodeType == "Leader" {
+		entry := rf.AppendCommand(command)
+		rf.Schedule(3)
+		return entry.Index, rf.currentTerm, true
+	} else {
+		return -1, rf.currentTerm, false
+	}
 }
 
 func (rf *Raft) Schedule(retries int) {
-    for peerIdx, _ := range rf.peers {
+	for peerIdx, _ := range rf.peers {
 
-        rf.mu.Lock()
-        retries, ok := rf.nextIndex[peerIdx]
-        if ! ok {
-            retries = 3
-        }
-        rf.nextIndex[peerIdx] = retries
-        rf.mu.Unlock()
-    }
-    rf.Print("Schedule", rf.nextIndex)
+		rf.mu.Lock()
+		retries, ok := rf.nextIndex[peerIdx]
+		if !ok {
+			retries = 3
+		}
+		rf.nextIndex[peerIdx] = retries
+		rf.mu.Unlock()
+	}
+	rf.Print("Schedule", rf.nextIndex)
 }
 
 //
@@ -643,22 +640,22 @@ func (rf *Raft) Schedule(retries int) {
 //
 func (rf *Raft) Kill() {
 
-    rf.kill = true
-    for rf.aliveServices > 0 {
-        time.Sleep(50 * time.Millisecond)
-    }
-    rf.Print("Kill", nil)
+	rf.kill = true
+	for rf.aliveServices > 0 {
+		time.Sleep(50 * time.Millisecond)
+	}
+	rf.Print("Kill", nil)
 }
 
 func (rf *Raft) ResetTime() {
 
-    if rf.disconnected {
-        rf.disconnected = false
-    }
+	if rf.disconnected {
+		rf.disconnected = false
+	}
 
-    rf.timeoutLeader = time.Now()
-    ratio := time.Duration((rf.me+1)*150) * time.Duration(len(rf.peers)) * rf.avgPackage
-    rf.timeoutLeader = rf.timeoutLeader.Add(ratio)
+	rf.timeoutLeader = time.Now()
+	ratio := time.Duration((rf.me+1)*150) * time.Duration(len(rf.peers)) * rf.avgPackage
+	rf.timeoutLeader = rf.timeoutLeader.Add(ratio)
 }
 
 //
@@ -678,41 +675,41 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.peers = peers
 	rf.persister = persister
 	rf.me = me
-    rf.applyCh = applyCh
+	rf.applyCh = applyCh
 
-    // Persistent state on all servers
-    rf.votedFor = make(map[int]int)
-    rf.history = make([]Entry, 0)
+	// Persistent state on all servers
+	rf.votedFor = make(map[int]int)
+	rf.history = make([]Entry, 0)
 
-    // Volatile state on all servers
-   rf.commitIndex = -1
-   rf.lastApplied = -1
-   rf.currentTerm = 0
+	// Volatile state on all servers
+	rf.commitIndex = -1
+	rf.lastApplied = -1
+	rf.currentTerm = 0
 
-   // Volatile state on leaders
-   if rf.me == 0 {
-       rf.nodeType = "Candidate"
-       rf.currentTerm = 1
-   } else {
-       rf.nodeType = "Follower"
-   }
-   rf.AppendCommand(-7)
-   rf.leaderId = -1
-   rf.nextIndex = make(map[int]int)
+	// Volatile state on leaders
+	if rf.me == 0 {
+		rf.nodeType = "Candidate"
+		rf.currentTerm = 1
+	} else {
+		rf.nodeType = "Follower"
+	}
+	rf.AppendCommand(-7)
+	rf.leaderId = -1
+	rf.nextIndex = make(map[int]int)
 
-   rf.matchIndex = make(map[int]int)
-   for peerIdx, _ := range(rf.peers) {
-        rf.matchIndex[peerIdx] = -1
-   }
+	rf.matchIndex = make(map[int]int)
+	for peerIdx, _ := range rf.peers {
+		rf.matchIndex[peerIdx] = -1
+	}
 
-   rf.disconnected = true
-   rf.ResetTime()
+	rf.disconnected = true
+	rf.ResetTime()
 
-   rf.DebugPrint = true
-   rf.kill = false
-   rf.aliveServices = 0
-   rf.pingSend = 0
-   rf.avgPackage = time.Duration(500)  * time.Millisecond
+	rf.DebugPrint = true
+	rf.kill = false
+	rf.aliveServices = 0
+	rf.pingSend = 0
+	rf.avgPackage = time.Duration(500) * time.Millisecond
 
 	// initialize from state persisted before a crash
 	rf.readPersist(rf.persister.ReadRaftState())
@@ -721,16 +718,16 @@ func Make(peers []*labrpc.ClientEnd, me int,
 }
 
 func (rf *Raft) VolatilRefresh() {
-   rf.nextIndex = make(map[int]int)
+	rf.nextIndex = make(map[int]int)
 
-   rf.matchIndex = make(map[int]int)
-   for peerIdx, _ := range(rf.peers) {
-        rf.matchIndex[peerIdx] = -1
-   }
+	rf.matchIndex = make(map[int]int)
+	for peerIdx, _ := range rf.peers {
+		rf.matchIndex[peerIdx] = -1
+	}
 }
 
 func (rf *Raft) Bootstrap() {
-    rf.CalculateBestTimeout(10)
+	rf.CalculateBestTimeout(10)
 }
 
 /*
@@ -739,252 +736,251 @@ func (rf *Raft) Bootstrap() {
 
 func (rf *Raft) CheckTimeoutLeader() {
 
-    rf.aliveServices += 1
+	rf.aliveServices += 1
 
-    for ! rf.kill {
+	for !rf.kill {
 
-        time.Sleep(100 * time.Millisecond)
+		time.Sleep(100 * time.Millisecond)
 
-        if rf.disconnected {
-            alives := rf.PeersAlives(3)
-            if alives > 0 {
-                rf.Print("ReConnected", nil)
-                rf.nodeType = "Follower"
-                rf.ResetTime()
-            } else {
-                rf.Print("I am disconnected", nil)
-                continue
-            }
-        }
+		if rf.disconnected {
+			alives := rf.PeersAlives(3)
+			if alives > 0 {
+				rf.Print("ReConnected", nil)
+				rf.nodeType = "Follower"
+				rf.ResetTime()
+			} else {
+				rf.Print("I am disconnected", nil)
+				continue
+			}
+		}
 
-        switch rf.nodeType {
-        case "Follower":
-            now := time.Now()
-            if now.After(rf.timeoutLeader) {
-                alives := rf.PeersAlives(3)
-                if alives > 0 {
-                    leaderAlive := rf.DoPing(rf.leaderId, 3)
-                    if ! leaderAlive {
-                        rf.currentTerm += 1
-                        rf.nodeType = "Candidate"
-                    }
-                } else {
-                    rf.Print("Disconnected (Follower)", nil)
-                    rf.disconnected = true
-                    rf.leaderId = -1
-                }
-            }
-        case "Candidate":
-            votes := rf.Votation(3)
-            rf.Print("Votes", votes)
-            if float32(votes) >= float32(len(rf.peers))/2.0 {
-                if rf.nodeType == "Candidate" {
-                    rf.Print("Became Leader", nil)
-                    rf.VolatilRefresh()
-                    rf.nodeType = "Leader"
-                } else {
-                    rf.nodeType = "Follower"
-                    rf.ResetTime()
-                }
-            } else {
-                alives := rf.PeersAlives(3)
-                if alives <= 0 {
-                    rf.Print("Disconnected (Candidate)", nil)
-                    rf.nodeType = "Follower"
-                    rf.leaderId = -1
-                    rf.disconnected = true
-                }
-            }
-        case "Leader":
-            alive := rf.Heartbeat()
-            if alive == 0 {
-                alives := rf.PeersAlives(3)
-                if alives <= 0 {
-                    rf.Print("Disconnected (Leader)", nil)
-                    rf.nodeType = "Follower"
-                    rf.leaderId = -1
-                    rf.disconnected = true
-                }
-            }
-        }
-    }
+		switch rf.nodeType {
+		case "Follower":
+			now := time.Now()
+			if now.After(rf.timeoutLeader) {
+				alives := rf.PeersAlives(3)
+				if alives > 0 {
+					leaderAlive := rf.DoPing(rf.leaderId, 3)
+					if !leaderAlive {
+						rf.currentTerm += 1
+						rf.nodeType = "Candidate"
+					}
+				} else {
+					rf.Print("Disconnected (Follower)", nil)
+					rf.disconnected = true
+					rf.leaderId = -1
+				}
+			}
+		case "Candidate":
+			votes := rf.Votation(3)
+			rf.Print("Votes", votes)
+			if float32(votes) >= float32(len(rf.peers))/2.0 {
+				if rf.nodeType == "Candidate" {
+					rf.Print("Became Leader", nil)
+					rf.VolatilRefresh()
+					rf.nodeType = "Leader"
+				} else {
+					rf.nodeType = "Follower"
+					rf.ResetTime()
+				}
+			} else {
+				alives := rf.PeersAlives(3)
+				if alives <= 0 {
+					rf.Print("Disconnected (Candidate)", nil)
+					rf.nodeType = "Follower"
+					rf.leaderId = -1
+					rf.disconnected = true
+				}
+			}
+		case "Leader":
+			alive := rf.Heartbeat()
+			if alive == 0 {
+				alives := rf.PeersAlives(3)
+				if alives <= 0 {
+					rf.Print("Disconnected (Leader)", nil)
+					rf.nodeType = "Follower"
+					rf.leaderId = -1
+					rf.disconnected = true
+				}
+			}
+		}
+	}
 
-    rf.aliveServices -= 1
+	rf.aliveServices -= 1
 }
 
 func (rf *Raft) UpdateStateMachine() {
 
-    rf.aliveServices += 1
+	rf.aliveServices += 1
 
-    for ! rf.kill {
+	for !rf.kill {
 
-        time.Sleep(100 * time.Millisecond)
+		time.Sleep(100 * time.Millisecond)
 
-        //Save Persister
-        rf.persist()
+		//Save Persister
+		rf.persist()
 
-        // Apply command
-        for rf.commitIndex > rf.lastApplied {
-            rf.lastApplied += 1
-            entry := rf.history[rf.lastApplied]
-            apply := ApplyMsg{rf.lastApplied, entry.Command, false, nil}
-            rf.applyCh <- apply
-            rf.Print("ApplyCh", apply)
-        }
+		// Apply command
+		for rf.commitIndex > rf.lastApplied {
+			rf.lastApplied += 1
+			entry := rf.history[rf.lastApplied]
+			apply := ApplyMsg{rf.lastApplied, entry.Command, false, nil}
+			rf.applyCh <- apply
+			rf.Print("ApplyCh", apply)
+		}
 
-        // Update Commit Index
-        if rf.nodeType == "Leader" {
-            for n := len(rf.history)-1; n > rf.commitIndex && n >= 0; n-- {
-                matched := 0
-                for _, matchIdx := range rf.matchIndex {
-                    if matchIdx >= n && rf.history[n].Term == rf.currentTerm {
-                        matched += 1
-                    }
-                }
-                if float64(matched) > float64(len(rf.peers))/float64(2) {
-                    rf.commitIndex = n
-                    rf.Print("Set Commit Index", rf.commitIndex)
-                    //Propagate commit
-                    rf.Schedule(3)
-                    break
-                }
-            }
-        }
-    }
+		// Update Commit Index
+		if rf.nodeType == "Leader" {
+			for n := len(rf.history) - 1; n > rf.commitIndex && n >= 0; n-- {
+				matched := 0
+				for _, matchIdx := range rf.matchIndex {
+					if matchIdx >= n && rf.history[n].Term == rf.currentTerm {
+						matched += 1
+					}
+				}
+				if float64(matched) > float64(len(rf.peers))/float64(2) {
+					rf.commitIndex = n
+					rf.Print("Set Commit Index", rf.commitIndex)
+					//Propagate commit
+					rf.Schedule(3)
+					break
+				}
+			}
+		}
+	}
 
-    rf.aliveServices -= 1
+	rf.aliveServices -= 1
 }
 
 func (rf *Raft) HandleNextAppendEntries() {
 
-    rf.aliveServices += 1
-    nextServer := 0
+	rf.aliveServices += 1
+	nextServer := 0
 
-    for ! rf.kill {
+	for !rf.kill {
 
-        time.Sleep(100 * time.Millisecond)
+		time.Sleep(100 * time.Millisecond)
 
-        // Only leader must use this function
-        if rf.nodeType != "Leader" {
-            rf.nextIndex = make(map[int]int)
-        }
+		// Only leader must use this function
+		if rf.nodeType != "Leader" {
+			rf.nextIndex = make(map[int]int)
+		}
 
-        // No Entries for the moment
-        if len(rf.nextIndex) == 0 {
-            continue
-        }
+		// No Entries for the moment
+		if len(rf.nextIndex) == 0 {
+			continue
+		}
 
-        // Fetch next pendint request
-        retries, exists := rf.nextIndex[nextServer]
-        lastMatched := rf.matchIndex[nextServer]
+		// Fetch next pendint request
+		retries, exists := rf.nextIndex[nextServer]
+		lastMatched := rf.matchIndex[nextServer]
 
-        // No Entry for this server yet
-        if ! exists {
-            continue
-        }
+		// No Entry for this server yet
+		if !exists {
+			continue
+		}
 
-        if retries == 0 {
-            rf.Print("Too Many Network Issues", nil)
-            delete(rf.nextIndex, nextServer)
-            continue
-        }
+		if retries == 0 {
+			rf.Print("Too Many Network Issues", nil)
+			delete(rf.nextIndex, nextServer)
+			continue
+		}
 
-        // Apply the AppendEntries of the schedule
-        entries := rf.MapCommands(1)
-        currEntry := rf.history[0]
+		// Apply the AppendEntries of the schedule
+		entries := rf.MapCommands(1)
+		currEntry := rf.history[0]
 
-        if lastMatched-1 >= 0 && lastMatched-1 < len(rf.history) {
-            entries = rf.MapCommands(lastMatched)
-            currEntry = rf.history[lastMatched-1]
-        }
+		if lastMatched-1 >= 0 && lastMatched-1 < len(rf.history) {
+			entries = rf.MapCommands(lastMatched)
+			currEntry = rf.history[lastMatched-1]
+		}
 
-        args := AppendEntriesArgs{rf.currentTerm, rf.me, currEntry, entries, rf.commitIndex}
-        reply := AppendEntriesReply{}
-        reason := rf.SendAppendEntries(nextServer, args, &reply)
+		args := AppendEntriesArgs{rf.currentTerm, rf.me, currEntry, entries, rf.commitIndex}
+		reply := AppendEntriesReply{}
+		reason := rf.SendAppendEntries(nextServer, args, &reply)
 
-        // Log inconsistency
-        if reason == 1 {
-            rf.matchIndex[nextServer] -= 1
-        }
-        // Network Issue
-        if reason == 2 {
-            rf.nextIndex[nextServer] = retries-1
-        }
-        // Success
-        if reason == 0 {
-            delete(rf.nextIndex, nextServer)
-            if len(rf.history) > 0 {
-                lastEntry := rf.history[len(rf.history)-1]
+		// Log inconsistency
+		if reason == 1 {
+			rf.matchIndex[nextServer] -= 1
+		}
+		// Network Issue
+		if reason == 2 {
+			rf.nextIndex[nextServer] = retries - 1
+		}
+		// Success
+		if reason == 0 {
+			delete(rf.nextIndex, nextServer)
+			if len(rf.history) > 0 {
+				lastEntry := rf.history[len(rf.history)-1]
 
-                match, ok := rf.matchIndex[nextServer]
-                if !ok || match < lastEntry.Index {
-                    rf.matchIndex[nextServer] = lastEntry.Index
-                    rf.Print("Set Match Index", lastEntry.Index)
-                }
-            }
-        }
+				match, ok := rf.matchIndex[nextServer]
+				if !ok || match < lastEntry.Index {
+					rf.matchIndex[nextServer] = lastEntry.Index
+					rf.Print("Set Match Index", lastEntry.Index)
+				}
+			}
+		}
 
-        nextServer = (nextServer+1) % len(rf.peers)
-    }
+		nextServer = (nextServer + 1) % len(rf.peers)
+	}
 
-    rf.aliveServices -= 1
+	rf.aliveServices -= 1
 }
-
 
 /*
  Network Functions
 */
 func (rf *Raft) CallWrapper(server int, endpoint string, args interface{}, reply interface{}, suc chan bool) {
-    if ! rf.kill {
-        ok := rf.peers[server].Call(endpoint, args, reply)
-        suc <- ok
-    }
-    suc <- false
+	if !rf.kill {
+		ok := rf.peers[server].Call(endpoint, args, reply)
+		suc <- ok
+	}
+	suc <- false
 }
 
 func (rf *Raft) MakeCall(server int, endpoint string, args interface{}, reply interface{}, unlimited bool) bool {
 
-    if rf.kill {
-        return false
-    }
+	if rf.kill {
+		return false
+	}
 
-    channel := make(chan bool)
-    go rf.CallWrapper(server, endpoint, args, reply, channel)
+	channel := make(chan bool)
+	go rf.CallWrapper(server, endpoint, args, reply, channel)
 
-    tolerance := time.Duration(150*len(rf.peers)) * rf.avgPackage
-    timeout := time.Now().Add(tolerance)
+	tolerance := time.Duration(150*len(rf.peers)) * rf.avgPackage
+	timeout := time.Now().Add(tolerance)
 
-    counter := 0
-    for true {
-        now := time.Now()
-        counter += 1
-        if now.After(timeout) && ! unlimited {
-            if endpoint != "Raft.PingRPC" {
-                rf.Print("Network Issue (" + endpoint + ") send it to (" + strconv.Itoa(server) + ")", args)
-            }
-            return false
-        } else {
-            select {
-            case v := <-channel:
-                return v
-            default:
-                //pass
-            }
-        }
-    }
-    return false
+	counter := 0
+	for true {
+		now := time.Now()
+		counter += 1
+		if now.After(timeout) && !unlimited {
+			if endpoint != "Raft.PingRPC" {
+				rf.Print("Network Issue ("+endpoint+") send it to ("+strconv.Itoa(server)+")", args)
+			}
+			return false
+		} else {
+			select {
+			case v := <-channel:
+				return v
+			default:
+				//pass
+			}
+		}
+	}
+	return false
 }
 
 func (rf *Raft) CalculateBestTimeout(retries int) {
-    avg := time.Duration(0)
-    for i := 0; i < retries; i++ {
-        for peerIdx, _ := range rf.peers {
-            starttime := time.Now()
-            rf.TestPing(peerIdx, 0)
-            endtime := time.Now()
-            avg += endtime.Sub(starttime)
-        }
-    }
-    rf.avgPackage = (avg/time.Duration(len(rf.peers)))/time.Duration(retries)
-    rf.Print("AVG Time", rf.avgPackage)
+	avg := time.Duration(0)
+	for i := 0; i < retries; i++ {
+		for peerIdx, _ := range rf.peers {
+			starttime := time.Now()
+			rf.TestPing(peerIdx, 0)
+			endtime := time.Now()
+			avg += endtime.Sub(starttime)
+		}
+	}
+	rf.avgPackage = (avg / time.Duration(len(rf.peers))) / time.Duration(retries)
+	rf.Print("AVG Time", rf.avgPackage)
 }
